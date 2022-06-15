@@ -1,10 +1,22 @@
 import React from "react";
-import {View,Text, SafeAreaView, StyleSheet} from "react-native";
+import {View,Text, SafeAreaView, StyleSheet, ColorPropType} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 
 const HomeScreen=()=>{
+    const categories=['Popular','Cakes','Dessert','Perzonalized'];
+
+    const [categoryIndex,setCategoryIndex]=React.useState(0);
+
+    const CategoryList=()=>{
+        return(
+        <View style={style.categoryContainer}>
+            {categories.map((item,index)=>(
+                <Text key={index} style={[style.categoryText,categoryIndex==index && style.categoryTextSelected]}>{item}</Text>
+            ))}
+        </View>);
+    }
     return (
         <SafeAreaView style={{flex:1,
         paddingHorizontal:20,
@@ -25,6 +37,7 @@ const HomeScreen=()=>{
                         <MaterialIcons name="sort" size={30} color={COLORS.white}/>
                     </View>
                 </View>
+            <CategoryList/>
         </SafeAreaView>
     )
 }
@@ -58,6 +71,19 @@ const style=StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius:10
+    },categoryContainer:{
+        flexDirection:"row",
+        marginTop:30,
+        marginBottom:20,
+        justifyContent:"space-between"
+    },
+    categoryText:{fontSize:16,color:"gray",fontWeight:"bold"},
+    categoryTextSelected:{
+        color:COLORS.green,
+        paddingBottom:5,
+        borderBottomWidth:2,
+        borderColor:ColorPropType.green,
+        
     }
 })
 export default HomeScreen;
