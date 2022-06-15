@@ -13,7 +13,9 @@ const HomeScreen=()=>{
         return(
         <View style={style.categoryContainer}>
             {categories.map((item,index)=>(
-                <TouchableOpacity key={index} onPress={()=>setCategoryIndex(index)}>
+                <TouchableOpacity key={index}
+                activeOpacity={0.8}
+                onPress={()=>setCategoryIndex(index)}>
                     <Text
                     style={[style.categoryText,
                         categoryIndex==index && style.categoryTextSelected,
