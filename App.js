@@ -12,7 +12,7 @@ import COLORS from './consts/colors';
 export default function App() {
   return (
    <NavigationContainer>
-    <StatusBar barStyle="dark-content" background={COLORS.white}/>
+    <StatusBar barStyle="black-content" backgroundColor={COLORS.white}/>
     <Stack.Navigator screenOptions={{header:()=>null}}>
       <Stack.Screen name="Home" component={HomeScreen}/>
       <Stack.Screen name="Details" component={DetailsScreen}/>
