@@ -8,3 +8,4 @@ const DetailsScreen=()=>{
         </View>
     )
 }
+export default DetailsScreen;
