@@ -32,7 +32,8 @@ const HomeScreen=({navigation})=>{
 
     const Card = ({product})=>{
         return (
-        <TouchableOpacity onPress={()=>navigation.navigate("Details",product)}>
+        <TouchableOpacity activeOpacity={0.8}
+        onPress={() => navigation.navigate('Details', product)}>
             <View style={style.card}>
                 <View style={{alignItems:'flex-end'}}>
                     <View style={{width:30,height:30, borderRadius:15,
@@ -42,11 +43,10 @@ const HomeScreen=({navigation})=>{
                         <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
                     </View>
                 </View>
-                <View style={{height:100,alignItems:"center"}}>
-                    <Image style={{flex:1, resizeMode:'contain'}}
-                    source={product.img}/>
-                </View>
-                <Text style={{fontWeight:'bold',fontSize:17,marginBottom:10}}>{product.name}</Text>
+                    <View style={{height:100,alignItems:"center"}}>
+                        <Image source={product.img} style={{flex:1, resizeMode:'contain'}}/>
+                    </View>
+                    <Text style={{fontWeight:'bold',fontSize:17,marginBottom:10}}>{product.name}</Text>
                 <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
                     <Text style={{fontSize:16,fontWeight:"bold"}}>${product.price}</Text>
                     <View style={{
@@ -93,7 +93,8 @@ const HomeScreen=({navigation})=>{
                 paddingBottom:50
             }}
             numColumns={2} data={products}
-            renderItem={({item})=><Card product={item}/>}/>
+            renderItem={({item})=>{
+                return <Card product={item}/>}}/>
         </SafeAreaView>
     )
 }
