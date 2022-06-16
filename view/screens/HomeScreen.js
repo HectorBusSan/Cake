@@ -1,8 +1,11 @@
 import React from "react";
-import {View,Text, SafeAreaView, StyleSheet, ColorPropType, TouchableOpacity} from "react-native";
+import {View,Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, FlatList} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
+import products from "./../../consts/products";
+
+const width =Dimensions.get('screen').width/2-30
 
 const HomeScreen=()=>{
     const categories=['Popular','Cakes','Dessert','Perzonalized'];
@@ -26,6 +29,11 @@ const HomeScreen=()=>{
             ))}
         </View>);
     }
+
+    const Card = ({item})=>{
+        return (<View style={style.card}><Text>Hola</Text></View>);
+    }
+
     return (
         <SafeAreaView style={{flex:1,
         paddingHorizontal:20,
@@ -47,10 +55,11 @@ const HomeScreen=()=>{
                     </View>
                 </View>
             <CategoryList/>
+            <FlatList numColumns={2} data={products} renderItem={({item})=><Card product={item}/>}/>
         </SafeAreaView>
     )
 }
-
+// renderItem={({item})=><Card product={item}/>}
 const style=StyleSheet.create({
     header:{
         marginTop:10,
@@ -92,7 +101,15 @@ const style=StyleSheet.create({
         paddingBottom:5,
         borderBottomWidth:2,
         borderColor:COLORS.green,
-
-    }
-})
+    },
+    card:{
+        height:225,
+        backgroundColor:COLORS.light,
+        width,
+        marginHorizontal:2,
+        borderRadius:20,
+        marginBottom:20,
+        padding:15,
+    },
+});
 export default HomeScreen;
