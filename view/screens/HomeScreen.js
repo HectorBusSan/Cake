@@ -32,21 +32,37 @@ const HomeScreen=()=>{
 
     const Card = ({product})=>{
         return (
-        <View style={style.card}>
-            <View style={{alignItems:'flex-end'}}>
-                <View style={{width:30,height:30, borderRadius:15,
-                alignItems:"center",justifyContent:"center",
-                backgroundColor:product.like?"rgba(245,42,42,0.2)":"rgba(0,0,0,0.2)"
-                }}>
-                    <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
+        <TouchableOpacity>
+            <View style={style.card}>
+                <View style={{alignItems:'flex-end'}}>
+                    <View style={{width:30,height:30, borderRadius:15,
+                    alignItems:"center",justifyContent:"center",
+                    backgroundColor:product.like?"rgba(245,42,42,0.2)":"rgba(0,0,0,0.2)"
+                    }}>
+                        <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
+                    </View>
+                </View>
+                <View style={{height:100,alignItems:"center"}}>
+                    <Image style={{flex:1, resizeMode:'contain'}}
+                    source={product.img}/>
+                </View>
+                <Text style={{fontWeight:'bold',fontSize:17,marginBottom:10}}>{product.name}</Text>
+                <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
+                    <Text style={{fontSize:16,fontWeight:"bold"}}>${product.price}</Text>
+                    <View style={{
+                        height:25,
+                        width:25,
+                        backgroundColor:COLORS.green, 
+                        borderRadius:5,
+                        justifyContent:"center",
+                        alignItems:"center",
+                        }}>
+                        <FontAwesome name="plus" fontWeight="bold" size={15} color={COLORS.white}/>
+                    </View>
                 </View>
             </View>
-            <View style={{height:100,alignItems:"center"}}>
-                <Image style={{flex:1, resizeMode:'contain'}}
-                source={product.img}/>
-            </View>
-            
-        </View>);
+        </TouchableOpacity>
+        );
     }
 
     return (
@@ -84,7 +100,7 @@ const HomeScreen=()=>{
 // renderItem={({item})=><Card product={item}/>}
 const style=StyleSheet.create({
     header:{
-        marginTop:10,
+        marginTop:30,
         flexDirection:"row",
         justifyContent:"space-between",
     },
