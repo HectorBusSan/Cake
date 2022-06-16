@@ -38,7 +38,7 @@ const products=[
         img: require('./../assets/example5.png'),
         about:'Potted Plant Ravenea Plant one of the most popular and beautiful species that will produce clumpms. The storage of water often gives succulent plants a more swollen or fleshy appearance than other plants, a characteristic known as succulence.'
     },{
-        id:5,
+        id:6,
         name:"Dragon Plant",
         price:'59.99',
         like:false,
