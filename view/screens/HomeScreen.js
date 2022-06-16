@@ -7,7 +7,7 @@ import products from "./../../consts/products";
 
 const width =Dimensions.get('screen').width/2-30
 
-const HomeScreen=()=>{
+const HomeScreen=({navigation})=>{
     const categories=['Popular','Cakes','Dessert','Perzonalized'];
 
     const [categoryIndex,setCategoryIndex]=React.useState(0);
@@ -32,7 +32,7 @@ const HomeScreen=()=>{
 
     const Card = ({product})=>{
         return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.navigate("Details",product)}>
             <View style={style.card}>
                 <View style={{alignItems:'flex-end'}}>
                     <View style={{width:30,height:30, borderRadius:15,
