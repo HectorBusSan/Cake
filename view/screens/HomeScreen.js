@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, FlatList} from "react-native";
+import {View,Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, FlatList, Image} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
@@ -41,6 +41,11 @@ const HomeScreen=()=>{
                     <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
                 </View>
             </View>
+            <View style={{height:100,alignItems:"center"}}>
+                <Image style={{flex:1, resizeMode:'contain'}}
+                source={product.img}/>
+            </View>
+            
         </View>);
     }
 
