@@ -30,8 +30,18 @@ const HomeScreen=()=>{
         </View>);
     }
 
-    const Card = ({item})=>{
-        return (<View style={style.card}><Text>Hola</Text></View>);
+    const Card = ({product})=>{
+        return (
+        <View style={style.card}>
+            <View style={{alignItems:'flex-end'}}>
+                <View style={{width:30,height:30, borderRadius:15,
+                alignItems:"center",justifyContent:"center",
+                backgroundColor:product.like?"rgba(245,42,42,0.2)":"rgba(0,0,0,0.2)"
+                }}>
+                    <MaterialIcons name="favorite" size={18} color="black"/>
+                </View>
+            </View>
+        </View>);
     }
 
     return (
@@ -55,7 +65,14 @@ const HomeScreen=()=>{
                     </View>
                 </View>
             <CategoryList/>
-            <FlatList numColumns={2} data={products} renderItem={({item})=><Card product={item}/>}/>
+            <FlatList columnWrapperStyle={{justifyContent:"space-between"}}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+                marginTop:10,
+                paddingBottom:50
+            }}
+            numColumns={2} data={products}
+            renderItem={({item})=><Card product={item}/>}/>
         </SafeAreaView>
     )
 }
