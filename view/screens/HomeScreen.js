@@ -38,7 +38,7 @@ const HomeScreen=()=>{
                 alignItems:"center",justifyContent:"center",
                 backgroundColor:product.like?"rgba(245,42,42,0.2)":"rgba(0,0,0,0.2)"
                 }}>
-                    <MaterialIcons name="favorite" size={18} color="black"/>
+                    <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
                 </View>
             </View>
         </View>);
