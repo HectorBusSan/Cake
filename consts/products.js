@@ -19,7 +19,7 @@ const products=[
         id:3,
         name:"Ravenea Plant",
         price:'50.99',
-        like:true,
+        like:false,
         img: require('./../assets/example3.png'),
         about:'Ravenea Plant one of the most popular and beautiful species that will produce clumpms. The storage of water often gives succulent plants a more swollen or fleshy appearance than other plants, a characteristic known as succulence.'
     },
