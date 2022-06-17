@@ -18,7 +18,17 @@ const DetailsScreen=({navigation,route})=>{
             <View style={style.detailsContainer}>
                 <View style={{marginLeft:20,flexDirection:"row",alignItems:"flex-end"}}>
                     <View style={style.line}/>
-                    <Text>Best Choice</Text>
+                    <Text style={{fontSize:16,fontWeight:"bold"}}>Best Choice</Text>
+                </View>
+                <View style={{marginLeft:20,marginTop:20,flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
+                    <Text style={{fontSize:22,fontWeight:"bold",}}>{product.name}</Text>
+                    <View style={style.priceTag}>
+                        <Text style={{marginLeft:15,color:COLORS.white,fontWeight:"bold",fontSize:16}}>${product.price}</Text>
+                    </View>
+                </View>
+                <View style={{paddingHorizontal:20,marginTop:10}}>
+                    <Text style={{fontSize:20,fontWeight:"bold",}}>About:</Text>
+                    <Text style={{color:"grey",fontSize:16,lineHeight:22,marginTop:20}}>{product.about}</Text>
                 </View>
             </View>
         </SafeAreaView>
@@ -27,7 +37,7 @@ const DetailsScreen=({navigation,route})=>{
 
 const style = StyleSheet.create({
     header:{paddingHorizontal:20,
-        marginTop:20,
+        marginTop:15,
         flexDirection:"row",
         justifyContent:"space-between"
     },
@@ -52,6 +62,15 @@ const style = StyleSheet.create({
         backgroundColor:COLORS.dark,
         marginBottom:5,
         marginRight:3
+    },
+    priceTag:{
+        backgroundColor:COLORS.green,
+        width:80,
+        height:40,
+        borderTopLeftRadius:25,
+        borderBottomLeftRadius:25,
+        justifyContent:"center",
+        alignItems:"flex-start",
     }
 })
 export default DetailsScreen;
