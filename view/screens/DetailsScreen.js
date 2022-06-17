@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {View,Text,StyleSheet, SafeAreaView, Image}from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 const DetailsScreen=({navigation,route})=>{
     const product = route.params;
+    
+
     console.log(product)
     return(
         <SafeAreaView style={{flex:1,backgroundColor:COLORS.white}}>
@@ -28,7 +30,21 @@ const DetailsScreen=({navigation,route})=>{
                 </View>
                 <View style={{paddingHorizontal:20,marginTop:10}}>
                     <Text style={{fontSize:20,fontWeight:"bold",}}>About:</Text>
-                    <Text style={{color:"grey",fontSize:16,lineHeight:22,marginTop:20}}>{product.about}</Text>
+                    <Text style={{color:"grey",fontSize:16,lineHeight:22,marginTop:10}}>{product.about}</Text>
+                    <View style={{marginTop:20,flexDirection:"row",justifyContent:"space-between"}}>
+                        <View style={{flexDirection:"row",alignItems:"center"}}>
+                            <View style={style.borderBtn}>
+                                <Text style={style.borderBtnText}>-</Text>
+                            </View>
+                            <Text style={{fontSize:20,marginHorizontal:10,fontWeight:"bold"}}>1</Text>
+                            <View style={style.borderBtn}>
+                                <Text style={style.borderBtnText}>+</Text>
+                            </View>
+                        </View>
+                        <View style={style.buyBtn}>
+                            <Text style={{color:COLORS.white,fontSize:18}}>Buy</Text>
+                        </View>
+                    </View>
                 </View>
             </View>
         </SafeAreaView>
@@ -43,7 +59,7 @@ const style = StyleSheet.create({
     },
     imageContainer:{
         flex:0.45,
-        marginTop:20,
+        marginTop:10,
         justifyContent:"center",
         alignItems:"center"
     },
@@ -51,10 +67,11 @@ const style = StyleSheet.create({
         flex:0.55,
         backgroundColor:COLORS.light,
         marginHorizontal:7,
-        marginBottom:7,
-        marginTop:30,
+        marginBottom:0,
+        marginTop:10,
         paddingTop:30,
-        borderRadius:40
+        borderTopRightRadius:40,
+        borderTopLeftRadius:40
     },
     line:{
         width:25,
@@ -71,6 +88,27 @@ const style = StyleSheet.create({
         borderBottomLeftRadius:25,
         justifyContent:"center",
         alignItems:"flex-start",
+    },
+    borderBtn:{
+        borderColor:"grey",
+        borderWidth:1,
+        borderRadius:5,
+        height:40,
+        width:60,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    borderBtnText:{
+        fontWeight:"bold",
+        fontSize:28
+    },
+    buyBtn:{
+        backgroundColor:COLORS.green,
+        width:150,
+        height:50,
+        borderRadius:40,
+        justifyContent:"center",
+        alignItems:"center"
     }
 })
 export default DetailsScreen;
