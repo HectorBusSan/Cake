@@ -2,10 +2,21 @@ import React, { useState } from "react";
 import {View,Text,StyleSheet, SafeAreaView, Image}from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const DetailsScreen=({navigation,route})=>{
     const product = route.params;
     
+    const [contador,setContador]=useState(1);
+
+    const sumar=()=>setContador(contador+1);
+    const restar=()=>{
+        if(!contador<1){
+            setContador(contador-1)
+        }else{
+            return setContador(contador);
+        }
+    }
 
     console.log(product)
     return(
@@ -33,13 +44,17 @@ const DetailsScreen=({navigation,route})=>{
                     <Text style={{color:"grey",fontSize:16,lineHeight:22,marginTop:10}}>{product.about}</Text>
                     <View style={{marginTop:20,flexDirection:"row",justifyContent:"space-between"}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
-                            <View style={style.borderBtn}>
-                                <Text style={style.borderBtnText}>-</Text>
-                            </View>
-                            <Text style={{fontSize:20,marginHorizontal:10,fontWeight:"bold"}}>1</Text>
-                            <View style={style.borderBtn}>
-                                <Text style={style.borderBtnText}>+</Text>
-                            </View>
+                            <TouchableOpacity onPress={restar}>
+                                <View style={style.borderBtn}>
+                                    <Text style={style.borderBtnText}>-</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <Text style={{fontSize:20,marginHorizontal:10,fontWeight:"bold"}}>{contador}</Text>
+                            <TouchableOpacity onPress={sumar}>
+                                <View style={style.borderBtn}>
+                                    <Text style={style.borderBtnText}>+</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={style.buyBtn}>
                             <Text style={{color:COLORS.white,fontSize:18}}>Buy</Text>
