@@ -18,7 +18,7 @@ const DetailsScreen=({navigation,route})=>{
         }
     }
 
-    console.log(product)
+    // console.log(product)
     return(
         <SafeAreaView style={{flex:1,backgroundColor:COLORS.white}}>
             <View style={style.header}>
