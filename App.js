@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 import HomeScreen from './view/screens/HomeScreen';
 import DetailsScreen from './view/screens/DetailsScreen';
+import OnBoarding from "./view/screens/Onboarding"
 import {StatusBar, View} from 'react-native';
 import COLORS from './consts/colors';
 
@@ -14,8 +15,9 @@ export default function App() {
    <NavigationContainer>
     <StatusBar barStyle="black-content" backgroundColor={COLORS.white}/>
     <Stack.Navigator screenOptions={{header:()=>null}}>
-      <Stack.Screen name="Home" component={HomeScreen}/>
-      <Stack.Screen name="Details" component={DetailsScreen}/>
+      <Stack.Screen name='Onboarding' component={OnBoarding}/>
+      {/* <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Screen name="Details" component={DetailsScreen}/> */}
     </Stack.Navigator>
    </NavigationContainer>
   )
