@@ -15,12 +15,20 @@ const Onboarding=({navigation})=>{
                     <Text style={{color:COLORS.white,fontSize:32,fontWeight:"bold"}}>Cake Shop</Text>
                     <Text style={{color:COLORS.white,fontSize:31,fontWeight:"bold"}}>Fine Bakery</Text>
                     <Text style={{color:COLORS.white,lineHeight:25,marginTop:15}}>The Best Cake shop of the whole world, enjoy us desserts and cakes</Text>
-                    <TouchableOpacity activeOpacity={0.8}
-                    onPress={()=>navigation.navigate("Home")}>
-                    <View style={style.btn}>
-                        <Text style={{fontWeight:"bold"}}>Login</Text>
+                    <View style={{display:"flex",flexDirection:"row", gap:"1rem"}}>
+                        <TouchableOpacity activeOpacity={0.8}
+                        onPress={()=>navigation.navigate("Login")}>
+                        <View style={style.btnL}>
+                            <Text style={{fontWeight:"bold"}}>Login</Text>
+                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.8}
+                        onPress={()=>navigation.navigate("Register")}>
+                        <View style={style.btnR}>
+                            <Text style={{fontWeight:"bold", color:COLORS.white}}>Registrarse</Text>
+                        </View>
+                        </TouchableOpacity>
                     </View>
-                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         </View>
@@ -34,7 +42,7 @@ const style= StyleSheet.create({
     position:"absolute",
     paddingHorizontal:40,
     },
-    btn:{
+    btnL:{
         height:50,
         width:120,
         backgroundColor:COLORS.white,
@@ -42,6 +50,14 @@ const style= StyleSheet.create({
         borderRadius:7,
         justifyContent:"center",
         alignItems:"center"
+    },btnR:{
+        height:50,
+        width:120,
+        marginTop:20,
+        borderRadius:7,
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:COLORS.dark,
     }
 })
 
