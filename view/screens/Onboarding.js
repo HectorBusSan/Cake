@@ -13,6 +13,9 @@ const Onboarding=()=>{
                     <Text style={{color:COLORS.white,fontSize:32,fontWeight:"bold"}}>Cake Shop</Text>
                     <Text style={{color:COLORS.white,fontSize:31,fontWeight:"bold"}}>Fine Bakery</Text>
                     <Text style={{color:COLORS.white,lineHeight:25,marginTop:15}}>The Best Cake shop of the whole world, enjoy us desserts and cakes</Text>
+                    <View style={style.btn}>
+                        <Text style={{fontWeight:"bold"}}>Login</Text>
+                    </View>
                 </View>
             </ImageBackground>
         </View>
@@ -25,6 +28,15 @@ const style= StyleSheet.create({
     bottom:0,
     position:"absolute",
     paddingHorizontal:40,
+    },
+    btn:{
+        height:50,
+        width:120,
+        backgroundColor:COLORS.white,
+        marginTop:20,
+        borderRadius:7,
+        justifyContent:"center",
+        alignItems:"center"
     }
 })
 
