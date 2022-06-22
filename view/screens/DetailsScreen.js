@@ -23,7 +23,10 @@ const DetailsScreen=({navigation,route})=>{
         <SafeAreaView style={{flex:1,backgroundColor:COLORS.white}}>
             <View style={style.header}>
                 <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
-                <FontAwesome name="shopping-cart" size={24}/>
+                <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
+                    <FontAwesome name="user-circle-o" size={24} color="black" />
+                    <FontAwesome name="shopping-cart" size={24} />
+                </View>
             </View>
             <View style={style.imageContainer}>
                 <Image source={product.img} style={{resizeMode:"contain",flex:1,}}/>
@@ -68,7 +71,7 @@ const DetailsScreen=({navigation,route})=>{
 
 const style = StyleSheet.create({
     header:{paddingHorizontal:20,
-        marginTop:15,
+        marginTop:50,
         flexDirection:"row",
         justifyContent:"space-between"
     },
