@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, FlatList, Image} from "react-native";
+import {View,Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, FlatList, Image} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
