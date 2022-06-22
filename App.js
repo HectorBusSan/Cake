@@ -10,6 +10,7 @@ import OnBoarding from "./view/screens/Onboarding"
 import {StatusBar, View} from 'react-native';
 import COLORS from './consts/colors';
 import Login from './view/screens/Login';
+import Register from './view/screens/Register';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
     <Stack.Navigator screenOptions={{header:()=>null}}>
       <Stack.Screen name='Onboarding' component={OnBoarding}/>
       <Stack.Screen name="Login" component={Login}/>
+      <Stack.Screen name="Register" component={Register}/>
       <Stack.Screen name="Home" component={HomeScreen}/>
       <Stack.Screen name="Details" component={DetailsScreen}/>
     </Stack.Navigator>
