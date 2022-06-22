@@ -74,7 +74,10 @@ const HomeScreen=({navigation})=>{
                     <Text style={{fontSize:25,fontWeight:"bold"}}>Welcome to </Text>
                     <Text style={{fontSize:38,fontWeight:"bold",color:COLORS.green}}>Cakes Shop</Text>
                 </View>
-                <FontAwesome name="shopping-cart" size={24}/>
+                <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
+                    <FontAwesome name="user-circle-o" size={24} color="black" />
+                    <FontAwesome name="shopping-cart" size={24} />
+                </View>
             </View>
                 <View style={{marginTop:30, flexDirection:"row", alignItems:"center"}}>
                     <View style={style.searchContainer}>
@@ -101,7 +104,7 @@ const HomeScreen=({navigation})=>{
 // renderItem={({item})=><Card product={item}/>}
 const style=StyleSheet.create({
     header:{
-        marginTop:30,
+        marginTop:50,
         flexDirection:"row",
         justifyContent:"space-between",
     },
