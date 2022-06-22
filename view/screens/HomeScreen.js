@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {View,Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, FlatList, Image} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
@@ -29,6 +29,13 @@ const HomeScreen=({navigation})=>{
             ))}
         </View>);
     }
+
+    const [search,setSearch]=useState([]);
+    const handlerChange=(e)=>{
+        setSearch(e.target.value);
+        console.log("Busqueda: "+e.target.value)
+    }
+
 
     const Card = ({product})=>{
         return (
@@ -82,7 +89,7 @@ const HomeScreen=({navigation})=>{
                 <View style={{marginTop:30, flexDirection:"row", alignItems:"center"}}>
                     <View style={style.searchContainer}>
                         <FontAwesome name="search" size={19} style={{marginLeft:20}}/>
-                        <TextInput placeholder=" Search..." style={style.input} />
+                        <TextInput placeholder=" Search..." style={style.input} onChange={handlerChange}/>
                     </View>
                     <View style={style.sortBtn}>
                         <MaterialIcons name="sort" size={30} color={COLORS.white}/>
