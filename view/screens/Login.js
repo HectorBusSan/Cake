@@ -1,21 +1,30 @@
-import React,{useRef, useState} from "react";
+import React,{useState} from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet,Text,View, ImageBackground, Dimensions,Animated, Image, useColorScheme, SafeAreaView, useWindowDimensions } from "react-native";
 import COLORS from "../../consts/colors";
 import Logo from "./../../assets/logo.png"
 import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
+import { CustomerButton } from "../Components/Buttons/CustomerButton";
+
+
 const Login=()=>{
     const {height}=useWindowDimensions();
     const isDarkMode=useColorScheme()==="dark"
     const backgroundStyle={
         backgroundStyle:isDarkMode?COLORS.dark:COLORS.white
     }
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     return(
+        <SafeAreaView style={styles.body}>
         <View style={styles.root}>
             <View style={styles.header}></View>
             <Image source={Logo} style={{...styles.logo,height:height*0.3}} resizeMode="contain"/>
-            <CustomerInput/>
+            <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
+            <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
         </View>
+        </SafeAreaView>
     )
 }
 const styles= StyleSheet.create({
@@ -23,9 +32,13 @@ const styles= StyleSheet.create({
         marginTop:50,
         flexDirection:"row",
         justifyContent:"space-between",
+    },body:{
+       height:"100%",
+       backgroundColor:"#fff"
     },root:{
         alignItems:"center",
         padding:20,
+        backgroundColor:"#fff",
     },logo:{
         width:"70%",
         maxWidth:300,
