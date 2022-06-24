@@ -16,6 +16,16 @@ const Login=()=>{
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const onSingInPressed=()=>{
+        console.warn("Sing In")
+    }
+    const onForgotPressed=()=>{
+        console.warn("Forgot Password");
+    }
+    const onRegisterPressed=()=>{
+        console.warn("Register")
+    }
+
     return(
         <SafeAreaView style={styles.body}>
         <View style={styles.root}>
@@ -23,6 +33,9 @@ const Login=()=>{
             <Image source={Logo} style={{...styles.logo,height:height*0.3}} resizeMode="contain"/>
             <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
             <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
+            <CustomerButton text="Sing In" onPress={onSingInPressed}/>
+            <CustomerButton text="Register" onPress={onRegisterPressed}/>
+            <CustomerButton text="Forgot Password" onPress={onForgotPressed}/>
         </View>
         </SafeAreaView>
     )
