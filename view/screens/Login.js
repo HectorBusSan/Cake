@@ -1,6 +1,6 @@
 import React,{useRef, useState} from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet,Text,View, ImageBackground, Dimensions,Animated } from "react-native";
+import { StyleSheet,Text,View, ImageBackground, Dimensions,Animated, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import COLORS from "../../consts/colors";
 
@@ -10,6 +10,20 @@ const {height,width}=Dimensions.get("window");
 const Login=({navigation})=>{
 
 const fadeAnim= useRef(new Animated.Value(1)).current;
+
+    const showLogin=()=>{
+        Animated.timing(fadeAnim,{
+            toValueValue:1,
+            duration:5000
+        }).start()
+    }
+
+    const showRegister=()=>{
+        Animated.timing(fadeAnim,{
+            toValue:1,
+            duration:5000
+        }).start()
+    }
 
     const fadeIn=()=>{
         Animated.timing(fadeAnim,{
@@ -31,14 +45,19 @@ const fadeAnim= useRef(new Animated.Value(1)).current;
             <StatusBar translucent backgroundColor="rgba(0,0,0,0)"/>
                 <ImageBackground source={require("./../../assets/LoginBack.jpeg")}
                 style={{flex:1,height:null,width:null,justifyContent:"flex-end"}}>
-                
+
+                <View style={{height:height/1.8, marginBottom:35, backgroundColor:"#fff", padding:20}}>
+                    <View style={{height:height/2, backgroundColor:"#ccc"}}></View>
+                    <View></View>
+                </View>
+
                 <View style={{height:height/3}}>
-                    <TouchableOpacity onPress={fadeOut}>
+                    <TouchableOpacity onPress={showLogin}>
                         <Animated.View style={{...styles.button,opacity:fadeAnim}}>
                                 <Text style={{fontSize:20,fontWeight:"bold"}}>Sing In</Text>
                         </Animated.View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={fadeIn}>
+                    <TouchableOpacity onPress={showRegister}>
                         <View style={{...styles.button,marginTop:20, backgroundColor:"#2E71DC"}}>
                             <Text style={{fontSize:20,fontWeight:"bold", color:COLORS.white}}>Register</Text>
                         </View>
