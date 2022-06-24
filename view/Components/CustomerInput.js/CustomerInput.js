@@ -23,8 +23,6 @@ const style= StyleSheet.create({
         padding:10,
         marginHorizontal:10,
         marginVertical:5
-    },input:{
-        
     }
 })
 export default CustomerInput
