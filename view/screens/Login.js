@@ -34,8 +34,8 @@ const Login=()=>{
             <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
             <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
             <CustomerButton text="Sing In" onPress={onSingInPressed}/>
-            <CustomerButton text="Register" onPress={onRegisterPressed}/>
-            <CustomerButton text="Forgot Password" onPress={onForgotPressed}/>
+            <CustomerButton text="Register" onPress={onRegisterPressed} type="SECOND"/>
+            <CustomerButton text="Forgot Password" onPress={onForgotPressed} type="TETIARY"/>
         </View>
         </SafeAreaView>
     )
