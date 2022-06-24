@@ -19,15 +19,15 @@ const Onboarding=({navigation})=>{
                         <TouchableOpacity activeOpacity={0.8}
                         onPress={()=>navigation.navigate("Login")}>
                         <View style={style.btnL}>
-                            <Text style={{fontWeight:"bold"}}>Login</Text>
+                            <Text style={{fontSize:20,fontWeight:"bold"}}>Login</Text>
                         </View>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.8}
+                        {/* <TouchableOpacity activeOpacity={0.8}
                         onPress={()=>navigation.navigate("Register")}>
                         <View style={style.btnR}>
                             <Text style={{fontWeight:"bold", color:COLORS.white}}>Registrarse</Text>
                         </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
             </ImageBackground>
@@ -43,13 +43,13 @@ const style= StyleSheet.create({
     paddingHorizontal:40,
     },
     btnL:{
-        height:50,
-        width:120,
         backgroundColor:COLORS.white,
-        marginTop:20,
-        borderRadius:7,
+        height:50,
+        width:100,
+        borderRadius:35,
+        alignItems:"center",
         justifyContent:"center",
-        alignItems:"center"
+        marginVertical:10
     },btnR:{
         height:50,
         width:120,
