@@ -5,3 +5,4 @@ export const CustomerButton = () => {
     <div>CustomerButton</div>
   )
 }
+export default CustomerButton;
