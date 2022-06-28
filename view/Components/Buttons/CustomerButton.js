@@ -2,9 +2,9 @@ import React from 'react'
 import { View,Text, StyleSheet, Pressable } from 'react-native';
 import COLORS from '../../../consts/colors';
 
-export const CustomerButton = ({onPress, text, type="PRYMARY"}) => {
+export const CustomerButton = ({text, type="PRYMARY"}) => {
   return (
-    <Pressable onPress={onPress} style={[styles.container,styles[`container_${type}`]]}>
+    <Pressable style={[styles.container,styles[`container_${type}`]]}>
       <Text style={[styles.text,styles[`text_${type}`]]}>{text}</Text>
     </Pressable>
   )
