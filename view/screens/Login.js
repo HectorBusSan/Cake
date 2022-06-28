@@ -5,10 +5,11 @@ import COLORS from "../../consts/colors";
 import Logo from "./../../assets/logo.png"
 import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
 import { CustomerButton } from "../Components/Buttons/CustomerButton";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
-const Login=()=>{
-    const {height}=useWindowDimensions();
+const Login=({navigation})=>{
+    const {height,width}=useWindowDimensions();
     const isDarkMode=useColorScheme()==="dark"
     const backgroundStyle={
         backgroundStyle:isDarkMode?COLORS.dark:COLORS.white
@@ -22,9 +23,6 @@ const Login=()=>{
     const onForgotPressed=()=>{
         console.warn("Forgot Password");
     }
-    const onRegisterPressed=()=>{
-        console.warn("Register")
-    }
 
     return(
         <SafeAreaView style={styles.body}>
@@ -34,7 +32,9 @@ const Login=()=>{
             <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
             <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
             <CustomerButton text="Sing In" onPress={onSingInPressed}/>
-            <CustomerButton text="Register" onPress={onRegisterPressed} type="SECOND"/>
+            <TouchableOpacity onPress={()=>navigation.navigate("Register")} style={{width:width, paddingHorizontal:20}}>
+            <CustomerButton text="Register" type="SECOND"/>
+            </TouchableOpacity>
             <CustomerButton text="Forgot Password" onPress={onForgotPressed} type="TETIARY"/>
         </View>
         </SafeAreaView>
