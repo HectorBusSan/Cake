@@ -9,8 +9,8 @@ const prisma = new PrismaClient();
             create:{
                 username:"Administrador",
                 nombre:"Héctor",
-                ApellidoP:"Bustos",
-                ApellidoM:"Sánchez",
+                ApellidoP:"Bus",
+                ApellidoM:"San",
                 Correo:"hector@hotmail.com",
                 Password:"buzo1234",
                 rol:1
