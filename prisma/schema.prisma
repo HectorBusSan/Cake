@@ -9,3 +9,12 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+model usuarios{
+  id Int @id @default(autoincrement())
+  username String @unique
+  nombre String @db.VarChar(250)
+  ApellidoP String @db.VarChar(250)
+  ApellidoM String @db.VarChar(250)
+  Correo String @db.VarChar(250)
+  Password String @db.VarChar(250)
+}
