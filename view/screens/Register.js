@@ -14,6 +14,7 @@ const Register=({navigation})=>{
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [apellido2, setApellido2] = useState("")
+    const [correo, setCorreo] = useState("")
 
     const onRegister=()=>{
         console.warn("Register")
@@ -30,6 +31,7 @@ const Register=({navigation})=>{
             <CustomerInput Placeholder="Nombre" value={nombre} setValue={setNombre}/>
             <CustomerInput Placeholder="ApellidoP" value={apellido} setValue={setApellido}/>
             <CustomerInput Placeholder="ApellidoM" value={apellido2} setValue={setApellido2}/>
+            <CustomerInput Placeholder="Correo" value={correo} setValue={setCorreo}/>
             <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
             <CustomerButton text="Register" onPress={onRegister}/>
         </View>
