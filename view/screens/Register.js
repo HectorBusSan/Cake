@@ -31,9 +31,7 @@ const Register=({navigation})=>{
             <CustomerInput Placeholder="ApellidoP" value={apellido} setValue={setApellido}/>
             <CustomerInput Placeholder="ApellidoM" value={apellido2} setValue={setApellido2}/>
             <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
-            <TouchableOpacity onPress={()=>navigation.navigate("HomeScreen")} style={{width:width, paddingHorizontal:20}}>
             <CustomerButton text="Register" onPress={onRegister}/>
-            </TouchableOpacity>
         </View>
         </SafeAreaView>
     )
