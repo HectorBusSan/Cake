@@ -17,4 +17,5 @@ model usuarios{
   ApellidoM String @db.VarChar(250)
   Correo String @db.VarChar(250)
   Password String @db.VarChar(250)
+  rol Int
 }
