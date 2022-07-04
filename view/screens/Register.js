@@ -19,7 +19,6 @@ const Register=({navigation})=>{
     });
 
     const handlerChange=(name,value)=>{
-        console.log(newuser)
         setNewuser({...newuser,[name]:value})
     }
 
