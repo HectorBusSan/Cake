@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet,Text,View, SafeAreaView, Image } from "react-native";
+import { StyleSheet,Text,View, SafeAreaView, Image,TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomerButton from "../Components/Buttons/CustomerButton";
 import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
@@ -9,13 +9,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 
 const Register=({navigation})=>{
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [nombre, setNombre] = useState("")
-    const [apellido, setApellido] = useState("")
-    const [apellido2, setApellido2] = useState("")
-    const [correo, setCorreo] = useState("")
-
     const [newuser, setNewuser] = useState({
         username:"",
         password:"",
@@ -25,8 +18,9 @@ const Register=({navigation})=>{
         correo:""
     });
 
-    const handlerChange=()=>{
-        
+    const handlerChange=(name,value)=>{
+        console.log(newuser)
+        setNewuser({...newuser,[name]:value})
     }
 
     const onRegister=()=>{
@@ -40,12 +34,42 @@ const Register=({navigation})=>{
                 <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
             </View>
             <Text style={{fontSize:28, marginBottom:20, fontWeight:"bold",color:COLORS.dark}}>Register</Text>
-            <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
-            <CustomerInput Placeholder="Nombre" value={nombre} setValue={setNombre}/>
-            <CustomerInput Placeholder="ApellidoP" value={apellido} setValue={setApellido}/>
-            <CustomerInput Placeholder="ApellidoM" value={apellido2} setValue={setApellido2}/>
-            <CustomerInput Placeholder="Correo" value={correo} setValue={setCorreo}/>
-            <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.username} placeholder={"Username"} style={styles.input}
+                onChangeText={(text)=>handlerChange("username",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.nombre} placeholder={"Nombre"} style={styles.input}
+                onChangeText={(text)=>handlerChange("nombre",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.apellidoP} placeholder={"Apellido Paterno"} style={styles.input}
+                onChangeText={(text)=>handlerChange("apellidoP",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.apellidoM} placeholder={"Apellido Materno"} style={styles.input}
+                onChangeText={(text)=>handlerChange("apellidoM",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.correo} placeholder={"Correo"} style={styles.input}
+                onChangeText={(text)=>handlerChange("correo",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={newuser.password} placeholder={"Password"} style={styles.input}
+                onChangeText={(text)=>handlerChange("password",text)}secureTextEntry={true}
+                />
+            </View>
             <CustomerButton text="Register" onPress={onRegister}/>
         </View>
         </SafeAreaView>
@@ -67,6 +91,15 @@ const styles= StyleSheet.create({
         width:"70%",
         maxWidth:300,
         maxHeight:200
+    },container:{
+        backgroundColor:"#fff",
+        width:"100%",
+        borderColor:"#e8e8e8",
+        borderWidth:1,
+        borderRadius:5,
+        padding:10,
+        marginHorizontal:10,
+        marginVertical:5
     }
 })
 export default Register;
