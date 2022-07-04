@@ -1,0 +1,14 @@
+@api= http://localhost:3000/usuarios
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "username":"usuario1",
+    "Password":"usuario1",
+    "nombre":"Usuario",
+    "ApellidoP":"uno",
+    "ApellidoM":"one",
+    "Correo":"usuario1@mail.com",
+    "rol":2
+}
