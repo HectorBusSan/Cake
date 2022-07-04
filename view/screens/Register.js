@@ -3,7 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet,Text,View, SafeAreaView, Image,TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomerButton from "../Components/Buttons/CustomerButton";
-import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
 import COLORS from "../../consts/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -22,8 +21,8 @@ const Register=({navigation})=>{
         setNewuser({...newuser,[name]:value})
     }
 
-    const onRegister=()=>{
-        console.warn("Register")
+    const onRegister=async()=>{
+        
     }
 
     return(
