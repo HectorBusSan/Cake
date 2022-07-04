@@ -16,6 +16,19 @@ const Register=({navigation})=>{
     const [apellido2, setApellido2] = useState("")
     const [correo, setCorreo] = useState("")
 
+    const [newuser, setNewuser] = useState({
+        username:"",
+        password:"",
+        nombre:"",
+        apellidoP:"",
+        apellidoM:"",
+        correo:""
+    });
+
+    const handlerChange=()=>{
+        
+    }
+
     const onRegister=()=>{
         console.warn("Register")
     }
