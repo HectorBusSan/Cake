@@ -5,16 +5,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomerButton from "../Components/Buttons/CustomerButton";
 import COLORS from "../../consts/colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import { saveUser } from "../../api";
 
 
 const Register=({navigation})=>{
     const [newuser, setNewuser] = useState({
         username:"",
-        password:"",
+        Password:"",
         nombre:"",
-        apellidoP:"",
-        apellidoM:"",
-        correo:""
+        ApellidoP:"",
+        ApellidoM:"",
+        Correo:"",
+        rol:2
     });
 
     const handlerChange=(name,value)=>{
@@ -22,7 +24,8 @@ const Register=({navigation})=>{
     }
 
     const onRegister=async()=>{
-        
+        await saveUser(newuser)
+        console.log(newuser);
     }
 
     return(
@@ -46,29 +49,31 @@ const Register=({navigation})=>{
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.apellidoP} placeholder={"Apellido Paterno"} style={styles.input}
-                onChangeText={(text)=>handlerChange("apellidoP",text)}
+                value={newuser.ApellidoP} placeholder={"Apellido Paterno"} style={styles.input}
+                onChangeText={(text)=>handlerChange("ApellidoP",text)}
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.apellidoM} placeholder={"Apellido Materno"} style={styles.input}
-                onChangeText={(text)=>handlerChange("apellidoM",text)}
+                value={newuser.ApellidoM} placeholder={"Apellido Materno"} style={styles.input}
+                onChangeText={(text)=>handlerChange("ApellidoM",text)}
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.correo} placeholder={"Correo"} style={styles.input}
-                onChangeText={(text)=>handlerChange("correo",text)}
+                value={newuser.Correo} placeholder={"Correo"} style={styles.input}
+                onChangeText={(text)=>handlerChange("Correo",text)}
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.password} placeholder={"Password"} style={styles.input}
-                onChangeText={(text)=>handlerChange("password",text)}secureTextEntry={true}
+                value={newuser.Password} placeholder={"Password"} style={styles.input}
+                onChangeText={(text)=>handlerChange("Password",text)}secureTextEntry={true}
                 />
             </View>
-            <CustomerButton text="Register" onPress={onRegister}/>
+            <TouchableOpacity style={{width:"100%", backgroundColor:"#f00"}} onPress={onRegister}>
+                <CustomerButton text="Register"/>
+            </TouchableOpacity>
         </View>
         </SafeAreaView>
     )
