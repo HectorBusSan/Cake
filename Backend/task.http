@@ -12,3 +12,5 @@ Content-Type: application/json
     "Correo":"usuario1@mail.com",
     "rol":2
 }
+####
+GET {{api}}/usuario1
