@@ -8,7 +8,7 @@ export const saveUser=async(user)=>{
     });
     return await res.json(res);
 }
-export const getUser=async(username)=>{
-    const res=await(fetch(`${API}/${username}`));
+export const getUser=async(log)=>{
+    const res=await(fetch(`${API}/${log}`));
     return await res.json();
 }
