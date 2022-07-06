@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import CustomerButton from "../Components/Buttons/CustomerButton";
 import COLORS from "../../consts/colors";
 import { MaterialIcons } from "@expo/vector-icons";
-import { saveUser } from "../../api";
+import { getUser, saveUser } from "../../api";
 
 
 const Register=({navigation})=>{
@@ -20,12 +20,34 @@ const Register=({navigation})=>{
     });
 
     const handlerChange=(name,value)=>{
-        setNewuser({...newuser,[name]:value})
+        setNewuser({...newuser,[name]:value});
     }
 
     const onRegister=async()=>{
-        await saveUser(newuser)
-        console.log(newuser);
+        let arrayP=Object.values(newuser.Password)
+        let arrayC=Object.values(newuser.Correo)
+        // console.log(arrayP);
+        // console.log(arrayC)
+        let includesP= arrayP.includes("/");
+        let includesP2= arrayP.includes("*");
+        let correoIncl= arrayC.includes(".");
+
+        if(newuser.username.length < 8){
+            console.warn("El usuario debe ser mayor 8 carateres");
+        }else if(newuser.Password.length < 8 ){
+            console.warn("El password debe ser mayor 8 carateres");
+        }else if(newuser.nombre<2){
+            console.warn("Llenar campo de nombre");
+        }else if(newuser.ApellidoP<2){
+            console.warn("Llenar campo de Apellido");
+        }else if(newuser.Correo<2){
+            console.warn("Llenar campo de correo");
+        }else if(includesP||includesP2){
+            console.warn("contraseña invalida no permitido signos")
+        }else{
+            await saveUser(newuser)
+            console.log(newuser);
+        }
     }
 
     return(
@@ -44,7 +66,7 @@ const Register=({navigation})=>{
             <View style={styles.container}>
                 <TextInput
                 value={newuser.nombre} placeholder={"Nombre"} style={styles.input}
-                onChangeText={(text)=>handlerChange("nombre",text)}
+                onChangeText={(text)=>handlerChange("nombre",text)} 
                 />
             </View>
             <View style={styles.container}>
@@ -56,7 +78,7 @@ const Register=({navigation})=>{
             <View style={styles.container}>
                 <TextInput
                 value={newuser.ApellidoM} placeholder={"Apellido Materno"} style={styles.input}
-                onChangeText={(text)=>handlerChange("ApellidoM",text)}
+                onChangeText={(text)=>handlerChange("ApellidoM",text)} 
                 />
             </View>
             <View style={styles.container}>
@@ -71,9 +93,11 @@ const Register=({navigation})=>{
                 onChangeText={(text)=>handlerChange("Password",text)}secureTextEntry={true}
                 />
             </View>
-            <TouchableOpacity style={{width:"100%", backgroundColor:"#f00"}} onPress={onRegister}>
+            <View style={{width:"100%", marginTop:10}}>
+            <TouchableOpacity style={{width:"100%"}} onPress={onRegister}>
                 <CustomerButton text="Register"/>
             </TouchableOpacity>
+            </View>
         </View>
         </SafeAreaView>
     )
