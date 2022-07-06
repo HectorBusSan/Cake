@@ -39,3 +39,11 @@ app.post("/usuarios",async(req,res)=>{
     await prisma.usuarios.create({data:usuario});
     return res.json({message});
 })
+// get usuario
+app.get("/usuarios/:username",async(req,res)=>{
+    const id=req.params.username;
+    // console.log(user)
+    // const usernames=await prisma.usuarios.findUnique({where:{username: parseInt(id)}});
+    const usernames=await prisma.usuarios.findUnique({where:{username:id}});
+    res.json(usernames);
+})
