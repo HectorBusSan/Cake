@@ -14,3 +14,11 @@ Content-Type: application/json
 }
 ####
 GET {{api}}/usuario1
+###
+POST {{api}}/login
+Content-Type: application/json
+
+{
+    "username":"usuario1",
+    "Password":"usuario1"
+}
