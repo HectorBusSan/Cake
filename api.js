@@ -8,3 +8,7 @@ export const saveUser=async(user)=>{
     });
     return await res.json(res);
 }
+export const getUser=async(username)=>{
+    const res=await(fetch(`${API}/${username}`));
+    return await res.json();
+}
