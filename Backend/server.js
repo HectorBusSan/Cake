@@ -47,3 +47,18 @@ app.get("/usuarios/:username",async(req,res)=>{
     const usernames=await prisma.usuarios.findUnique({where:{username:id}});
     res.json(usernames);
 })
+// get usuario y contraseña
+app.get("/usuarios/login/:username",async(req,res)=>{
+    const username=req.params.username;
+    // const Password= req.params.Password;
+    const logear=await prisma.usuarios.findUnique({where:{username:username}});
+    if(logear){
+        if(req.params.username === logear.username && req.params.Password === logear.Password){
+            res.json(logear);
+        }else{
+            res.json({});
+            console.log("crear cuenta")
+        }
+    }
+    // res.json(logear)
+})
