@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet,Text,View, ImageBackground, Dimensions,Animated, Image, useColorScheme, SafeAreaView, useWindowDimensions } from "react-native";
+import { StyleSheet,Text,View, ImageBackground, Dimensions,Animated, Image, useColorScheme, SafeAreaView, useWindowDimensions,TextInput } from "react-native";
 import COLORS from "../../consts/colors";
 import Logo from "./../../assets/logo.png"
 import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
@@ -16,9 +16,19 @@ const Login=({navigation})=>{
     }
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    
+    const [log, setLog] = useState({
+        username:"",
+        Password:""
+    })
 
-    const onSingInPressed=()=>{
-        console.warn("Sing In")
+    const handlerChange= async (name,value)=>{
+        setLog({...log,[name]:value});
+    }
+
+    const onSingInPressed=async(username,password)=>{
+        // console.warn("Sing In")
+        
     }
     const onForgotPressed=()=>{
         console.warn("Forgot Password");
@@ -32,9 +42,19 @@ const Login=({navigation})=>{
             </View>
             <Text style={{fontSize:28, marginBottom:20, fontWeight:"bold",color:COLORS.dark}}>Login</Text>
             <Image source={Logo} style={{...styles.logo,height:height*0.3}} resizeMode="contain"/>
-            <CustomerInput Placeholder="Username" value={username} setValue={setUsername}/>
-            <CustomerInput Placeholder="Password" value={password} setValue={setPassword} secureTextEntry={true}/>
-            <CustomerButton text="Sing In" onPress={onSingInPressed}/>
+            <View style={styles.container}>
+                <TextInput
+                value={log.username} placeholder={"Username"} style={styles.input}
+                onChangeText={(text)=>handlerChange("username",text)}
+                />
+            </View>
+            <View style={styles.container}>
+                <TextInput
+                value={log.Password} placeholder={"Password"} style={styles.input}
+                onChangeText={(text)=>handlerChange("Passwrod",text)} secureTextEntry={true}
+                />
+            </View>
+            <CustomerButton text="Sing In" onPress={onSingInPressed(username,password)}/>
             <TouchableOpacity onPress={()=>navigation.navigate("Register")} style={{width:width, paddingHorizontal:20}}>
             <CustomerButton text="Register" type="SECOND"/>
             </TouchableOpacity>
@@ -59,6 +79,15 @@ const styles= StyleSheet.create({
         width:"70%",
         maxWidth:300,
         maxHeight:200
+    },container:{
+        backgroundColor:"#fff",
+        width:"100%",
+        borderColor:"#e8e8e8",
+        borderWidth:1,
+        borderRadius:5,
+        padding:10,
+        marginHorizontal:10,
+        marginVertical:5
     }
 })
 export default Login;
