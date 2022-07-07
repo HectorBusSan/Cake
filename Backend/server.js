@@ -50,20 +50,25 @@ app.get("/usuarios/:username",async(req,res)=>{
 // get usuario y contraseña
 app.post("/usuarios/login",async(req,res)=>{
     const {username,Password}= req.body;
-    // const Password= req.params.Password;
-    // const username= req.params.username
     const logear=await prisma.usuarios.findUnique({where:{username:username}});
     if(logear){
-        console.log("registrado");
+        // console.log("registrado");
         if(Password===logear.Password){
             console.log("Logeado");
-            return console.log(logear)
+            console.log(logear)
+            // const message= "Usuario Encontrado";
+            return res.json(logear)
         }else{
+            const message= "Contraseña Incorrecta";
             console.log("No logeado")
-            return res.status(400)
+            return res.json(null)
+            // return null
         }
     }else{
+        const message= "No Existe el usuario";
         console.log("Registrate");
+        return res.json(null)
+        // return  null
     }
     
     // res.json(logear)
