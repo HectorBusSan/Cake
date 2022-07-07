@@ -6,9 +6,13 @@ export const saveUser=async(user)=>{
         headers:{Accept:"application/json","Content-type":"application/json"},
         body:JSON.stringify(user)
     });
-    return await res.json(res);
+    return await res.json();
 }
 export const getUser=async(log)=>{
-    const res=await(fetch(`${API}/${log}`));
+    const res=await fetch(`${API}/login`,{
+        method:"POST",
+        headers:{Accept:"application/json","Content-type":"application/json"},
+        body:JSON.stringify(log)
+    });
     return await res.json();
 }
