@@ -7,6 +7,7 @@ import CustomerInput from "../Components/CustomerInput.js/CustomerInput";
 import { CustomerButton } from "../Components/Buttons/CustomerButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
+import { getUser } from "../../api";
 
 const Login=({navigation})=>{
     const {height,width}=useWindowDimensions();
@@ -14,21 +15,27 @@ const Login=({navigation})=>{
     const backgroundStyle={
         backgroundStyle:isDarkMode?COLORS.dark:COLORS.white
     }
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [password, setPassword] = useState('');
     
     const [log, setLog] = useState({
         username:"",
         Password:""
     })
 
-    const handlerChange= async (name,value)=>{
+    const handlerChanger= (name,value)=>{
         setLog({...log,[name]:value});
     }
 
-    const onSingInPressed=async(username,password)=>{
-        // console.warn("Sing In")
-        
+    const onSingInPressed=async()=>{
+        // console.log(username,Password);
+        const respuesta=await getUser(log);
+        console.log(respuesta)
+        if(respuesta===null){
+            console.log("fallo")
+        }else{
+            console.log("vamos!!!")
+        }
     }
     const onForgotPressed=()=>{
         console.warn("Forgot Password");
@@ -45,16 +52,20 @@ const Login=({navigation})=>{
             <View style={styles.container}>
                 <TextInput
                 value={log.username} placeholder={"Username"} style={styles.input}
-                onChangeText={(text)=>handlerChange("username",text)}
+                onChangeText={(text)=>handlerChanger("username",text)}
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
                 value={log.Password} placeholder={"Password"} style={styles.input}
-                onChangeText={(text)=>handlerChange("Passwrod",text)} secureTextEntry={true}
+                onChangeText={(text)=>handlerChanger("Password",text)} secureTextEntry={true}
                 />
             </View>
-            <CustomerButton text="Sing In" onPress={onSingInPressed(username,password)}/>
+            <View style={{width:"100%", marginTop:10}}>
+            <TouchableOpacity style={{width:"100%"}} onPress={onSingInPressed}>
+            <CustomerButton text="Sing In"/>
+            </TouchableOpacity>
+            </View>
             <TouchableOpacity onPress={()=>navigation.navigate("Register")} style={{width:width, paddingHorizontal:20}}>
             <CustomerButton text="Register" type="SECOND"/>
             </TouchableOpacity>
