@@ -4,8 +4,8 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "username":"usuario1",
-    "Password":"usuario1",
+    "username":"usuario2",
+    "Password":"usuario2",
     "nombre":"Usuario",
     "ApellidoP":"uno",
     "ApellidoM":"one",
