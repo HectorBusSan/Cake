@@ -22,7 +22,7 @@ const Login=({navigation})=>{
         username:"",
         Password:""
     })
-
+    const [goHome, setGoHome] = useState();
     const handlerChanger= (name,value)=>{
         setLog({...log,[name]:value});
     }
@@ -32,9 +32,12 @@ const Login=({navigation})=>{
         const respuesta=await getUser(log);
         console.log(respuesta)
         if(respuesta===null){
-            console.log("fallo")
+            console.warn("Usuario o Contraseña Incorrecta")
+            setGoHome(false)
         }else{
             console.log("vamos!!!")
+            setGoHome(true);
+            navigation.navigate("Home")
         }
     }
     const onForgotPressed=()=>{
