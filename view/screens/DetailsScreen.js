@@ -59,9 +59,14 @@ const DetailsScreen=({navigation,route})=>{
                                 </View>
                             </TouchableOpacity>
                         </View>
+                        {contador===0?
+                        <View style={style.buyBtnNo}>
+                        <Text style={{color:"#bbb",fontSize:18}}>Buy</Text>
+                        </View>:
                         <View style={style.buyBtn}>
                             <Text style={{color:COLORS.white,fontSize:18}}>Buy</Text>
                         </View>
+                        }
                     </View>
                 </View>
             </View>
@@ -122,6 +127,13 @@ const style = StyleSheet.create({
     },
     buyBtn:{
         backgroundColor:COLORS.green,
+        width:150,
+        height:50,
+        borderRadius:40,
+        justifyContent:"center",
+        alignItems:"center"
+    },buyBtnNo:{
+        backgroundColor:COLORS.white,
         width:150,
         height:50,
         borderRadius:40,
