@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 
-const Products = () => {
+const Productos = () => {
     const [newuser, setNewuser] = useState({
         nombre:"",
         informacion:"",
@@ -80,4 +80,4 @@ const styles= StyleSheet.create({
     }
 })
 
-export default Products
+export default Productos
