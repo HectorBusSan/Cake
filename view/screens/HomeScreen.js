@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import {View,Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, FlatList, Image} from "react-native";
+import React, { useEffect, useState } from "react";
+import {View,Text, SafeAreaView, StyleSheet, Dimensions, TouchableOpacity, FlatList, Image, Animated} from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import products from "./../../consts/products";
 
+
 const width =Dimensions.get('screen').width/2-30
 
-const HomeScreen=({navigation})=>{
+const HomeScreen=({navigation,route})=>{
     const categories=['Popular','Cakes','Dessert','Perzonalized'];
-
+    const [sections, setSections] = useState(1);
+    const [productA, setProductA] = useState([]);
     const [categoryIndex,setCategoryIndex]=React.useState(0);
+    const Usuario= route.params;
 
     const CategoryList=()=>{
         return(
@@ -30,10 +33,10 @@ const HomeScreen=({navigation})=>{
         </View>);
     }
 
-    const [search,setSearch]=useState([]);
-    const handlerChange=(e)=>{
-        setSearch(e.target.value);
-        console.log("Busqueda: "+e.target.value)
+    const [search,setSearch]=useState("");
+    const handlerChange=(valor)=>{
+        setSearch(valor);
+        console.log("-Busqueda: "+search);
     }
 
 
@@ -71,25 +74,55 @@ const HomeScreen=({navigation})=>{
         </TouchableOpacity>
         );
     }
+    const [fadeIn,setFadeIn]= useState(new Animated.Value(-300));
+    const showProfile=()=>{
+        Animated.timing(fadeIn,{
+            toValue:150,
+            duration:3000,
+        }).start();
+    }
+
+    const hiddenProfile=()=>{
+        Animated.timing(fadeIn,{
+            toValue:-300,
+            duration:3000,
+        }).start();
+    }
+        
+    
+    const Profile=()=>{
+        return(
+            <Animated.View style={{...style.card,backgroundColor:COLORS.green,position:"absolute",width:"100%",marginLeft:20,marginRight:20,
+            display:"flex", flexDirection:"column", alignItems:"center",zIndex:100,padding:20, top:fadeIn}}>
+                <TouchableOpacity onPress={hiddenProfile} style={{position:"absolute",right:20,top:15}}><FontAwesome name="close" size={24} color="black"/></TouchableOpacity>
+                <Text style={{marginTop:10,fontSize:24,color:COLORS.white, fontWeight:"bold", marginBottom:10}}>Usuario: {Usuario.username}</Text>
+                {Usuario.rol===1?<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Pedidos</Text>:<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Mis Pedidos</Text>}
+                {Usuario.rol===1?<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Crear Productos</Text>:<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Carrito</Text>}
+                <Text style={style.buttonP}>Cerrar Sessión</Text>
+                {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
+            </Animated.View>
+        )
+    }
 
     return (
         <SafeAreaView style={{flex:1,
         paddingHorizontal:20,
         backgroundColor:COLORS.white}}>
+            <Profile Usuario={Usuario}/>
             <View style={style.header}>
                 <View>
-                    <Text style={{fontSize:25,fontWeight:"bold"}}>Welcome to </Text>
-                    <Text style={{fontSize:38,fontWeight:"bold",color:COLORS.green}}>Cakes Shop</Text>
+                    <Text style={{fontSize:25,fontWeight:"bold"}}>Bienvenido a el</Text>
+                    <Text style={{fontSize:34,fontWeight:"bold",color:COLORS.green}}>Palacio del Sabor</Text>
                 </View>
                 <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
-                    <FontAwesome name="user-circle-o" size={24} color="black" />
+                    <TouchableOpacity onPress={showProfile}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
                     <FontAwesome name="shopping-cart" size={24} />
                 </View>
             </View>
-                <View style={{marginTop:30, flexDirection:"row", alignItems:"center"}}>
+                <View style={{marginTop:30, flexDirection:"row", alignItems:"center", zIndex:10}}>
                     <View style={style.searchContainer}>
                         <FontAwesome name="search" size={19} style={{marginLeft:20}}/>
-                        <TextInput placeholder=" Search..." style={style.input} onChange={handlerChange}/>
+                        <TextInput placeholder=" Search..." style={style.input} onChangeText={(text)=>handlerChange(text)}/>
                     </View>
                     <View style={style.sortBtn}>
                         <MaterialIcons name="sort" size={30} color={COLORS.white}/>
@@ -114,6 +147,7 @@ const style=StyleSheet.create({
         marginTop:50,
         flexDirection:"row",
         justifyContent:"space-between",
+        zIndex:10
     },
     searchContainer:{
         height:50,
@@ -160,5 +194,12 @@ const style=StyleSheet.create({
         marginBottom:20,
         padding:15,
     },
+    buttonP:{
+        fontSize:18,
+        padding:8,
+        marginTop:10,
+        backgroundColor:"#dc3545",
+        borderRadius:5
+    }
 });
 export default HomeScreen;
