@@ -15,14 +15,22 @@ const Login=({navigation})=>{
     const backgroundStyle={
         backgroundStyle:isDarkMode?COLORS.dark:COLORS.white
     }
-    // const [username, setUsername] = useState('');
-    // const [password, setPassword] = useState('');
     
     const [log, setLog] = useState({
         username:"",
         Password:""
     })
     const [goHome, setGoHome] = useState();
+
+    const [user, setUser] = useState({
+        username:"",
+        Password:"",
+        nombre:"",
+        ApellidoP:"",
+        ApellidoM:"",
+        Correo:"",
+        rol:""
+    })
     const handlerChanger= (name,value)=>{
         setLog({...log,[name]:value});
     }
@@ -30,14 +38,26 @@ const Login=({navigation})=>{
     const onSingInPressed=async()=>{
         // console.log(username,Password);
         const respuesta=await getUser(log);
-        console.log(respuesta)
+        // console.log(respuesta);
+        setUser(respuesta)
         if(respuesta===null){
             console.warn("Usuario o Contraseña Incorrecta")
             setGoHome(false)
         }else{
             console.log("vamos!!!")
+            console.log(user);
+            // console.log(user.username)
             setGoHome(true);
-            navigation.navigate("Home")
+            navigation.navigate("Home",{
+                id:user.id,
+                username:user.username,
+                Password:user.Password,
+                nombre:user.nombre,
+                ApellidoP:user.ApellidoP,
+                ApellidoM:user.ApellidoM,
+                Correo:user.Correo,
+                rol:user.rol
+            })
         }
     }
     const onForgotPressed=()=>{
