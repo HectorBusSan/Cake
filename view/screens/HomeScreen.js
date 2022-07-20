@@ -97,7 +97,8 @@ const HomeScreen=({navigation,route})=>{
                 <TouchableOpacity onPress={hiddenProfile} style={{position:"absolute",right:20,top:15}}><FontAwesome name="close" size={24} color="black"/></TouchableOpacity>
                 <Text style={{marginTop:10,fontSize:24,color:COLORS.white, fontWeight:"bold", marginBottom:10}}>Usuario: {Usuario.username}</Text>
                 {Usuario.rol===1?<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Pedidos</Text>:<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Mis Pedidos</Text>}
-                {Usuario.rol===1?<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Crear Productos</Text>:<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Carrito</Text>}
+                {Usuario.rol===1?<TouchableOpacity onPress={() => navigation.navigate("Productos")}><Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Crear Productos</Text></TouchableOpacity>
+                :<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Carrito</Text>}
                 <Text style={style.buttonP}>Cerrar Sessión</Text>
                 {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
             </Animated.View>
