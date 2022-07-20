@@ -7,6 +7,7 @@ const Stack = createStackNavigator();
 import HomeScreen from './view/screens/HomeScreen';
 import DetailsScreen from './view/screens/DetailsScreen';
 import OnBoarding from "./view/screens/Onboarding"
+import Productos from './view/screens/Productos';
 import {StatusBar, View} from 'react-native';
 import COLORS from './consts/colors';
 import Login from './view/screens/Login';
@@ -22,6 +23,7 @@ export default function App() {
       <Stack.Screen name="Register" component={Register}/>
       <Stack.Screen name="Home" component={HomeScreen}/>
       <Stack.Screen name="Details" component={DetailsScreen}/>
+      <Stack.Screen name="Productos" component={Productos}/>
     </Stack.Navigator>
    </NavigationContainer>
   )
