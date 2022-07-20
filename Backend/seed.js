@@ -16,6 +16,19 @@ const prisma = new PrismaClient();
                 rol:1
             }
         });
+        const user2 = await prisma.usuarios.upsert({
+            where: {username:"Usuario1"},
+            update:{},
+            create:{
+                username:"usuario1",
+                nombre:"User1",
+                ApellidoP:"one",
+                ApellidoM:"two",
+                Correo:"One@hotmail.com",
+                Password:"usuario1",
+                rol:2
+            }
+        });
     }catch(e){
         console.error(e);
         process.exit(1);
