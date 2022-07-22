@@ -1,8 +1,13 @@
-import { View, Text, SafeAreaView } from 'react-native'
-import React from 'react'
 
-const Productos = () => {
-    const [newuser, setNewuser] = useState({
+import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Platform,Alert,Image,Button } from 'react-native'
+import React,{useState,useEffect} from 'react'
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import COLORS from "../../consts/colors";
+import CustomerButton from '../Components/Buttons/CustomerButton';
+import * as ImagenPicker from "expo-image-picker"
+
+const Productos = ({navigation}) => {
+    const [newproduct, setNewproduct] = useState({
         nombre:"",
         informacion:"",
         imagen:"",
@@ -10,8 +15,32 @@ const Productos = () => {
     });
     // https://codesandbox.io/s/cc5m3?file=/pages/api/upload.js
     const handlerChange=(name,value)=>{
-        setNewuser({...newuser,[name]:value});
+        setNewproduct({...newproduct,[name]:value});
     }
+    const [selectedImage, setSelectedImage] = useState(null);
+    let openImagePickerAsync=async()=>{
+        let permissionResult= await ImagenPicker.requestMediaLibraryPermissionsAsync()
+        if(permissionResult.granted===false){
+            alert("Permision to access camera is required");
+            return;
+        }
+        const pickerResult= await ImagenPicker.launchImageLibraryAsync();
+        if(permissionResult.cancelled===true){
+            return;
+        }
+        // setSelectedImage(pickerResult)
+        if(Platform.OS === 'web'){
+            const remoteUri= await uploadToAnonymousFilesAsync(pickerResult.uri)
+            // console.log(remoteUri)
+            setSelectedImage({localUri:pickerResult.uri,remoteUri:remoteUri})
+          }else{
+            setSelectedImage({localUri:pickerResult.uri,type:pickerResult.type})
+          } 
+    }
+    const onRegister=()=>{
+        console.log(selectedImage)
+    }
+
   return (   
     <SafeAreaView style={styles.body}>
         <View style={styles.root}>
@@ -21,34 +50,42 @@ const Productos = () => {
             <Text style={{fontSize:28, marginBottom:20, fontWeight:"bold",color:COLORS.dark}}>Register</Text>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.nombre} placeholder={"Nombre del Producto"} style={styles.input}
+                value={newproduct.nombre} placeholder={"Nombre del Producto"} style={styles.input}
                 onChangeText={(text)=>handlerChange("nombre",text)}
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.informacion} placeholder={"Descripción"} style={styles.input}
+                value={newproduct.informacion} placeholder={"Descripción"} style={styles.input}
                 onChangeText={(text)=>handlerChange("informacion",text)} 
                 />
             </View>
             <View style={styles.container}>
                 <TextInput
-                value={newuser.precio} placeholder={"Precio"} style={styles.input}
+                value={newproduct.precio} placeholder={"Precio"} style={styles.input}
                 onChangeText={(text)=>handlerChange("precio",text)}
                 />
             </View>
-            <View style={styles.container}>
-                <TextInput
-                value={newuser.imagen} placeholder={"Insertar Imagen"} style={styles.input}
-                onChangeText={(text)=>handlerChange("imagen",text)} 
-                />
+            <View style={{alignItems:"center"}}>
+            <Text style={{alignItems:"center", margin:20}}>Selecciona una Imagen</Text>
+            <TouchableOpacity onPress={openImagePickerAsync}>
+                <Image source={{uri: selectedImage!== null ? selectedImage.localUri : 'https://picsum.photos/200/200'}} style={style.image}/>
+            </TouchableOpacity>
+            {/* {
+            (selectedImage) ?(
+            <TouchableOpacity onPress={openShareDialog} style={style.button}>
+                <Text style={style.buttonText}>Share this Photo</Text>
+            </TouchableOpacity>
+            ):(<View/>)
+            } */}
             </View>
             <View style={{width:"100%", marginTop:10}}>
-            <TouchableOpacity style={{width:"100%"}} onPress={onRegister}>
-                <CustomerButton text="Register"/>
+            <TouchableOpacity style={{width:"100%",fontWeight:"bold",padding:15,marginVertical:5,alignItems:"center",borderRadius:30,backgroundColor:"#3B71F3",color:"#fff"}} onPress={onRegister}>
+                {/* <CustomerButton text="Register"/> */}
+                <Text style={{color:"#fff",fontWeight:"bold"}}>Registro</Text>
             </TouchableOpacity>
             </View>
-        </View>
+            </View>
         </SafeAreaView>
   )
 }
@@ -79,5 +116,12 @@ const styles= StyleSheet.create({
         marginVertical:5
     }
 })
+const style = StyleSheet.create({
+    contenedor: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', backgroundColor: '#292929' },
+    title: { fontSize: 30, color: '#fff' },
+    image: {height:200, width:200, borderRadius:100, resizeMode:'contain'},
+    button:{backgroundColor:"#35a", borderRadius:50, padding:10, marginTop:10},
+    buttonText:{color:"#fff", fontSize:20}
+  });
 
 export default Productos
