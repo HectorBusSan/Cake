@@ -1,4 +1,5 @@
 @api= http://localhost:3000/usuarios
+@api2= http://localhost:3000/productos
 
 POST {{api}}
 Content-Type: application/json
@@ -21,4 +22,16 @@ Content-Type: application/json
 {
     "username":"usuario1",
     "Password":"usuario1"
+}
+###
+GET {{api2}}
+###
+POST {{api2}}
+Content-Type: application/json
+
+{
+    "nombre":"Dragon Cake",
+    "informacion":"Pastel con un Gran dragon en medio",
+    "imagen":"imagen.jpg",
+    "precio":50
 }
