@@ -72,12 +72,19 @@ app.post("/usuarios/login",async(req,res)=>{
     }
 })
 
-app.post("/productos",async(res,req)=>{
+// Productos
+app.post("/productos",async(req,res)=>{
     const producto={
         nombre:req.body.nombre,
         informacion:req.body.informacion,
         imagen:req.body.imagen,
         precio:req.body.precio,
     }
-    const message="Producto Creado"
+    const message="Producto Creado";
+    await prisma.productos.create({data:producto});
+    return res.json({message});
+})
+app.get("/productos",async(req,res)=>{
+    const allproducts=await prisma.productos.findMany({});
+    return res.json(allproducts);
 })
