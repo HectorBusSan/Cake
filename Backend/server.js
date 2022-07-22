@@ -54,13 +54,13 @@ app.post("/usuarios/login",async(req,res)=>{
     if(logear){
         // console.log("registrado");
         if(Password===logear.Password){
-            console.log("Logeado");
+            // console.log("Logeado");
             console.log(logear)
             // const message= "Usuario Encontrado";
             return res.json(logear)
         }else{
             const message= "Contraseña Incorrecta";
-            console.log("No logeado")
+            // console.log("No logeado")
             return res.json(null)
             // return null
         }
@@ -70,6 +70,14 @@ app.post("/usuarios/login",async(req,res)=>{
         return res.json(null)
         // return  null
     }
-    
-    // res.json(logear)
+})
+
+app.post("/productos",async(res,req)=>{
+    const producto={
+        nombre:req.body.nombre,
+        informacion:req.body.informacion,
+        imagen:req.body.imagen,
+        precio:req.body.precio,
+    }
+    const message="Producto Creado"
 })

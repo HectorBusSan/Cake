@@ -8,4 +8,6 @@ El sistema tiene tecnologia de React Native, Expo.
 - Agregando dev para animaciones npm i react-native-reanimated
 - Agregamos dev para el carruzel npm i react-native-snap-carousel
 - Vamos a ocupar npm i @react-native-picker/picker para subir imagenes
-- Ocuparemos la libreria animatable
+- Ocuparemos la libreria animatable npm i react-native-animatable
+- picker de react native:
+npm i react-native-image-picker
