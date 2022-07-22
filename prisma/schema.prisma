@@ -23,6 +23,6 @@ model productos{
   id Int @id @default(autoincrement())
   nombre String @db.VarChar(250)
   informacion String @db.VarChar(250)
-  imagen Bytes @db.LongBlob
+  imagen String @db.VarChar(250)
   precio Float @db.Double
 }
