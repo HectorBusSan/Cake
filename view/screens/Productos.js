@@ -5,6 +5,7 @@ import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
 import CustomerButton from '../Components/Buttons/CustomerButton';
 import * as ImagenPicker from "expo-image-picker"
+import api,{saveProduct} from '../../api';
 
 const Productos = ({navigation}) => {
     const [newproduct, setNewproduct] = useState({
@@ -34,11 +35,30 @@ const Productos = ({navigation}) => {
             // console.log(remoteUri)
             setSelectedImage({localUri:pickerResult.uri,remoteUri:remoteUri})
           }else{
-            setSelectedImage({localUri:pickerResult.uri,type:pickerResult.type})
+            setSelectedImage({localUri:pickerResult.uri})
+            setNewproduct({...newproduct,["imagen"]:pickerResult.uri})
+            // setSelectedImage({pickerResult})
           } 
     }
+
+    // const onRegister=()=>{
+    //     // console.log(selectedImage)
+    //     const formData= new FormData();
+    //     formData.append("profile",{
+    //         name:new Date+"_profile",
+    //         uri:selectedImage,
+    //         type:"image/jpg"
+    //     })
+    //     const res = await api.post("/productos/upload",formData,{
+    //         Headers:{
+    //             Accept:"application/json",
+    //             "Content-type":"multiplart/form-data",
+    //         }
+    //     })
+    // }
     const onRegister=()=>{
-        console.log(selectedImage)
+        console.log(newproduct)
+        saveProduct(newproduct);
     }
 
   return (   
