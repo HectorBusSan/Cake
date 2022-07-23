@@ -1,6 +1,9 @@
 const express = require("express");
 const app= express();
 app.use(express.json());
+const multer=require("multer");
+const {v4: uuidv4} = require('uuid');
+
 const port = process.env.PORT || 3000;
 
 const {PrismaClient}= require("@prisma/client");
@@ -78,10 +81,11 @@ app.post("/productos",async(req,res)=>{
         nombre:req.body.nombre,
         informacion:req.body.informacion,
         imagen:req.body.imagen,
-        precio:req.body.precio,
+        precio:Number(req.body.precio),
     }
     const message="Producto Creado";
     await prisma.productos.create({data:producto});
+    console.log(producto)
     return res.json({message});
 })
 app.get("/productos",async(req,res)=>{
