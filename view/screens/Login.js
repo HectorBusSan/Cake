@@ -20,7 +20,7 @@ const Login=({navigation})=>{
         username:"",
         Password:""
     })
-    const [goHome, setGoHome] = useState();
+    // const [goHome, setGoHome] = useState();
 
     const [user, setUser] = useState({
         username:"",
@@ -37,26 +37,27 @@ const Login=({navigation})=>{
 
     const onSingInPressed=async()=>{
         // console.log(username,Password);
+        await getUser(log);
         const respuesta=await getUser(log);
-        // console.log(respuesta);
         setUser(respuesta)
         if(respuesta===null){
             console.warn("Usuario o Contraseña Incorrecta")
-            setGoHome(false)
+            setLog({
+                username:"",
+                Password:""
+            })
         }else{
             console.log("vamos!!!")
             console.log(user);
-            // console.log(user.username)
-            setGoHome(true);
             navigation.navigate("Home",{
-                id:user.id,
-                username:user.username,
-                Password:user.Password,
-                nombre:user.nombre,
-                ApellidoP:user.ApellidoP,
-                ApellidoM:user.ApellidoM,
-                Correo:user.Correo,
-                rol:user.rol
+                id:respuesta.id,
+                username:respuesta.username,
+                Password:respuesta.Password,
+                nombre:respuesta.nombre,
+                ApellidoP:respuesta.ApellidoP,
+                ApellidoM:respuesta.ApellidoM,
+                Correo:respuesta.Correo,
+                rol:respuesta.rol
             })
         }
     }
