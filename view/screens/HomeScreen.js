@@ -10,9 +10,9 @@ const width =Dimensions.get('screen').width/2-30
 
 const HomeScreen=({navigation,route})=>{
     const categories=['Popular','Cakes','Dessert','Perzonalized'];
-    const [sections, setSections] = useState(1);
-    const [productA, setProductA] = useState([]);
+    
     const [categoryIndex,setCategoryIndex]=React.useState(0);
+
     const Usuario= route.params;
 
     const CategoryList=()=>{
@@ -36,15 +36,14 @@ const HomeScreen=({navigation,route})=>{
     const [search,setSearch]=useState("");
     const handlerChange=(valor)=>{
         setSearch(valor);
-        console.log("-Busqueda: "+search);
+        // console.log("-Busqueda: "+search);
     }
-
 
     const Card = ({product})=>{
         return (
         <TouchableOpacity activeOpacity={0.8}
         onPress={() => navigation.navigate('Details', product)}>
-            <View style={style.card}>
+            <View style={product.name!=search&&search.length>2?style.cardnone:product.category===categoryIndex? style.card:categoryIndex===0?style.card:style.cardnone}>
                 <View style={{alignItems:'flex-end'}}>
                     <View style={{width:30,height:30, borderRadius:15,
                     alignItems:"center",justifyContent:"center",
@@ -123,18 +122,26 @@ const HomeScreen=({navigation,route})=>{
                 <View style={{marginTop:30, flexDirection:"row", alignItems:"center", zIndex:10}}>
                     <View style={style.searchContainer}>
                         <FontAwesome name="search" size={19} style={{marginLeft:20}}/>
-                        <TextInput placeholder=" Search..." style={style.input} onChangeText={(text)=>handlerChange(text)}/>
+                        <TextInput value={search} placeholder=" Search..." style={style.input} onChangeText={(text)=>handlerChange(text)}/>
                     </View>
+                    <TouchableOpacity onPress={()=>{
+                       setCategoryIndex(0)
+                       setSearch("");
+                    }}>
                     <View style={style.sortBtn}>
                         <MaterialIcons name="sort" size={30} color={COLORS.white}/>
                     </View>
+                    </TouchableOpacity>
                 </View>
             <CategoryList/>
             <FlatList columnWrapperStyle={{justifyContent:"space-between"}}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
                 marginTop:10,
-                paddingBottom:50
+                width:"100%",
+                paddingBottom:50,
+                // flexWrap:"wrap",
+                // flexDirection:"row",
             }}
             numColumns={2} data={products}
             renderItem={({item})=>{
@@ -142,7 +149,6 @@ const HomeScreen=({navigation,route})=>{
         </SafeAreaView>
     )
 }
-// renderItem={({item})=><Card product={item}/>}
 const style=StyleSheet.create({
     header:{
         marginTop:50,
@@ -187,7 +193,7 @@ const style=StyleSheet.create({
         borderColor:COLORS.green,
     },
     card:{
-        height:225,
+        height:245,
         backgroundColor:COLORS.light,
         width,
         marginHorizontal:2,
@@ -201,6 +207,8 @@ const style=StyleSheet.create({
         marginTop:10,
         backgroundColor:"#dc3545",
         borderRadius:5
+    },cardnone:{
+        display:"none"
     }
 });
 export default HomeScreen;
