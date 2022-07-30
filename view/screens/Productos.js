@@ -1,11 +1,11 @@
 
-import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Platform,Alert,Image,Button } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Platform,Alert,Image} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import COLORS from "../../consts/colors";
 import CustomerButton from '../Components/Buttons/CustomerButton';
 import * as ImagenPicker from "expo-image-picker"
-import api,{saveProduct} from '../../api';
+import api,{saveProduct, uploadI} from '../../api';
 
 const Productos = ({navigation}) => {
     const [newproduct, setNewproduct] = useState({
@@ -15,9 +15,14 @@ const Productos = ({navigation}) => {
         precio:"",
     });
     // https://codesandbox.io/s/cc5m3?file=/pages/api/upload.js
+    // https://www.youtube.com/watch?v=79WtnkL_XsM
+    // https://www.youtube.com/watch?v=5AaIJQcI0dI&t=2s
+
+    // https://medium.com/zero-equals-false/uploading-image-to-node-from-react-native-d197285f678a
     const handlerChange=(name,value)=>{
         setNewproduct({...newproduct,[name]:value});
     }
+    const [all, setAll] = useState();
     const [selectedImage, setSelectedImage] = useState(null);
     let openImagePickerAsync=async()=>{
         let permissionResult= await ImagenPicker.requestMediaLibraryPermissionsAsync()
@@ -26,6 +31,8 @@ const Productos = ({navigation}) => {
             return;
         }
         const pickerResult= await ImagenPicker.launchImageLibraryAsync();
+        setAll(pickerResult);
+
         if(permissionResult.cancelled===true){
             return;
         }
@@ -35,32 +42,32 @@ const Productos = ({navigation}) => {
             // console.log(remoteUri)
             setSelectedImage({localUri:pickerResult.uri,remoteUri:remoteUri})
           }else{
+            console.log(pickerResult);
             setSelectedImage({localUri:pickerResult.uri})
-            setNewproduct({...newproduct,["imagen"]:pickerResult.uri})
+            let name=JSON.stringify(pickerResult.uri);
+            let pickername= name.lastIndexOf("/")+1;
+            setNewproduct({...newproduct,["imagen"]:pickerResult.uri.substr(pickername)})
             // setSelectedImage({pickerResult})
+            // uploadI(pickerResult);
           } 
     }
 
-    // const onRegister=()=>{
-    //     // console.log(selectedImage)
-    //     const formData= new FormData();
-    //     formData.append("profile",{
-    //         name:new Date+"_profile",
-    //         uri:selectedImage,
-    //         type:"image/jpg"
-    //     })
-    //     const res = await api.post("/productos/upload",formData,{
-    //         Headers:{
-    //             Accept:"application/json",
-    //             "Content-type":"multiplart/form-data",
-    //         }
-    //     })
-    // }
-    const onRegister=()=>{
-        console.log(newproduct)
-        saveProduct(newproduct);
+    const onRegister=async()=>{
+        console.log(newproduct);
+        if(newproduct.nombre<2){
+            console.warn("Introducir nombre");
+        }else if(newproduct.informacion<2){
+            console.warn("Introdución una descripción")
+        }else if(Number(newproduct.precio)<=0){
+            console.warn("Introducir un Precio Valido")
+        }else if(newproduct.imagen===""){
+            console.warn("Introducir Imagen del producto")
+        }else{
+            await saveProduct(newproduct);
+        }
+        // uploadI(newproduct);
+        // await uploadI(all)
     }
-
   return (   
     <SafeAreaView style={styles.body}>
         <View style={styles.root}>
@@ -91,19 +98,13 @@ const Productos = ({navigation}) => {
             <TouchableOpacity onPress={openImagePickerAsync}>
                 <Image source={{uri: selectedImage!== null ? selectedImage.localUri : 'https://picsum.photos/200/200'}} style={style.image}/>
             </TouchableOpacity>
-            {/* {
-            (selectedImage) ?(
-            <TouchableOpacity onPress={openShareDialog} style={style.button}>
-                <Text style={style.buttonText}>Share this Photo</Text>
-            </TouchableOpacity>
-            ):(<View/>)
-            } */}
             </View>
             <View style={{width:"100%", marginTop:10}}>
             <TouchableOpacity style={{width:"100%",fontWeight:"bold",padding:15,marginVertical:5,alignItems:"center",borderRadius:30,backgroundColor:"#3B71F3",color:"#fff"}} onPress={onRegister}>
-                {/* <CustomerButton text="Register"/> */}
+                
                 <Text style={{color:"#fff",fontWeight:"bold"}}>Registro</Text>
             </TouchableOpacity>
+
             </View>
             </View>
         </SafeAreaView>
