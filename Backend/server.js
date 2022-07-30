@@ -1,6 +1,7 @@
 const express = require("express");
 const app= express();
 app.use(express.json());
+const path= require("path");
 const multer=require("multer");
 const {v4: uuidv4} = require('uuid');
 
@@ -76,6 +77,40 @@ app.post("/usuarios/login",async(req,res)=>{
 })
 
 // Productos
+
+// middlewares
+const storage=multer.diskStorage({
+    destination: path.join(__dirname,"./public/uploads"),
+    filename:(req,file,cb)=>{
+        // cb(null,file.originalname);
+        cb(null,uuidv4() + path.extname(req.name).toLocaleLowerCase());
+    }
+})
+
+app.use(multer({
+    storage,
+    dest:path.join(__dirname,"public/uploads"),
+    // dest:"/upload",
+    limits:{fileSize:2000000},
+    fileFilter:(req,file,cb)=>{
+        const filetypes=/jpeg|jpg|png|gif/
+        const mimetype= filetypes.test(file.mimetype);
+        const extname= filetypes.test(path.extname(file.originalname));
+        if(mimetype&&extname){
+            return cb(null,true);
+        }
+        cb("Error: Archivo debe ser una imagen valida");
+    }
+}).single("image"));
+
+
+app.post("/upload",async(req,res)=>{
+    console.log("hola")
+    console.log(req.file)
+    return res.json();
+})
+
+
 app.post("/productos",async(req,res)=>{
     const producto={
         nombre:req.body.nombre,
