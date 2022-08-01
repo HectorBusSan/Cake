@@ -12,6 +12,7 @@ import {StatusBar, View} from 'react-native';
 import COLORS from './consts/colors';
 import Login from './view/screens/Login';
 import Register from './view/screens/Register';
+import UploadImage from './view/screens/UploadImage';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
       <Stack.Screen name="Register" component={Register}/>
       <Stack.Screen name="Home" component={HomeScreen}/>
       <Stack.Screen name="Details" component={DetailsScreen}/>
+      {/* <Stack.Screen name='UploadImage' component={UploadImage}/> */}
       <Stack.Screen name="Productos" component={Productos}/>
     </Stack.Navigator>
    </NavigationContainer>
