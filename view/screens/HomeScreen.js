@@ -140,8 +140,8 @@ const HomeScreen=({navigation,route})=>{
                 marginTop:10,
                 width:"100%",
                 paddingBottom:50,
-                // flexWrap:"wrap",
-                // flexDirection:"row",
+                flexWrap:"wrap",
+                flexDirection:"row",
             }}
             numColumns={2} data={products}
             renderItem={({item})=>{
