@@ -59,7 +59,7 @@ const DetailsScreen=({navigation,route})=>{
         let check=itemArray.includes(identify);
         if(check){
             ToastAndroid.show(
-                "Item Selected It's saved",
+                "Item Selected It saved",
                 ToastAndroid.SHORT,
             )
         }else{
