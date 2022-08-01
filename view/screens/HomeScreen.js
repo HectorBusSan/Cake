@@ -116,7 +116,7 @@ const HomeScreen=({navigation,route})=>{
                 </View>
                 <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
                     <TouchableOpacity onPress={showProfile}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
-                    <FontAwesome name="shopping-cart" size={24} />
+                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart")}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
                 </View>
             </View>
                 <View style={{marginTop:30, flexDirection:"row", alignItems:"center", zIndex:10}}>
