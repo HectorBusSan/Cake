@@ -19,34 +19,77 @@ const DetailsScreen=({navigation,route})=>{
         }
     }
     
-    const addToCart=async(id)=>{
+    // const addToCart=async()=>{
+    //     let itemArray= await AsyncStorage.getItem("cartItem");
+    //     itemArray= JSON.parse(itemArray);
+    //     if(itemArray){
+    //         let array=itemArray
+    //         array.push(product.id);
+    //         try{
+    //             await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+    //             ToastAndroid.show(
+    //                 "Item Added Successfully to cart",
+    //                 ToastAndroid.SHORT,
+    //             );
+    //         // navigation.navigate("Home")
+    //         }catch(error){
+    //             return error;
+    //         }
+    //     }else{
+    //         let array=[];
+    //         array.push(product.id);
+    //         try{
+    //             await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+    //             ToastAndroid.show(
+    //                 "Item Added Successfully to cart",
+    //                 ToastAndroid.SHORT,
+    //             )
+    //         }catch(error){
+    //             return error
+    //         }
+    //     }
+
+
+    // }
+
+    const addToCart=async()=>{
         let itemArray= await AsyncStorage.getItem("cartItem");
         itemArray= JSON.parse(itemArray);
-        if(itemArray){
-            let array=itemArray
-            array.push(id);
-            try{
-                await AsyncStorage.setItem("cartItem",JSON.stringify(array));
-                ToastAndroid.show(
-                    "Item Added Successfully to cart",
-                    ToastAndroid.SHORT,
-                );
-            // navigation.navigate("Home")
-            }catch(error){
-                return error;
-            }
+        let identify=String(product.id);
+        let check=itemArray.includes(identify);
+        if(check){
+            ToastAndroid.show(
+                "Item Selected It's saved",
+                ToastAndroid.SHORT,
+            )
         }else{
-            let array=[];
-            array.push(id);
-            try{
-                await AsyncStorage.setItem("cartItem",JSON.stringify(array));
-                ToastAndroid.show(
-                    "Item Added Successfully to cart",
-                    ToastAndroid.SHORT,
-                )
-            }catch(error){
-                return error
+            if(itemArray){
+                let array= itemArray;
+                array.push(identify)
+                try{
+                    await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+                    ToastAndroid.show(
+                        "Item Added Successfully to cart",
+                        ToastAndroid.SHORT,
+                    )
+                }catch(error){
+                    return error
+                }
+            }else{
+                let array=[];
+                array.push(identify);
+                try{
+                    await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+                    ToastAndroid.show(
+                        "Item Added Successfully to cart",
+                        ToastAndroid.SHORT,
+                    )
+                }catch(error){
+                    return error
+                }
             }
+            const resp=await AsyncStorage.getItem("cartItem");
+            console.log(resp)
         }
 
     }
@@ -58,7 +101,7 @@ const DetailsScreen=({navigation,route})=>{
                 <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
                 <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
                     <FontAwesome name="user-circle-o" size={24} color="black" />
-                    <FontAwesome name="shopping-cart" size={24} />
+                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart")}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
                 </View>
             </View>
             <View style={style.imageContainer}>
