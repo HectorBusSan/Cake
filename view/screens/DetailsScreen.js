@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import {View,Text,StyleSheet, SafeAreaView, Image}from "react-native";
+import {View,Text,StyleSheet, SafeAreaView, Image, ToastAndroid}from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const DetailsScreen=({navigation,route})=>{
     const product = route.params;
@@ -16,6 +17,38 @@ const DetailsScreen=({navigation,route})=>{
         }else{
             return setContador(contador);
         }
+    }
+    
+    const addToCart=async(id)=>{
+        let itemArray= await AsyncStorage.getItem("cartItem");
+        itemArray= JSON.parse(itemArray);
+        if(itemArray){
+            let array=itemArray
+            array.push(id);
+            try{
+                await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+                ToastAndroid.show(
+                    "Item Added Successfully to cart",
+                    ToastAndroid.SHORT,
+                );
+            // navigation.navigate("Home")
+            }catch(error){
+                return error;
+            }
+        }else{
+            let array=[];
+            array.push(id);
+            try{
+                await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+                ToastAndroid.show(
+                    "Item Added Successfully to cart",
+                    ToastAndroid.SHORT,
+                )
+            }catch(error){
+                return error
+            }
+        }
+
     }
 
     // console.log(product)
@@ -59,14 +92,21 @@ const DetailsScreen=({navigation,route})=>{
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        {contador===0?
+                        {/* {contador===0?
+                        
                         <View style={style.buyBtnNo}>
                         <Text style={{color:"#bbb",fontSize:18}}>Buy</Text>
-                        </View>:
+                        </View>
+                        :
                         <View style={style.buyBtn}>
                             <Text style={{color:COLORS.white,fontSize:18}}>Buy</Text>
                         </View>
-                        }
+                        } */}
+                        <TouchableOpacity onPress={addToCart}>
+                            <View style={style.buyBtn}>
+                                <Text style={{color:COLORS.white,fontSize:18}}>Buy</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
