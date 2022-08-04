@@ -8,6 +8,7 @@ import { CustomerButton } from "../Components/Buttons/CustomerButton";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import { getUser } from "../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login=({navigation})=>{
     const {height,width}=useWindowDimensions();
@@ -48,7 +49,7 @@ const Login=({navigation})=>{
             })
         }else{
             console.log("vamos!!!")
-            console.log(user);
+            // console.log(user);
             navigation.navigate("Home",{
                 id:respuesta.id,
                 username:respuesta.username,
@@ -59,6 +60,8 @@ const Login=({navigation})=>{
                 Correo:respuesta.Correo,
                 rol:respuesta.rol
             })
+            let array=[]
+            await AsyncStorage.setItem("cartItem",JSON.stringify(array))
         }
     }
     const onForgotPressed=()=>{
