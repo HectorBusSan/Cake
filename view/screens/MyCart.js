@@ -46,7 +46,21 @@ const getTotal=(productData)=>{
     setTotal(total);
 }
 
-
+const removeItemFromCart=async(id)=>{
+    let itemArray=await AsyncStorage.getItem("cartItem");
+    itemArray=JSON.parse(itemArray);
+    if(itemArray){
+        let array=itemArray;
+        for (let index = 0; index < array.length; index++) {
+            if(array[index]===id){
+                array.splice(index,1)
+            }
+            await AsyncStorage.setItem("cartItem",JSON.stringify(array));
+            getDataFromDB();
+            
+        }
+    }
+}
 
 const [contador,setContador]=useState(1);
 const sumar=()=>setContador(contador+1);
