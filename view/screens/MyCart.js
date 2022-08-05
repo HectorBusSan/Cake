@@ -49,20 +49,21 @@ const getTotal=(productData)=>{
 const removeItemFromCart=async(id)=>{
     let itemArray=await AsyncStorage.getItem("cartItem");
     itemArray= JSON.parse(itemArray);
-    let arrays=itemArray.map(data=>Number(data));
-    console.log(arrays);
     if(itemArray){
+        let arrays=itemArray.map(data=>Number(data));
+        console.log(itemArray)
+        console.log(arrays)
         console.log("-array-")
         for (let index = 0; index < itemArray.length; index++) {
-                console.log(arrays[index])
-                if(arrays[index]==id){
+                // console.log(arrays[index])
+                if(arrays[index]===id){
                     arrays.splice(index,1);
                 }
-                let arr= String([arrays])
+                let arr= arrays.map(data=>String(data));
                 await AsyncStorage.setItem("cartItem",JSON.stringify(arr));
-                console.log(arr);
+                console.log(await AsyncStorage.getItem("cartItem"));
                 getDataFromDB();
-        }       
+            }       
     }
     // if(arrays){
     //     let array=arrays;
