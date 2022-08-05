@@ -48,18 +48,33 @@ const getTotal=(productData)=>{
 
 const removeItemFromCart=async(id)=>{
     let itemArray=await AsyncStorage.getItem("cartItem");
-    itemArray=JSON.parse(itemArray);
+    item=itemArray= JSON.parse(itemArray);
+    let arrays=itemArray.map(data=>Number(data));
+    console.log(arrays);
     if(itemArray){
-        let array=itemArray;
-        for (let index = 0; index < array.length; index++) {
-            if(array[index]===id){
-                array.splice(index,1)
+        console.log("array")
+        for (let index = 0; index < itemArray.length; index++) {
+            // console.log(arrays[index])
+            if(arrays[index]==id){
+                arrays.splice(index,1);
             }
-            await AsyncStorage.setItem("cartItem",JSON.stringify(array));
-            getDataFromDB();
-            
         }
+            let arr= String(arrays)
+            await AsyncStorage.setItem("cartItem",JSON.stringify(arr));
+            console.log(arr);
+            getDataFromDB();
     }
+    // if(arrays){
+    //     let array=arrays;
+    //     for (let index = 0; index < itemArray.length; index++) {
+    //         if(array[index]==id){
+    //             arrays.splice(index,1)
+    //         }
+    //         await AsyncStorage.setItem("cartItem",JSON.stringify(arrays));
+    //         getDataFromDB();
+            
+    //     }
+    // }
 }
 
 const [contador,setContador]=useState(1);
