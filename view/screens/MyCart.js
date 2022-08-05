@@ -28,7 +28,7 @@ const MyCart = ({navigation}) => {
                 }
             })
             setProduct(productData)
-            getTotal(productData) 
+            getTotal(productData)
         }
         else{
             setProduct(false)
@@ -40,7 +40,7 @@ const MyCart = ({navigation}) => {
 const getTotal=(productData)=>{
     let total=0;
     for(let index=0; index<productData.length;index++){
-        let productPrice= productData[index].productPrice
+        let productPrice= Number(productData[index].price)
         total=total+productPrice;
     }
     setTotal(total);
@@ -48,21 +48,21 @@ const getTotal=(productData)=>{
 
 const removeItemFromCart=async(id)=>{
     let itemArray=await AsyncStorage.getItem("cartItem");
-    item=itemArray= JSON.parse(itemArray);
+    itemArray= JSON.parse(itemArray);
     let arrays=itemArray.map(data=>Number(data));
     console.log(arrays);
     if(itemArray){
-        console.log("array")
+        console.log("-array-")
         for (let index = 0; index < itemArray.length; index++) {
-            // console.log(arrays[index])
-            if(arrays[index]==id){
-                arrays.splice(index,1);
-            }
-        }
-            let arr= String(arrays)
-            await AsyncStorage.setItem("cartItem",JSON.stringify(arr));
-            console.log(arr);
-            getDataFromDB();
+                console.log(arrays[index])
+                if(arrays[index]==id){
+                    arrays.splice(index,1);
+                }
+                let arr= String([arrays])
+                await AsyncStorage.setItem("cartItem",JSON.stringify(arr));
+                console.log(arr);
+                getDataFromDB();
+        }       
     }
     // if(arrays){
     //     let array=arrays;
@@ -145,7 +145,7 @@ const renderProduct =(data,index)=>{
         <View style={style.header}>
             <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
             <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
-                <TouchableOpacity onPress={()=>console.log(product)}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
+                <TouchableOpacity onPress={()=>console.log()}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
                 <FontAwesome name="shopping-cart" size={24} />
             </View>
         </View>
@@ -158,7 +158,7 @@ const renderProduct =(data,index)=>{
             marginTop:15,
             borderRadius:25
         }}>
-            <ScrollView style={{height:"50%"}}>
+            <ScrollView style={{maxHeight:"50%"}}>
                 <View>
                     <Text style={{fontSize:20,
                     color:COLORS.dark,
@@ -170,7 +170,10 @@ const renderProduct =(data,index)=>{
                     </View>
                 </View>
             </ScrollView>
-            <View style={{height:"50%"}}>
+            <View style={{maxHeight:"50%"}}>
+                <View>
+                    <Text style={{fontSize:18,marginBottom:20,marginLeft:10}}>Total: ${total}</Text>
+                </View>
                 <TouchableOpacity style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
                 </TouchableOpacity>
