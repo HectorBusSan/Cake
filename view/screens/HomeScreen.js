@@ -4,7 +4,9 @@ import COLORS from "../../consts/colors";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import products from "./../../consts/products";
-
+// import { LogBox } from "react-native";
+// LogBox.ignoreLogs(["Warning: ..."]);
+// LogBox.ignoreAllLogs();
 
 const width =Dimensions.get('screen').width/2-30
 
