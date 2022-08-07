@@ -11,3 +11,8 @@ El sistema tiene tecnologia de React Native, Expo.
 - Ocuparemos la libreria animatable npm i react-native-animatable
 - picker de react native:
 npm i react-native-image-picker
+
+## Comandos:
+- prisma
+* npx prisma init
+* npx prisma migrate dev --name init
