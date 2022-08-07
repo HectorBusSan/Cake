@@ -230,8 +230,8 @@ const renderProduct =(data,index)=>{
                     </View>
                     <View style={{marginLeft:20}}>
                         <Text style={{fontSize:22}}>Total:</Text>
-                        <Text style={{fontSize:20}}>
-                        {final<=1?null:final}
+                        <Text style={{fontSize:18}}>
+                        ${final<=1?null:final}
                         </Text>
                     </View>
                     </View>
@@ -245,7 +245,7 @@ const renderProduct =(data,index)=>{
                     <CustomerButton text="Total"/>
                 </TouchableOpacity>
                 <View>
-                    <Text style={{fontSize:18,marginBottom:10,marginTop:10,marginLeft:10}}>Total:{final<=1?"?":final}</Text>
+                    <Text style={{fontSize:18,marginBottom:10,marginTop:10,marginLeft:10}}>Total: ${final<=1?"?":final}</Text>
                 </View>
                 {
                     final>1?
