@@ -125,14 +125,23 @@ const checkPrice=()=>{
         let inde2= counter[index+2];
         let multi=inde1*inde2;
         if(!isNaN(multi)){
-            console.log(multi);
+            // console.log(multi);
             arrayAmount.push(multi)
             setSubtotal(arrayAmount);
         }
     }
-    console.log("----",subtotal)
+    let sumando=0
+    for (let index = 0; index < subtotal.length; index++) {
+        sumando= sumando+subtotal[index];
+        // console.log(sumando)
+        setFinal(sumando);
+    }
+
 }
 
+const sending=()=>{
+    console.log("----",subtotal)
+}
 const renderProduct =(data,index)=>{
     return(
         <TouchableOpacity key={data.id} style={{width:"100%",
@@ -213,7 +222,6 @@ const renderProduct =(data,index)=>{
                     paddingTop:2, marginBottom:10}}>My Cart</Text>
                     <View>
                         {product?product.map(renderProduct):null}
-                        {/* {product?renderProduct(product):null} */}
                     </View>
                 </View>
             </ScrollView>
@@ -224,9 +232,15 @@ const renderProduct =(data,index)=>{
                 <TouchableOpacity onPress={checkPrice} style={{width:"100%"}}>
                     <CustomerButton text="Total"/>
                 </TouchableOpacity>
-                <TouchableOpacity style={{width:"100%"}}>
+                <View>
+                    <Text style={{fontSize:18,marginBottom:10,marginTop:10,marginLeft:10}}>Total:{final<=1?"?":final}</Text>
+                </View>
+                {
+                    subtotal[0]>1?
+                <TouchableOpacity onPress={sending} style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
-                </TouchableOpacity>
+                </TouchableOpacity>:null
+                }   
             </View>
         </View>
     </SafeAreaView>
