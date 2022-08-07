@@ -62,6 +62,7 @@ const Login=({navigation})=>{
             })
             let array=[]
             await AsyncStorage.setItem("cartItem",JSON.stringify(array))
+            await AsyncStorage.setItem("cantidad",JSON.stringify(array))
         }
     }
     const onForgotPressed=()=>{
