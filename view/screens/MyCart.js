@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,SafeAreaView, ScrollView,Image } from 'react-native'
+import { View, Text,StyleSheet,SafeAreaView, ScrollView,Image,Alert } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -10,6 +10,8 @@ const MyCart = ({navigation}) => {
     const [product, setProduct] = useState();
     const [total, setTotal] = useState(null);
     const [counter, setCounter] = useState();
+    const [respuesta, setRespuesta] = useState([])
+
     useEffect(() => {
         getDataFromDB();
     }, [navigation])
@@ -90,6 +92,8 @@ const MyCart = ({navigation}) => {
                 }
                 await AsyncStorage.setItem("cantidad",JSON.stringify(arrays2));
                 console.log(await AsyncStorage.getItem("cantidad"));
+                setFinal(1);
+                setSubtotal(1);
                 getDataFromDB();
             }       
         }
@@ -107,7 +111,6 @@ const sumar=()=>setContador(contador+1)
             setContador(contador-1)
         }
     }
-const [respuesta, setRespuesta] = useState([])
 
 // const send=async()=>{
 //     let cart=await AsyncStorage.getItem("cartItem")
@@ -135,8 +138,9 @@ const checkPrice=()=>{
         sumando= sumando+subtotal[index];
         // console.log(sumando)
         setFinal(sumando);
+        console.log(sumando)
+        return final;
     }
-
 }
 
 const sending=()=>{
@@ -220,8 +224,16 @@ const renderProduct =(data,index)=>{
                     fontWeight:"400",
                     letterSpacing:1,
                     paddingTop:2, marginBottom:10}}>My Cart</Text>
-                    <View>
+                    <View style={{flexDirection:"row"}}>
+                    <View style={{flex:3}}>
                         {product?product.map(renderProduct):null}
+                    </View>
+                    <View style={{flex:1}}>
+                        <Text>Total:</Text>
+                        <Text>
+                        {final<=1?null:final}
+                        </Text>
+                    </View>
                     </View>
                 </View>
             </ScrollView>
@@ -236,7 +248,7 @@ const renderProduct =(data,index)=>{
                     <Text style={{fontSize:18,marginBottom:10,marginTop:10,marginLeft:10}}>Total:{final<=1?"?":final}</Text>
                 </View>
                 {
-                    subtotal[0]>1?
+                    final>1?
                 <TouchableOpacity onPress={sending} style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
                 </TouchableOpacity>:null
