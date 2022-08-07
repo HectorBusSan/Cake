@@ -91,7 +91,40 @@ const DetailsScreen=({navigation,route})=>{
             const resp=await AsyncStorage.getItem("cartItem");
             console.log(resp)
         }
-
+        // counter
+        let counterArray= await AsyncStorage.getItem("cantidad");
+        counterArray= JSON.parse(counterArray)
+        let checked=counterArray.includes(identify);
+        if(checked){
+            console.log("Ya esta guardado")
+            console.log("id",identify);
+            for (let index = 0; index < counterArray.length; index++) {
+                if(counterArray[index]===identify){
+                    let pos=index
+                    console.log("index",pos)
+                }
+            }
+        }else{
+            if(counterArray){
+                let array= counterArray;
+                    array.push(identify,contador)
+                    try{
+                        await AsyncStorage.setItem("cantidad",JSON.stringify(array));
+                    }catch(error){
+                        return error
+                    }
+            }else{
+                let array=[];
+                    array.push(identify,contador);
+                    try{
+                        await AsyncStorage.setItem("cantidad",JSON.stringify(array));
+                    }catch(error){
+                        return error
+                    }
+            }
+            const resps=await AsyncStorage.getItem("cantidad");
+            console.log(resps)
+        }
     }
 
     // console.log(product)
