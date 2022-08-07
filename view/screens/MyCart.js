@@ -7,8 +7,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import COLORS from '../../consts/colors';
 import CustomerButton from '../Components/Buttons/CustomerButton';
 const MyCart = ({navigation}) => {
-    const [product, setProduct] = useState()
-    const [total, setTotal] = useState(null)
+    const [product, setProduct] = useState();
+    const [total, setTotal] = useState(null);
+    const [counter, setCounter] = useState();
     useEffect(() => {
         getDataFromDB();
     }, [navigation])
@@ -33,7 +34,18 @@ const MyCart = ({navigation}) => {
         }
         // // const resp=await AsyncStorage.getItem("cartItem");
         // // setProduct(resp)
+        let counterArray= await AsyncStorage.getItem("cantidad");
+        counterArray= JSON.parse(counterArray)
+        let dataCantidad=[]
+        if(counterArray){
+            dataCantidad=counterArray;
+            setCounter(dataCantidad);
+            // console.log(dataCantidad);
+        }else{
+            console.log("no se ha encontrado nada")
+        }
     }
+
     const getTotal=(productData)=>{
         let total=0;
         for(let index=0; index<productData.length;index++){
@@ -62,6 +74,25 @@ const MyCart = ({navigation}) => {
                 getDataFromDB();
             }       
         }
+        let counterArray=await AsyncStorage.getItem("cantidad");
+        counterArray= JSON.parse(itemArray);
+        let iden=String(id);
+        let arrays2=itemArray.map(data=>data);
+        if(itemArray){
+            for (let index = 0; index < itemArray.length; index++) {
+                // console.log(arrays[index])
+                if(arrays2[index]==iden){
+                    let ix=index+1
+                    let ix2= index+2
+                    arrays2.splice(ix,1);
+                    arrays2.splice(ix2,1);
+                    arrays2.splice(index,1);
+                }
+                await AsyncStorage.setItem("cantidad",JSON.stringify(arrays2));
+                console.log(await AsyncStorage.getItem("cantidad"));
+                getDataFromDB();
+            }       
+        }
     }
     
     const [contador,setContador]=useState(1);
@@ -84,8 +115,22 @@ const [respuesta, setRespuesta] = useState([])
 //     console.log(itemCart);
 // }
 
-const send=(id)=>{
-    console.log(arreglo[id]);
+const [subtotal, setSubtotal] = useState([1])
+const [final, setFinal] = useState()
+const checkPrice=()=>{
+    // console.log(counter)
+    let arrayAmount=[]
+    for (let index = 0; index < counter.length; index=index+3) {
+        let inde1= counter[index+1];
+        let inde2= counter[index+2];
+        let multi=inde1*inde2;
+        if(!isNaN(multi)){
+            console.log(multi);
+            arrayAmount.push(multi)
+            setSubtotal(arrayAmount);
+        }
+    }
+    console.log("----",subtotal)
 }
 
 const renderProduct =(data,index)=>{
@@ -120,17 +165,17 @@ const renderProduct =(data,index)=>{
                     </View>
                 </View>
                 <View style={{flexDirection:"row", alignItems:"center"}}>
-                <TouchableOpacity onPress={restar}>
+                {/* <TouchableOpacity onPress={restar}>
                     <View style={style.borderBtn}>
                         <Text style={style.borderBtnText}>-</Text>
                     </View>
                 </TouchableOpacity>
-                <Text style={{fontSize:18,marginHorizontal:10,fontWeight:"bold"}}>{contador>1?contador:1}</Text>
+                <Text style={{fontSize:18,marginHorizontal:10,fontWeight:"bold"}}>{pos}</Text>
                 <TouchableOpacity onPress={()=>sumar(data.id)}>
                     <View style={style.borderBtn}>
                         <Text style={style.borderBtnText}>+</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 </View>
             </View>
             <View style={{marginHorizontal:10,marginVertical:5}}>
@@ -168,13 +213,17 @@ const renderProduct =(data,index)=>{
                     paddingTop:2, marginBottom:10}}>My Cart</Text>
                     <View>
                         {product?product.map(renderProduct):null}
+                        {/* {product?renderProduct(product):null} */}
                     </View>
                 </View>
             </ScrollView>
             <View style={{maxHeight:"50%"}}>
                 <View>
-                    <Text style={{fontSize:18,marginBottom:20,marginLeft:10}}>Total: ${total}</Text>
+                    <Text style={{fontSize:18,marginBottom:20,marginLeft:10}}>SubTotal: ${total} por unidades</Text>
                 </View>
+                <TouchableOpacity onPress={checkPrice} style={{width:"100%"}}>
+                    <CustomerButton text="Total"/>
+                </TouchableOpacity>
                 <TouchableOpacity style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
                 </TouchableOpacity>
