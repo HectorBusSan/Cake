@@ -10,10 +10,7 @@ const MyCart = ({navigation}) => {
     const [product, setProduct] = useState()
     const [total, setTotal] = useState(null)
     useEffect(() => {
-    //   const unsubscribe= navigation.addListener("focus",()=>{
-    //     getDataFromDB();
-    //   })
-    getDataFromDB();
+        getDataFromDB();
     }, [navigation])
     
     const getDataFromDB=async()=>{
@@ -37,24 +34,24 @@ const MyCart = ({navigation}) => {
         // // const resp=await AsyncStorage.getItem("cartItem");
         // // setProduct(resp)
     }
-const getTotal=(productData)=>{
-    let total=0;
-    for(let index=0; index<productData.length;index++){
-        let productPrice= Number(productData[index].price)
-        total=total+productPrice;
+    const getTotal=(productData)=>{
+        let total=0;
+        for(let index=0; index<productData.length;index++){
+            let productPrice= Number(productData[index].price)
+            total=total+productPrice;
+        }
+        setTotal(total);
     }
-    setTotal(total);
-}
-
-const removeItemFromCart=async(id)=>{
-    let itemArray=await AsyncStorage.getItem("cartItem");
-    itemArray= JSON.parse(itemArray);
-    if(itemArray){
-        let arrays=itemArray.map(data=>Number(data));
-        console.log(itemArray)
-        console.log(arrays)
-        console.log("-array-")
-        for (let index = 0; index < itemArray.length; index++) {
+    
+    const removeItemFromCart=async(id)=>{
+        let itemArray=await AsyncStorage.getItem("cartItem");
+        itemArray= JSON.parse(itemArray);
+        if(itemArray){
+            let arrays=itemArray.map(data=>Number(data));
+            console.log(itemArray)
+            console.log(arrays)
+            console.log("-array-")
+            for (let index = 0; index < itemArray.length; index++) {
                 // console.log(arrays[index])
                 if(arrays[index]===id){
                     arrays.splice(index,1);
@@ -64,22 +61,13 @@ const removeItemFromCart=async(id)=>{
                 console.log(await AsyncStorage.getItem("cartItem"));
                 getDataFromDB();
             }       
+        }
     }
-    // if(arrays){
-    //     let array=arrays;
-    //     for (let index = 0; index < itemArray.length; index++) {
-    //         if(array[index]==id){
-    //             arrays.splice(index,1)
-    //         }
-    //         await AsyncStorage.setItem("cartItem",JSON.stringify(arrays));
-    //         getDataFromDB();
-            
-    //     }
-    // }
-}
+    
+    const [contador,setContador]=useState(1);
 
-const [contador,setContador]=useState(1);
-const sumar=()=>setContador(contador+1);
+    
+const sumar=()=>setContador(contador+1)
 
     const restar=()=>{
         if(contador<2){
@@ -88,6 +76,18 @@ const sumar=()=>setContador(contador+1);
             setContador(contador-1)
         }
     }
+const [respuesta, setRespuesta] = useState([])
+
+// const send=async()=>{
+//     let cart=await AsyncStorage.getItem("cartItem")
+//     let itemCart= cart.map(cart=>Number(cart));
+//     console.log(itemCart);
+// }
+
+const send=(id)=>{
+    console.log(arreglo[id]);
+}
+
 const renderProduct =(data,index)=>{
     return(
         <TouchableOpacity key={data.id} style={{width:"100%",
@@ -125,8 +125,8 @@ const renderProduct =(data,index)=>{
                         <Text style={style.borderBtnText}>-</Text>
                     </View>
                 </TouchableOpacity>
-                <Text style={{fontSize:18,marginHorizontal:10,fontWeight:"bold"}}>{contador}</Text>
-                <TouchableOpacity onPress={sumar}>
+                <Text style={{fontSize:18,marginHorizontal:10,fontWeight:"bold"}}>{contador>1?contador:1}</Text>
+                <TouchableOpacity onPress={()=>sumar(data.id)}>
                     <View style={style.borderBtn}>
                         <Text style={style.borderBtnText}>+</Text>
                     </View>
