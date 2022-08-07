@@ -26,3 +26,12 @@ model productos{
   imagen String @db.VarChar(250)
   precio Float @db.Double
 }
+model pedido{
+  id Int @id @default(autoincrement())
+  codigop String @db.VarChar(250)
+  idproducto Int
+  cantidad Int
+  total Float @db.Double
+  fechai DateTime
+  fechaf DateTime
+}
