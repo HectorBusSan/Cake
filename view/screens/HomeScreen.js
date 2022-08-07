@@ -95,10 +95,10 @@ const HomeScreen=({navigation,route})=>{
             display:"flex", flexDirection:"column", alignItems:"center",zIndex:100,padding:20, top:fadeIn}}>
                 <TouchableOpacity onPress={hiddenProfile} style={{position:"absolute",right:20,top:15}}><FontAwesome name="close" size={24} color="black"/></TouchableOpacity>
                 <Text style={{marginTop:10,fontSize:24,color:COLORS.white, fontWeight:"bold", marginBottom:10}}>Usuario: {Usuario.username}</Text>
-                {Usuario.rol===1?<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Pedidos</Text>:<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}>Mis Pedidos</Text>}
-                {Usuario.rol===1?<TouchableOpacity onPress={() => navigation.navigate("Productos")}><Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Crear Productos</Text></TouchableOpacity>
-                :<Text style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}>Carrito</Text>}
-                <Text style={style.buttonP}>Cerrar Sessión</Text>
+                {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}><Text style={{fontSize:18}}>Pedidos</Text></TouchableOpacity>:<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}><Text style={{fontSize:18}}>Mis Pedidos</Text></TouchableOpacity>}
+                {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}} onPress={() => navigation.navigate("Productos")}><Text style={{fontSize:18}}>Crear Productos</Text></TouchableOpacity>
+                :<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>}
+                <TouchableOpacity style={style.buttonP}><Text style={{fontSize:18}}>Cerrar Sessión</Text></TouchableOpacity>
                 {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
             </Animated.View>
         )
@@ -206,7 +206,10 @@ const style=StyleSheet.create({
         padding:8,
         marginTop:10,
         backgroundColor:"#dc3545",
-        borderRadius:5
+        borderRadius:5,
+        width:200,
+        justifyContent:"center",
+        alignItems:"center"
     },cardnone:{
         display:"none"
     }
