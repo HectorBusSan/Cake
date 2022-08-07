@@ -12,10 +12,10 @@ const DetailsScreen=({navigation,route})=>{
 
     const sumar=()=>setContador(contador+1);
     const restar=()=>{
-        if(!contador<1){
-            setContador(contador-1)
+        if(contador<2){
+            setContador(1)
         }else{
-            return setContador(contador);
+            setContador(contador-1)
         }
     }
     
@@ -95,6 +95,7 @@ const DetailsScreen=({navigation,route})=>{
         let counterArray= await AsyncStorage.getItem("cantidad");
         counterArray= JSON.parse(counterArray)
         let checked=counterArray.includes(identify);
+        let prices= Number(product.price);
         if(checked){
             console.log("Ya esta guardado")
             console.log("id",identify);
@@ -107,7 +108,7 @@ const DetailsScreen=({navigation,route})=>{
         }else{
             if(counterArray){
                 let array= counterArray;
-                    array.push(identify,contador)
+                    array.push(identify,contador,prices)
                     try{
                         await AsyncStorage.setItem("cantidad",JSON.stringify(array));
                     }catch(error){
@@ -115,7 +116,7 @@ const DetailsScreen=({navigation,route})=>{
                     }
             }else{
                 let array=[];
-                    array.push(identify,contador);
+                    array.push(identify,contador,prices);
                     try{
                         await AsyncStorage.setItem("cantidad",JSON.stringify(array));
                     }catch(error){
