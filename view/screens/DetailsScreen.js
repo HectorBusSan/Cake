@@ -100,7 +100,7 @@ const DetailsScreen=({navigation,route})=>{
             console.log("id",identify);
             for (let index = 0; index < counterArray.length; index++) {
                 if(counterArray[index]===identify){
-                    let pos=index
+                    let pos=index+1
                     console.log("index",pos)
                 }
             }
