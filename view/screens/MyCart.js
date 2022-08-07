@@ -228,9 +228,9 @@ const renderProduct =(data,index)=>{
                     <View style={{flex:3}}>
                         {product?product.map(renderProduct):null}
                     </View>
-                    <View style={{flex:1}}>
-                        <Text>Total:</Text>
-                        <Text>
+                    <View style={{marginLeft:20}}>
+                        <Text style={{fontSize:22}}>Total:</Text>
+                        <Text style={{fontSize:20}}>
                         {final<=1?null:final}
                         </Text>
                     </View>
