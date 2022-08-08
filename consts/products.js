@@ -11,7 +11,7 @@ const products=[
     },
     {
     id: 2,
-    name: 'CupCakes',
+    name: 'Paquete de CupCakes',
     price: '29.99',
     like: false,
     img: require('../assets/img/example2.jpg'),
@@ -32,7 +32,7 @@ const products=[
 
     {
     id: 4,
-    name: 'De Bodas',
+    name: 'Pastel de Bodas',
     price: '25.99',
     like: true,
     img: require('../assets/img/example4.jpg'),
