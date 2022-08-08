@@ -1,5 +1,6 @@
 @api= http://localhost:3000/usuarios
 @api2= http://localhost:3000/productos
+@api3= http://localhost:3000/pedidos
 
 POST {{api}}
 Content-Type: application/json
@@ -35,3 +36,8 @@ Content-Type: application/json
     "imagen":"imagen.jpg",
     "precio":50
 }
+###
+GET {{api2}}
+
+###
+GET {{api3}}
