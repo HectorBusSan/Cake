@@ -127,3 +127,10 @@ app.get("/productos",async(req,res)=>{
     const allproducts=await prisma.productos.findMany({});
     return res.json(allproducts);
 })
+
+// Pedidos:
+app.get("/pedidos",async(req,res)=>{
+    const allproducts=await prisma.pedido.findMany({});
+    return res.json(allproducts);
+});
+
