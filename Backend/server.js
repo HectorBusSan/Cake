@@ -134,3 +134,21 @@ app.get("/pedidos",async(req,res)=>{
     return res.json(allproducts);
 });
 
+app.post("/pedidos",async(req,res)=>{
+    const fecha= new Date();
+    let id=String(uuidv4())
+    const pedido={
+        codigop:req.body.codigop,
+        codcake:id,
+        idproducto:req.body.idproducto,
+        cantidad:req.body.cantidad,
+        total:req.body.total,
+        fechai: fecha,
+        fechaf:fecha,
+        username:req.body.username,
+    }
+    const message= "Conseguidó"
+    await prisma.pedido.create({data:pedido});
+    console.log(pedido)
+    return res.json({message});
+})
