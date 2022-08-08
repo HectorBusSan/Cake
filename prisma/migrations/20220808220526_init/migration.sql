@@ -9,7 +9,7 @@ CREATE TABLE `pedido` (
     `fechai` DATETIME(3) NOT NULL,
     `fechaf` DATETIME(3) NOT NULL,
     `username` VARCHAR(250) NOT NULL,
-    `completo` BOOLEAN NOT NULL,
+    `completo` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `pedido_codcake_key`(`codcake`),
     PRIMARY KEY (`id`)

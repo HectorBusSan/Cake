@@ -50,5 +50,6 @@ Content-Type: application/json
     "idproducto":1,
     "cantidad":1,
     "total":1,
-    "username":"usuario1"
+    "username":"usuario1",
+    "completo":true
 }

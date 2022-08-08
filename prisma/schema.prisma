@@ -36,5 +36,5 @@ model pedido{
   fechai DateTime
   fechaf DateTime
   username String @db.VarChar(250)
-  completo Boolean
+  completo Boolean @default(false)
 }

@@ -146,6 +146,7 @@ app.post("/pedidos",async(req,res)=>{
         fechai: fecha,
         fechaf:fecha,
         username:req.body.username,
+        completo:req.body.completo
     }
     const message= "Conseguidó"
     await prisma.pedido.create({data:pedido});
