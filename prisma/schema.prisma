@@ -21,7 +21,7 @@ model usuarios{
 }
 model productos{
   id Int @id @default(autoincrement())
-  nombre String @db.VarChar(250)
+  nombre String @unique @db.VarChar(250)
   informacion String @db.VarChar(250)
   imagen String @db.VarChar(250)
   precio Float @db.Double
