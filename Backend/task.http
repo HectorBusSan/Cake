@@ -41,3 +41,15 @@ GET {{api2}}
 
 ###
 GET {{api3}}
+###
+POST {{api3}}
+Content-Type: application/json
+
+{
+    "codigop":"1234",
+    "codcake":"3",
+    "idproducto":1,
+    "cantidad":1,
+    "total":1,
+    "username":"usuario1"
+}
