@@ -65,6 +65,7 @@ const MyCart = ({navigation}) => {
     }
     
     const removeItemFromCart=async(id)=>{
+        setCounter(0)
         let itemArray=await AsyncStorage.getItem("cartItem");
         itemArray= JSON.parse(itemArray);
         if(itemArray){
@@ -87,14 +88,14 @@ const MyCart = ({navigation}) => {
         counterArray= JSON.parse(counterArray);
         let iden=String(id);
         let arrays2=counterArray.map(data=>data);
-        if(itemArray){
-            for (let index = 0; index < counterArray.length; index++) {
+        if(counterArray){
+            for (let index = 0; index < counterArray.length; index=index+3) {
                 // console.log(arrays[index])
+                let ix= counterArray[index + 1]
+                let ix2= counterArray[index + 2]
                 if(arrays2[index]==iden){
-                    let ix=index+1
-                    let ix2= index+2
-                    arrays2.splice(ix,1);
-                    arrays2.splice(ix2,1);
+                    arrays2.splice(index+2,1);
+                    arrays2.splice(index+1,1);
                     arrays2.splice(index,1);
                 }
                 await AsyncStorage.setItem("cantidad",JSON.stringify(arrays2));
