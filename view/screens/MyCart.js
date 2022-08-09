@@ -11,10 +11,12 @@ import {sendOrder} from "../../api"
 const MyCart = ({navigation}) => {
     const [product, setProduct] = useState();
     const [total, setTotal] = useState(null);
-    const [counter, setCounter] = useState();
+    const [counter, setCounter] = useState([]);
     const [respuesta, setRespuesta] = useState([])
     const [pedido, setPedido] = useState()
-
+    const [subtotal, setSubtotal] = useState([])
+    const [final, setFinal] = useState()
+    
     useEffect(() => {
         getDataFromDB();
     }, [navigation])
@@ -36,6 +38,8 @@ const MyCart = ({navigation}) => {
         else{
             setProduct(false)
             getTotal(false)
+            setFinal(false)
+            setSubtotal(false)
         }
         // // const resp=await AsyncStorage.getItem("cartItem");
         // // setProduct(resp)
@@ -80,11 +84,11 @@ const MyCart = ({navigation}) => {
             }       
         }
         let counterArray=await AsyncStorage.getItem("cantidad");
-        counterArray= JSON.parse(itemArray);
+        counterArray= JSON.parse(counterArray);
         let iden=String(id);
-        let arrays2=itemArray.map(data=>data);
+        let arrays2=counterArray.map(data=>data);
         if(itemArray){
-            for (let index = 0; index < itemArray.length; index++) {
+            for (let index = 0; index < counterArray.length; index++) {
                 // console.log(arrays[index])
                 if(arrays2[index]==iden){
                     let ix=index+1
@@ -95,11 +99,9 @@ const MyCart = ({navigation}) => {
                 }
                 await AsyncStorage.setItem("cantidad",JSON.stringify(arrays2));
                 console.log(await AsyncStorage.getItem("cantidad"));
-                setFinal(1);
-                setSubtotal(1);
                 getDataFromDB();
-                setPedido();
-            }       
+                // setPedido();
+            }
         }
     }
     
@@ -122,19 +124,18 @@ const sumar=()=>setContador(contador+1)
 //     console.log(itemCart);
 // }
 
-const [subtotal, setSubtotal] = useState([])
-const [final, setFinal] = useState()
 
-let arrayAmount=[]
 function addDays(date,days){
     var res =new Date(date);
     res.setDate(res.getDate()+days);
     return res;
 }
 
-const checkPrice=()=>{
-    // console.log(counter)
+let arrayAmount=[]
 
+const checkPrice=()=>{
+    console.log(counter)
+    let sumando=0;
     for (let index = 0; index < counter.length; index=index+3) {
         let inde1= counter[index+1];
         let inde2= counter[index+2];
@@ -143,25 +144,21 @@ const checkPrice=()=>{
             // console.log(multi);
             arrayAmount.push(multi)
             setSubtotal(arrayAmount);
+            sumando=sumando+multi;
+            setFinal(sumando);
         }
-    }
-    let sumando=0
-    for (let index = 0; index < subtotal.length; index++) {
-        sumando= sumando+subtotal[index];
-        // console.log(sumando)
-        setFinal(sumando);
-        console.log(sumando)
     }
 }
 
-const send=async(pedido)=>{
+const send=async()=>{
     for (let index = 0; index < pedido.length; index++) {
         console.log(pedido[index]);
         await sendOrder(pedido[index]);
         return;
     }
     console.log(pedido);
-    setPedido()
+    // setPedido()
+    // navigation.navigate("Pedidos")
 }
 
 const sending=async()=>{
@@ -199,7 +196,7 @@ const sending=async()=>{
         "¿Estas Seguro de mandar tu Pedido?",
         [
             {
-                text:"yes",onPress:()=>{send(pedido)}
+                text:"yes",onPress:()=>{send}
             },{
                 text:"No",onPress:()=>console.log("no")
             }
@@ -304,9 +301,9 @@ const renderProduct =(data,index)=>{
                 <TouchableOpacity onPress={checkPrice} style={{width:"100%"}}>
                     <CustomerButton text="Total"/>
                 </TouchableOpacity>
-                <View>
+                {/* <View>
                     <Text style={{fontSize:18,marginBottom:10,marginTop:10,marginLeft:10}}>Total: ${final<=1?"?":final}</Text>
-                </View>
+                </View> */}
                 {
                     final>1?
                 <TouchableOpacity onPress={sending} style={{width:"100%"}}>
