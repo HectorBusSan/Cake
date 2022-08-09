@@ -138,15 +138,15 @@ app.post("/pedidos",async(req,res)=>{
     const fecha= new Date();
     let id=String(uuidv4())
     const pedido={
-        codigop:req.body.codigop,
+        codigop:String(req.body.codigop),
         codcake:id,
         idproducto:req.body.idproducto,
         cantidad:req.body.cantidad,
         total:req.body.total,
         fechai: fecha,
-        fechaf:fecha,
+        fechaf:req.body.fechaf,
         username:req.body.username,
-        completo:req.body.completo
+        completo:false
     }
     const message= "Conseguidó"
     await prisma.pedido.create({data:pedido});

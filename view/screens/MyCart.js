@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,SafeAreaView, ScrollView,Image,Alert } from 'react-native'
+import { View, Text,StyleSheet,SafeAreaView, ScrollView,Image,Alert, ToastAndroid } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage"
@@ -6,11 +6,14 @@ import products from '../../consts/products';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import COLORS from '../../consts/colors';
 import CustomerButton from '../Components/Buttons/CustomerButton';
+import {sendOrder} from "../../api"
+
 const MyCart = ({navigation}) => {
     const [product, setProduct] = useState();
     const [total, setTotal] = useState(null);
     const [counter, setCounter] = useState();
     const [respuesta, setRespuesta] = useState([])
+    const [pedido, setPedido] = useState()
 
     useEffect(() => {
         getDataFromDB();
@@ -95,6 +98,7 @@ const MyCart = ({navigation}) => {
                 setFinal(1);
                 setSubtotal(1);
                 getDataFromDB();
+                setPedido();
             }       
         }
     }
@@ -118,11 +122,19 @@ const sumar=()=>setContador(contador+1)
 //     console.log(itemCart);
 // }
 
-const [subtotal, setSubtotal] = useState([1])
+const [subtotal, setSubtotal] = useState([])
 const [final, setFinal] = useState()
+
+let arrayAmount=[]
+function addDays(date,days){
+    var res =new Date(date);
+    res.setDate(res.getDate()+days);
+    return res;
+}
+
 const checkPrice=()=>{
     // console.log(counter)
-    let arrayAmount=[]
+
     for (let index = 0; index < counter.length; index=index+3) {
         let inde1= counter[index+1];
         let inde2= counter[index+2];
@@ -139,12 +151,60 @@ const checkPrice=()=>{
         // console.log(sumando)
         setFinal(sumando);
         console.log(sumando)
-        return final;
     }
 }
 
-const sending=()=>{
-    console.log("----",subtotal)
+const send=async(pedido)=>{
+    for (let index = 0; index < pedido.length; index++) {
+        console.log(pedido[index]);
+        await sendOrder(pedido[index]);
+        return;
+    }
+    console.log(pedido);
+    setPedido()
+}
+
+const sending=async()=>{
+    const fecha= new Date();
+    
+    let nextday=addDays(fecha,5)
+    for (let index = 0; index < counter.length; index=index+3) {
+        let codigoCake= Number(counter[index])
+        let cantidadCake= counter[index + 1]
+        let precioCake=counter[index+2]
+        let totalCake= precioCake*cantidadCake;
+        if(index===0){
+            setPedido([{
+                codigop:1,
+                idproducto:codigoCake,
+                cantidad:cantidadCake,
+                total:totalCake,
+                fechaf: nextday,
+                username:"usuario1"
+            }])
+        }else{
+            setPedido([...pedido,{
+                codigop:1,
+                idproducto:codigoCake,
+                cantidad:cantidadCake,
+                total:totalCake,
+                fechaf: nextday,
+                username:"usuario1"
+            }])
+        }
+        console.log("contendo: ",counter[index]);
+    }
+    Alert.alert(
+        "Envio de Pedido",
+        "¿Estas Seguro de mandar tu Pedido?",
+        [
+            {
+                text:"yes",onPress:()=>{send(pedido)}
+            },{
+                text:"No",onPress:()=>console.log("no")
+            }
+        ]
+    )
 }
 const renderProduct =(data,index)=>{
     return(
@@ -251,7 +311,13 @@ const renderProduct =(data,index)=>{
                     final>1?
                 <TouchableOpacity onPress={sending} style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
-                </TouchableOpacity>:null
+                </TouchableOpacity>:
+                <TouchableOpacity onPress={()=>{ToastAndroid.show(
+                    "Preciona Total para terminar tu pedido",
+                    ToastAndroid.SHORT,
+                )}} style={{width:"100%"}}>
+                    <CustomerButton type="TETIARY" text="Completar"/>
+                </TouchableOpacity>
                 }   
             </View>
         </View>
