@@ -134,8 +134,8 @@ const DetailsScreen=({navigation,route})=>{
             <View style={style.header}>
                 <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
                 <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
-                    <FontAwesome name="user-circle-o" size={24} color="black" />
-                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart")}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
+                    {/* <FontAwesome name="user-circle-o" size={24} color="black" />
+                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart",route)}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity> */}
                 </View>
             </View>
             <View style={style.imageContainer}>
