@@ -14,6 +14,7 @@ import Login from './view/screens/Login';
 import Register from './view/screens/Register';
 import UploadImage from './view/screens/UploadImage';
 import MyCart from './view/screens/MyCart';
+import Pedidos from './view/screens/Pedidos';
 export default function App() {
   return (
    <NavigationContainer>
@@ -27,6 +28,7 @@ export default function App() {
       {/* <Stack.Screen name='UploadImage' component={UploadImage}/> */}
       <Stack.Screen name="Productos" component={Productos}/>
       <Stack.Screen name="MyCart" component={MyCart}/>
+      <Stack.Screen name="Pedidos" component={Pedidos}/>
     </Stack.Navigator>
    </NavigationContainer>
   )

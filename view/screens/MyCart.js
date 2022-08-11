@@ -121,6 +121,7 @@ const MyCart = ({navigation}) => {
                 }
                 await AsyncStorage.setItem("cantidad",JSON.stringify(arrays2));
                 console.log(await AsyncStorage.getItem("cantidad"));
+                setFinal();
                 getDataFromDB();
                 // setPedido();
             }
@@ -190,7 +191,7 @@ const send=async()=>{
     setSubtotal()
     setFinal()
     getDataFromDB();
-    // navigation.navigate("Pedidos")
+    navigation.navigate("Pedidos");
 }
 
 const sending=()=>{
