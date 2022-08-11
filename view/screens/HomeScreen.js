@@ -99,7 +99,7 @@ const HomeScreen=({navigation,route})=>{
                 <Text style={{marginTop:10,fontSize:24,color:COLORS.white, fontWeight:"bold", marginBottom:10}}>Usuario: {Usuario.username}</Text>
                 {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}><Text style={{fontSize:18}}>Pedidos</Text></TouchableOpacity>:<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}><Text style={{fontSize:18}}>Mis Pedidos</Text></TouchableOpacity>}
                 {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}} onPress={() => navigation.navigate("Productos")}><Text style={{fontSize:18}}>Crear Productos</Text></TouchableOpacity>
-                :<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>}
+                :<TouchableOpacity onPress={()=>navigation.navigate("Pedidos")} style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>}
                 <TouchableOpacity style={style.buttonP}><Text style={{fontSize:18}}>Cerrar Sessión</Text></TouchableOpacity>
                 {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
             </Animated.View>
