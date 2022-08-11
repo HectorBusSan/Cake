@@ -53,3 +53,5 @@ Content-Type: application/json
     "username":"usuario1",
     "completo":true
 }
+###
+GET {{api3}}/usuario1
