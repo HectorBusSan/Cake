@@ -20,7 +20,27 @@ const MyCart = ({navigation}) => {
     useEffect(() => {
         getDataFromDB();
     }, [navigation])
-    
+    useEffect(()=>{
+        let fecha= new Date();
+        let nextday=addDays(fecha,5)
+        let arrayResult=[]
+        for (let index = 0; index < counter.length; index=index+3) {
+            let codigoCake= Number(counter[index])
+            let cantidadCake= counter[index + 1]
+            let precioCake=counter[index + 2]
+            let totalCake= precioCake*cantidadCake; 
+            console.log("contendo: ",counter[index]);
+            arrayResult.push({
+                codigop:1,
+                idproducto:codigoCake,
+                cantidad:cantidadCake,
+                total:totalCake,
+                fechaf: nextday,
+                username:"usuario1"
+            });
+        }
+        setPedido(arrayResult)
+    },[final])
     const getDataFromDB=async()=>{
         let items=await AsyncStorage.getItem("cartItem")
         items = JSON.parse(items);
@@ -34,6 +54,7 @@ const MyCart = ({navigation}) => {
             })
             setProduct(productData)
             getTotal(productData)
+            setPedido([]);
         }
         else{
             setProduct(false)
@@ -137,11 +158,11 @@ let arrayAmount=[]
 const checkPrice=()=>{
     console.log(counter)
     let sumando=0;
-    setPedido([])
+    // setPedido([])
     for (let index = 0; index < counter.length; index=index+3) {
         let inde1= counter[index+1];
         let inde2= counter[index+2];
-        let multi=inde1*inde2;
+        let multi=inde1*inde2;    
         if(!isNaN(multi)){
             // console.log(multi);
             arrayAmount.push(multi)
@@ -152,13 +173,17 @@ const checkPrice=()=>{
     }
 }
 
-const send=()=>{
+const send=async()=>{
     for (let index = 0; index < pedido.length; index++) {
+        console.log("-------------")
+        console.log("Pedido: ",index)
         console.log(pedido[index]);
-        // await sendOrder(pedido[index]);
+        await sendOrder(pedido[index]);
         // return;
     }
-    console.log("hola");
+    console.log("Mostrar todos los productos;")
+    console.log(pedido);
+    // console.log("hola");
     
     // setPedido()
     // navigation.navigate("Pedidos")
@@ -324,7 +349,7 @@ const renderProduct =(data,index)=>{
                 </View> */}
                 {
                     final>1?
-                <TouchableOpacity onPress={sending} style={{width:"100%"}}>
+                <TouchableOpacity onPress={send} style={{width:"100%"}}>
                     <CustomerButton text="Completar"/>
                 </TouchableOpacity>:
                 <TouchableOpacity onPress={()=>{ToastAndroid.show(
