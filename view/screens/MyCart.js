@@ -8,7 +8,8 @@ import COLORS from '../../consts/colors';
 import CustomerButton from '../Components/Buttons/CustomerButton';
 import {sendOrder} from "../../api"
 
-const MyCart = ({navigation}) => {
+const MyCart = ({navigation,route}) => {
+    const Usuario= route.params;
     const [product, setProduct] = useState();
     const [total, setTotal] = useState(null);
     const [counter, setCounter] = useState([]);
@@ -36,7 +37,7 @@ const MyCart = ({navigation}) => {
                 cantidad:cantidadCake,
                 total:totalCake,
                 fechaf: nextday,
-                username:"usuario1"
+                username:Usuario.username
             });
         }
         setPedido(arrayResult)
