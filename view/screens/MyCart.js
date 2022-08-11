@@ -192,7 +192,7 @@ const send=async()=>{
     setSubtotal()
     setFinal()
     getDataFromDB();
-    navigation.navigate("Pedidos");
+    navigation.navigate("Pedidos",Usuario);
 }
 
 const sending=()=>{
