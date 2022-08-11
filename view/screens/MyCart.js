@@ -13,7 +13,7 @@ const MyCart = ({navigation}) => {
     const [total, setTotal] = useState(null);
     const [counter, setCounter] = useState([]);
     const [respuesta, setRespuesta] = useState([])
-    const [pedido, setPedido] = useState()
+    const [pedido, setPedido] = useState([])
     const [subtotal, setSubtotal] = useState([])
     const [final, setFinal] = useState()
     
@@ -137,6 +137,7 @@ let arrayAmount=[]
 const checkPrice=()=>{
     console.log(counter)
     let sumando=0;
+    setPedido([])
     for (let index = 0; index < counter.length; index=index+3) {
         let inde1= counter[index+1];
         let inde2= counter[index+2];
@@ -151,59 +152,75 @@ const checkPrice=()=>{
     }
 }
 
-const send=async()=>{
+const send=()=>{
     for (let index = 0; index < pedido.length; index++) {
         console.log(pedido[index]);
-        await sendOrder(pedido[index]);
-        return;
+        // await sendOrder(pedido[index]);
+        // return;
     }
-    console.log(pedido);
+    console.log("hola");
+    
     // setPedido()
     // navigation.navigate("Pedidos")
 }
 
-const sending=async()=>{
+const sending=()=>{
     const fecha= new Date();
-    
     let nextday=addDays(fecha,5)
     for (let index = 0; index < counter.length; index=index+3) {
         let codigoCake= Number(counter[index])
         let cantidadCake= counter[index + 1]
-        let precioCake=counter[index+2]
-        let totalCake= precioCake*cantidadCake;
-        if(index===0){
-            setPedido([{
-                codigop:1,
-                idproducto:codigoCake,
-                cantidad:cantidadCake,
-                total:totalCake,
-                fechaf: nextday,
-                username:"usuario1"
-            }])
-        }else{
-            setPedido([...pedido,{
-                codigop:1,
-                idproducto:codigoCake,
-                cantidad:cantidadCake,
-                total:totalCake,
-                fechaf: nextday,
-                username:"usuario1"
-            }])
-        }
+        let precioCake=counter[index + 2]
+        let totalCake= precioCake*cantidadCake; 
         console.log("contendo: ",counter[index]);
+        // if(index<=3){
+        //     setPedido({
+        //         codigop:1,
+        //         idproducto:codigoCake,
+        //         cantidad:cantidadCake,
+        //         total:totalCake,
+        //         fechaf: nextday,
+        //         username:"usuario1"
+        //     })
+        //     console.log("---",pedido)
+        // }else{
+        //     setPedido([...pedido,{
+        //         codigop:1,
+        //         idproducto:codigoCake,
+        //         cantidad:cantidadCake,
+        //         total:totalCake,
+        //         fechaf: nextday,
+        //         username:"usuario1"
+        //     }])
+        //     console.log("---",pedido)
+        // }
+        setPedido([...pedido,{
+                    codigop:1,
+                    idproducto:codigoCake,
+                    cantidad:cantidadCake,
+                    total:totalCake,
+                    fechaf: nextday,
+                    username:"usuario1"
+                }])
     }
-    Alert.alert(
-        "Envio de Pedido",
-        "¿Estas Seguro de mandar tu Pedido?",
-        [
-            {
-                text:"yes",onPress:()=>{send}
-            },{
-                text:"No",onPress:()=>console.log("no")
-            }
-        ]
-    )
+    // return pedido;
+    console.log(pedido);
 }
+// useEffect(() => {
+//   return () => {
+//     Alert.alert(
+//         "Envio de Pedido",
+//         "¿Estas Seguro de mandar tu Pedido?",
+//         [
+//             {
+//                 text:"yes",onPress:send
+//             },{
+//                 text:"No",onPress:()=>console.log("no")
+//             }
+//         ]
+//     )
+//   }
+// }, [pedido])
 const renderProduct =(data,index)=>{
     return(
         <TouchableOpacity key={data.id} style={{width:"100%",
