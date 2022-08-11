@@ -153,3 +153,12 @@ app.post("/pedidos",async(req,res)=>{
     console.log(pedido)
     return res.json({message});
 })
+app.get("/pedidos/:id",async(req,res)=>{
+    const username=req.username;
+    const someProducts=await prisma.pedido.findMany({where:{username:username}})
+    if(someProducts){
+        res.json(someProducts);
+    }else{
+        console.log("No encontraron ")
+    }
+})
