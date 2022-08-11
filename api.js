@@ -64,6 +64,6 @@ export const sendOrder=async(order)=>{
     return await res.json();
 }
 export const orders=async(orders)=>{
-    const res=await fetch(`${API4}/${orders}`)
+    const res=await fetch(API4)
     return await res.json();
 }
