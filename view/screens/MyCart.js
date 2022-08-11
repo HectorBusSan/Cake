@@ -184,8 +184,12 @@ const send=async()=>{
     console.log("Mostrar todos los productos;")
     console.log(pedido);
     // console.log("hola");
-    
-    // setPedido()
+    await AsyncStorage.setItem("cartItem",JSON.stringify([]));
+    await AsyncStorage.setItem("cantidad",JSON.stringify([]));
+    setPedido()
+    setSubtotal()
+    setFinal()
+    getDataFromDB();
     // navigation.navigate("Pedidos")
 }
 
