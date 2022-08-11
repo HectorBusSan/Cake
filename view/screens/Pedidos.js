@@ -1,21 +1,46 @@
 import { View, Text, SafeAreaView, StyleSheet,TouchableOpacity } from 'react-native'
 import React,{useEffect,useState} from 'react'
-import { MaterialIcons,FontAwesome } from '@expo/vector-icons'
+import { MaterialIcons} from '@expo/vector-icons'
 import { orders } from '../../api'
+
 const Pedidos = ({navigation,route}) => {
     const Usuario=route.params;
-    const [pedidos, setPedidos] = useState()
+    const [pedidos, setPedidos] = useState([])
+
+    const loadOrders=async()=>{
+        const data= await orders();
+        setPedidos(data);
+    }
     useEffect(() => {
-      return () => {
-        (async()=>{
-            const task= await orders(Usuario.username);
-            // console.log(task)
-            setPedidos([task]);
-            
-        })();
-        console.log(pedidos);
+    return () => {
+        loadOrders();
       }
     }, [])
+    
+
+
+
+    // useEffect(() => {
+    //   return () => {
+    //     (async()=>{
+    //         const task= await orders();
+    //         console.log([task])
+    //         // setPedidos({
+    //         //     id:task.id,
+    //         //     codigop:task.codigop,
+    //         //     codcake: task.codcake,
+    //         //     idproducto:task.idproducto,
+    //         //     cantidad:task.cantidad,
+    //         //     total:task.total,
+    //         //     fechai:task.fechai,
+    //         //     fechaf:task.fechaf,
+    //         //     usuario:task.usuario,
+    //         //     completo:task.completo
+    //         // });
+    //         setPedidos(task)
+    //     })();
+    //   }
+    // }, [navigation])
     
   return (
     <SafeAreaView>
@@ -28,7 +53,11 @@ const Pedidos = ({navigation,route}) => {
                 <Text>Podras consultar tus pedidos en esta Pantalla:</Text>
             </View>
             <View>
-                <Text>{pedidos>1?pedidos:null}</Text>
+                {
+                    pedidos?
+                    <Text>{pedidos}</Text>:
+                    <Text>Hola</Text>
+                }
             </View>
         </View>
     </SafeAreaView>
