@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, StyleSheet,TouchableOpacity } from 'react-nat
 import React,{useEffect,useState} from 'react'
 import { MaterialIcons} from '@expo/vector-icons'
 import { orders } from '../../api'
+import OrderList from '../Components/List/OrderList'
 
 const Pedidos = ({navigation,route}) => {
     const Usuario=route.params;
@@ -51,13 +52,7 @@ const Pedidos = ({navigation,route}) => {
             <Text style={{fontSize:24}}>Pedidos: {Usuario.username}</Text>
             <View style={{width:"100%",backgroundColor:"#ccc",height:"100%",borderRadius:20,marginTop:20,padding:10}}>
                 <Text>Podras consultar tus pedidos en esta Pantalla:</Text>
-            </View>
-            <View>
-                {
-                    pedidos?
-                    <Text>{pedidos}</Text>:
-                    <Text>Hola</Text>
-                }
+                <OrderList/>
             </View>
         </View>
     </SafeAreaView>
