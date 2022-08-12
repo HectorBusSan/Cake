@@ -1,11 +1,12 @@
-import { View, Text, SafeAreaView, StyleSheet,TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet,TouchableOpacity} from 'react-native'
 import React,{useEffect,useState} from 'react'
 import { MaterialIcons} from '@expo/vector-icons'
 import OrderList from '../Components/List/OrderList'
 
 const Pedidos = ({navigation,route}) => {
     const Usuario=route.params;
-
+    
+    
   return (
     <SafeAreaView>
         <View style={style.header}>
