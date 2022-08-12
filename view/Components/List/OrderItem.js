@@ -1,20 +1,21 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import products from '../../../consts/products'
 
 const OrderItem = ({pedidos}) => {
-  return (
-    <View style={{backgroundColor:"#f00"}}>
-    <Text>Servicio:</Text>
-      <Text>{pedidos.id}</Text>
-      <Text>{pedidos.codigop}</Text>
-      <Text>{pedidos.codcake}</Text>
-      <Text>{pedidos.idproducto}</Text>
-      <Text>{pedidos.cantidad}</Text>
-      <Text>{pedidos.total}</Text>
-      <Text>{pedidos.fechai}</Text>
-      <Text>{pedidos.fechaf}</Text>
-      <Text>{pedidos.username}</Text>
-      <Text>{pedidos.completo}</Text>
+return (
+    <View style={{padding:20}}>
+    <Text>Pedido:</Text>
+      <Text>id: {pedidos.id}</Text>
+      <Text>cod del pedido:{pedidos.codigop}</Text>
+      <Text>cod cake: {pedidos.codcake}</Text>
+      <Text>cod del producto: {pedidos.idproducto}</Text>
+      <Text>cantidad: {pedidos.cantidad}</Text>
+      <Text>total: {pedidos.total}</Text>
+      <Text>fecha de solicitud: {pedidos.fechai}</Text>
+      <Text>fehca de entrega: {pedidos.fechaf}</Text>
+      <Text>usuario: {pedidos.username}</Text>
+      <Text>completo: {Number(pedidos.completo)}</Text>
     </View>
   )
 }
