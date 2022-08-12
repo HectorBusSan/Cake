@@ -1,48 +1,11 @@
 import { View, Text, SafeAreaView, StyleSheet,TouchableOpacity } from 'react-native'
 import React,{useEffect,useState} from 'react'
 import { MaterialIcons} from '@expo/vector-icons'
-import { orders } from '../../api'
 import OrderList from '../Components/List/OrderList'
 
 const Pedidos = ({navigation,route}) => {
     const Usuario=route.params;
-    const [pedidos, setPedidos] = useState([])
 
-    const loadOrders=async()=>{
-        const data= await orders();
-        setPedidos(data);
-    }
-    useEffect(() => {
-    return () => {
-        loadOrders();
-      }
-    }, [])
-    
-
-
-
-    // useEffect(() => {
-    //   return () => {
-    //     (async()=>{
-    //         const task= await orders();
-    //         console.log([task])
-    //         // setPedidos({
-    //         //     id:task.id,
-    //         //     codigop:task.codigop,
-    //         //     codcake: task.codcake,
-    //         //     idproducto:task.idproducto,
-    //         //     cantidad:task.cantidad,
-    //         //     total:task.total,
-    //         //     fechai:task.fechai,
-    //         //     fechaf:task.fechaf,
-    //         //     usuario:task.usuario,
-    //         //     completo:task.completo
-    //         // });
-    //         setPedidos(task)
-    //     })();
-    //   }
-    // }, [navigation])
-    
   return (
     <SafeAreaView>
         <View style={style.header}>

@@ -3,7 +3,7 @@ import React from 'react'
 
 const OrderItem = ({pedidos}) => {
   return (
-    <View style={{backgroundColor:"#f00",height:"100%",width:"100%"}}>
+    <View style={{backgroundColor:"#f00"}}>
     <Text>Servicio:</Text>
       <Text>{pedidos.id}</Text>
       <Text>{pedidos.codigop}</Text>
