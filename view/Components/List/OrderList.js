@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text ,FlatList} from 'react-native'
+import React,{useState,useEffect} from 'react'
 import OrderItem from './OrderItem'
-import { FlatList } from 'react-native-gesture-handler'
+import { orders } from '../../../api'
 
 const OrderList = () => {
     const [pedidos, setPedidos] = useState([])
@@ -16,19 +16,15 @@ const OrderList = () => {
       }
     }, [])
     const renderItem=({item})=>{
-        return <OrderItem task={item}/>
+        return <OrderItem pedidos={item}/>
     }
 
   return (
-    <View>
       <FlatList
-        style={{width:"100%"}}  
+        style={{width:"100%"}}
         data={pedidos}
-        renderItem={renderItem}
-        keyExtractor={(item)=>{item.id+""}}
-        />
-
-    </View>
+        keyExtractor={(item)=>{item.id+" "}}
+        renderItem={renderItem}/>
   )
 }
 
