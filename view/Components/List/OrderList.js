@@ -3,6 +3,8 @@ import React,{useState,useEffect} from 'react'
 import OrderItem from './OrderItem'
 import { orders } from '../../../api'
 import { useIsFocused } from '@react-navigation/native'
+import products from '../../../consts/products'
+
 const OrderList = () => {
     const [pedidos, setPedidos] = useState([])
     const [refresting, setRefresting] = useState(false);
@@ -14,9 +16,10 @@ const OrderList = () => {
         setPedidos(data);
     }
     useEffect(() => {
-      console.log(isFocused)
+        console.log(isFocused)
         loadOrders();
     }, [isFocused])
+
     const renderItem=({item})=>{
         return <OrderItem pedidos={item}/>
     }
@@ -28,7 +31,7 @@ const OrderList = () => {
   })
   return (
       <FlatList
-        style={{width:"100%"}}
+        style={{width:"100%", height:"100%", marginBottom:100}}
         data={pedidos}
         keyExtractor={(item)=>{item.id+" "}}
         renderItem={renderItem}

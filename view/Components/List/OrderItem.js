@@ -1,10 +1,9 @@
 import { View, Text } from 'react-native'
 import React,{useState,useEffect} from 'react'
-import products from '../../../consts/products'
 
 const OrderItem = ({pedidos}) => {
 return (
-    <View style={{padding:20}}>
+  <View style={{marginBottom:20}}>
     <Text>Pedido:</Text>
       <Text>id: {pedidos.id}</Text>
       <Text>cod del pedido:{pedidos.codigop}</Text>
@@ -16,6 +15,7 @@ return (
       <Text>fehca de entrega: {pedidos.fechaf}</Text>
       <Text>usuario: {pedidos.username}</Text>
       <Text>completo: {Number(pedidos.completo)}</Text>
+      <Text>---------------</Text>
     </View>
   )
 }
