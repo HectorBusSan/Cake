@@ -75,7 +75,7 @@ const HomeScreen=({navigation,route})=>{
         </TouchableOpacity>
         );
     }
-    const [fadeIn,setFadeIn]= useState(new Animated.Value(-300));
+    const [fadeIn,setFadeIn]= useState(new Animated.Value(-310));
     const showProfile=()=>{
         Animated.timing(fadeIn,{
             toValue:150,
@@ -85,7 +85,7 @@ const HomeScreen=({navigation,route})=>{
 
     const hiddenProfile=()=>{
         Animated.timing(fadeIn,{
-            toValue:-300,
+            toValue:-310,
             duration:3000,
         }).start();
     }
