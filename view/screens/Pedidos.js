@@ -20,7 +20,7 @@ const Pedidos = ({navigation,route}) => {
                 </View>
             </View>
             <View style={{padding:20,backgroundColor:COLORS.green,borderRadius:20,height:"70%"}}>
-                <OrderList/>
+                <OrderList User={Usuario}/>
             </View>
     </SafeAreaView>
   )

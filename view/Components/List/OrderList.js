@@ -5,7 +5,7 @@ import { orders } from '../../../api'
 import { useIsFocused } from '@react-navigation/native'
 import products from '../../../consts/products'
 
-const OrderList = () => {
+const OrderList = ({User}) => {
     const [pedidos, setPedidos] = useState([])
     const [refresting, setRefresting] = useState(false);
 
@@ -21,7 +21,7 @@ const OrderList = () => {
     }, [isFocused])
 
     const renderItem=({item})=>{
-        return <OrderItem pedidos={item}/>
+        return <OrderItem User={User} pedidos={item}/>
     }
 
     const onRefresh= React.useCallback(async()=>{

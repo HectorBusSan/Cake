@@ -1,11 +1,11 @@
-import { View, Text,Image } from 'react-native'
+import { View, Text,Image,StyleSheet } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import products from '../../../consts/products'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import COLORS from '../../../consts/colors'
 
 
-const OrderItem = ({pedidos}) => {
+const OrderItem = ({User,pedidos}) => {
   const [productos, setProductos] = useState()
   useEffect(() => {
       getData();
@@ -39,7 +39,11 @@ const OrderItem = ({pedidos}) => {
   //         <Text>---------------</Text> */}
   
 return (
-  <TouchableOpacity style={{marginBottom:20,backgroundColor:COLORS.light,paddingHorizontal:10,paddingVertical:15,borderRadius:10}}>
+  <View>
+    {
+      pedidos.username==User.username?
+      
+  <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
         <View style={{flex:1}}>
         <Text style={{fontWeight:"bold",fontSize:18}}>Pedido:</Text>
@@ -58,9 +62,20 @@ return (
       <View style={{alignItems:'center'}}>
       <Text>fecha de solicitud: {pedidos.fechai}</Text>
       <Text>fehca de entrega: {pedidos.fechaf}</Text>
+      <Text>User: {pedidos.username}</Text>
       </View>
   </TouchableOpacity>
+      :null
+    }
+  </View>
   )
 }
-
+const style=StyleSheet.create({
+  button:{
+    marginBottom:20,backgroundColor:COLORS.light,paddingHorizontal:10,paddingVertical:15,borderRadius:10
+  },
+  nobuton:{
+    display:"none"
+  }
+})
 export default OrderItem
