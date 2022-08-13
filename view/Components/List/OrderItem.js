@@ -41,7 +41,7 @@ const OrderItem = ({User,pedidos}) => {
 return (
   <View>
     {
-      pedidos.username==User.username?
+      (pedidos.username==User.username && pedidos.completo==0)||User.rol==1?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
