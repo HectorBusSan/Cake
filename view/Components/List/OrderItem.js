@@ -1,7 +1,25 @@
 import { View, Text } from 'react-native'
 import React,{useState,useEffect} from 'react'
+import products from '../../../consts/products'
 
 const OrderItem = ({pedidos}) => {
+  const [productos, setProductos] = useState([])
+  useEffect(() => {
+      getData();
+  }, [])
+  let datas=[]
+  const getData=()=>{
+    products.forEach(data=>{
+      if(pedidos.id== Number(data.id)){
+        datas.push(data);
+      }
+    })
+    setProductos(datas);
+  }
+  useEffect(() => {
+    console.log(productos)
+  }, [productos])
+  
 return (
   <View style={{marginBottom:20}}>
     <Text>Pedido:</Text>
