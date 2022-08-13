@@ -33,7 +33,7 @@ const OrderList = () => {
       <FlatList
         style={{width:"100%", height:"100%", marginBottom:100}}
         data={pedidos}
-        keyExtractor={(item)=>{item.id+" "}}
+        keyExtractor={(item)=>{item.id+""}}
         renderItem={renderItem}
         refreshControl={
             <RefreshControl
