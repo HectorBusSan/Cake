@@ -1,10 +1,10 @@
-import { View, Text,Image,StyleSheet } from 'react-native'
+import { View, Text,Image,StyleSheet,Alert } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import products from '../../../consts/products'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../../consts/colors'
-
+import { deleteOrder } from '../../../api';
 
 const OrderItem = ({User,pedidos}) => {
   const [productos, setProductos] = useState()
@@ -39,12 +39,19 @@ const OrderItem = ({User,pedidos}) => {
   //         <Text>completo: {Number(pedidos.completo)}</Text>
   //         <Text>---------------</Text> */}
   
+
+  const eraserItem=async(id)=>{
+    // let ident=Number(id)
+    await deleteOrder(id)
+  }
+
+
 return (
   <View key={pedidos.id}>
     {
       (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2)?
       
-  <TouchableOpacity style={style.button}>
+  <TouchableOpacity onPress={()=>eraserItem(pedidos.id)} style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
       {
         User.pedido==1?null:
