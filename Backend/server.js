@@ -153,12 +153,18 @@ app.post("/pedidos",async(req,res)=>{
     console.log(pedido)
     return res.json({message});
 })
-app.get("/pedidos/:orders",async(req,res)=>{
-    const username=req.username;
-    const someProducts=await prisma.pedido.findMany({where:{username:username}});
-    if(someProducts){
-        res.json(someProducts);
-    }else{
-        console.log("No encontraron ")
-    }
+// app.get("/pedidos/:orders",async(req,res)=>{
+//     const username=req.orders;
+//     const someProducts=await prisma.pedido.findMany({where:{username:username}});
+//     if(someProducts){
+//         res.json(someProducts);
+//     }else{
+//         console.log("No encontraron ")
+//     }
+// })
+app.delete("/pedidos/:id",async(req,res)=>{
+    const id= parseInt(req.params.id)
+    await prisma.pedido.delete({where:{id:id}});
+    // console.log(id);
+    return res.json({message:"Eliminado Exitosamente"})
 })
