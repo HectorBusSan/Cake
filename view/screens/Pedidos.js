@@ -16,7 +16,9 @@ const Pedidos = ({navigation,route}) => {
             <View style={{marginVertical:10,paddingHorizontal:20}}>
                 <Text style={{fontSize:24}}>Pedidos: {Usuario.username}</Text>
                 <View style={{width:"100%",backgroundColor:"#ccc",borderRadius:20,marginTop:20,padding:10}}>
-                    <Text>Podras consultar tus pedidos en esta Pantalla:</Text>
+                    {Usuario.pedido==1?
+                    <Text>Podras consultar tus pedidos listos para que los recibas en esta Pantalla:</Text>:Usuario.pedido==2?
+                    <Text>Podras consultar todos los pedidos en esta Pantalla:</Text>:<Text>Podras consultar tus pedidos en esta Pantalla:</Text>}
                 </View>
             </View>
             <View style={{padding:20,backgroundColor:COLORS.green,borderRadius:20,height:"70%"}}>
