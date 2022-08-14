@@ -26,7 +26,7 @@ const OrderList = ({User}) => {
 
     const onRefresh= React.useCallback(async()=>{
       setRefresting(true);
-      await loadTask();
+      await loadOrders();
       setRefresting(false);
   })
   return (
