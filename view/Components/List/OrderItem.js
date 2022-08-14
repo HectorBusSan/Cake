@@ -39,9 +39,9 @@ const OrderItem = ({User,pedidos}) => {
   //         <Text>---------------</Text> */}
   
 return (
-  <View>
+  <View key={pedidos.id}>
     {
-      (pedidos.username==User.username && pedidos.completo==0)||User.rol==1?
+      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
