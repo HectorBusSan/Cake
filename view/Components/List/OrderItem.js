@@ -41,7 +41,7 @@ const OrderItem = ({User,pedidos}) => {
 return (
   <View key={pedidos.id}>
     {
-      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)?
+      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
