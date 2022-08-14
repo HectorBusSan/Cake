@@ -195,48 +195,7 @@ const send=async()=>{
     navigation.navigate("Pedidos",Usuario);
 }
 
-const sending=()=>{
-    const fecha= new Date();
-    let nextday=addDays(fecha,5)
-    for (let index = 0; index < counter.length; index=index+3) {
-        let codigoCake= Number(counter[index])
-        let cantidadCake= counter[index + 1]
-        let precioCake=counter[index + 2]
-        let totalCake= precioCake*cantidadCake; 
-        console.log("contendo: ",counter[index]);
-        // if(index<=3){
-        //     setPedido({
-        //         codigop:1,
-        //         idproducto:codigoCake,
-        //         cantidad:cantidadCake,
-        //         total:totalCake,
-        //         fechaf: nextday,
-        //         username:"usuario1"
-        //     })
-        //     console.log("---",pedido)
-        // }else{
-        //     setPedido([...pedido,{
-        //         codigop:1,
-        //         idproducto:codigoCake,
-        //         cantidad:cantidadCake,
-        //         total:totalCake,
-        //         fechaf: nextday,
-        //         username:"usuario1"
-        //     }])
-        //     console.log("---",pedido)
-        // }
-        setPedido([...pedido,{
-                    codigop:1,
-                    idproducto:codigoCake,
-                    cantidad:cantidadCake,
-                    total:totalCake,
-                    fechaf: nextday,
-                    username:"usuario1"
-                }])
-    }
-    // return pedido;
-    console.log(pedido);
-}
+
 // useEffect(() => {
 //   return () => {
 //     Alert.alert(
