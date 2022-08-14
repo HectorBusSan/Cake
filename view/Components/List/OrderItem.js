@@ -2,7 +2,7 @@ import { View, Text,Image,StyleSheet } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import products from '../../../consts/products'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../../consts/colors'
 
 
@@ -46,7 +46,11 @@ return (
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
-      <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}}/>
+      {
+        User.pedido==1?null:
+        User.pedido==2?<MaterialIcons name="arrow-forward-ios" size={24} color="black" />:
+        <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}}/>
+      }
         <View style={{flex:1}}>
         <Text style={{fontWeight:"bold",fontSize:18}}>Pedido:</Text>
           {
