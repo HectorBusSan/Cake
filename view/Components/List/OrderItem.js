@@ -1,4 +1,4 @@
-import { View, Text,Image,StyleSheet,Alert } from 'react-native'
+import { View, Text,Image,StyleSheet,ToastAndroid } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import products from '../../../consts/products'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -43,6 +43,10 @@ const OrderItem = ({User,pedidos}) => {
   const eraserItem=async(id)=>{
     // let ident=Number(id)
     await deleteOrder(id)
+    ToastAndroid.show(
+      "Elemento Eliminado Recargar Pantalla",
+      ToastAndroid.SHORT,
+    )
   }
 
 
@@ -51,12 +55,12 @@ return (
     {
       (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2)?
       
-  <TouchableOpacity onPress={()=>eraserItem(pedidos.id)} style={style.button}>
+  <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
       {
         User.pedido==1?null:
         User.pedido==2?<MaterialIcons name="arrow-forward-ios" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#0000ff"}}/>:
-        <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}}/>
+        <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}} onPress={()=>eraserItem(pedidos.id)}/>
       }
         <View style={{flex:1}}>
         <Text style={{fontWeight:"bold",fontSize:18}}>Pedido:</Text>
