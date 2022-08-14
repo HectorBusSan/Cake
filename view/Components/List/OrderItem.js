@@ -48,7 +48,7 @@ return (
       <View style={{flexDirection:"row",marginBottom:10}}>
       {
         User.pedido==1?null:
-        User.pedido==2?<MaterialIcons name="arrow-forward-ios" size={24} color="black" />:
+        User.pedido==2?<MaterialIcons name="arrow-forward-ios" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#0000ff"}}/>:
         <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}}/>
       }
         <View style={{flex:1}}>
