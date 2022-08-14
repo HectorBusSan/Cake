@@ -90,7 +90,7 @@ const HomeScreen=({navigation,route})=>{
         }).start();
     }
         
-    
+    let User= {...Usuario,pedido:1}
     const Profile=()=>{
         return(
             <Animated.View style={{...style.card,backgroundColor:COLORS.green,position:"absolute",width:"100%",marginLeft:20,marginRight:20,
@@ -100,8 +100,8 @@ const HomeScreen=({navigation,route})=>{
                 {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}}><Text style={{fontSize:18}}>Pedidos</Text></TouchableOpacity>:null}
                 {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}} onPress={() => navigation.navigate("Productos")}><Text style={{fontSize:18}}>Crear Productos</Text></TouchableOpacity>
                 :null}
-                <TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}} onPress={()=>navigation.navigate("Pedidos",Usuario)} ><Text style={{fontSize:18}}>Mis Pedidos</Text></TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate("Pedidos",{...Usuario,pedido:1})} style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>
+                <TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}} onPress={()=>navigation.navigate("Pedidos",User)} ><Text style={{fontSize:18}}>Mis Pedidos</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate("Pedidos",Usuario)} style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>
                 <TouchableOpacity style={style.buttonP} onPress={()=>navigation.navigate("Onboarding")}><Text style={{fontSize:18}}>Cerrar Sessión</Text></TouchableOpacity>
                 {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
             </Animated.View>
