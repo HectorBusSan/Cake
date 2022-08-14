@@ -67,3 +67,9 @@ export const orders=async()=>{
     const res= await fetch(API4)
     return await res.json();
 }
+export const deleteOrder=async(order)=>{
+    const res= await fetch(`${API4}/${order}`,{
+        method:"DELETE",
+    })
+    return await res.json();
+}
