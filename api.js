@@ -73,3 +73,9 @@ export const deleteOrder=async(order)=>{
     })
     return await res.json();
 }
+export const updateOrder=async(order)=>{
+    const res=await fetch(`${API4}/${order}`,{
+        method:"PUT",
+    })
+    return res;
+}
