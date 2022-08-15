@@ -6,7 +6,7 @@ import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../../consts/colors'
 import { deleteOrder,updateOrder } from '../../../api';
 
-const OrderItem = ({User,pedidos}) => {
+const OrderItem = ({User,pedidos,loadOrders}) => {
   const [productos, setProductos] = useState()
   useEffect(() => {
       getData();
@@ -41,6 +41,7 @@ const OrderItem = ({User,pedidos}) => {
   
   const updateItem=async(id)=>{
     await updateOrder(id)
+    await loadOrders()
     ToastAndroid.show(
       "Este Articulo esta Listo",
       ToastAndroid.SHORT,
@@ -51,8 +52,9 @@ const OrderItem = ({User,pedidos}) => {
     // let ident=Number(id)
     // let orders= true
     await deleteOrder(id)
+    await loadOrders()
     ToastAndroid.show(
-      "Elemento Eliminado Recargar Pantalla",
+      "Elemento Eliminado",
       ToastAndroid.SHORT,
     )
   }
