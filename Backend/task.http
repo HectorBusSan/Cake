@@ -58,4 +58,9 @@ GET {{api3}}/usuario1
 ###
 DELETE {{api3}}/2
 ###
-PUT {{api3}}/1
+PUT {{api3}}/7
+Content-Type: application/json
+
+{
+    "completo":true
+}
