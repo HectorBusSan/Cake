@@ -30,7 +30,7 @@ const Pedidos = ({navigation,route}) => {
                 fontWeight:"bold",color:COLORS.dark,marginLeft:5,marginRight:10}}/>
                 <FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/>
             </View>
-            <View style={{padding:20,backgroundColor:COLORS.green,marginTop:10,borderRadius:20,height:"70%"}}>
+            <View style={{padding:20,backgroundColor:COLORS.green,marginTop:10,borderRadius:20,height:"68%"}}>
                 <OrderList User={Usuario}/>
             </View>
     </SafeAreaView>
