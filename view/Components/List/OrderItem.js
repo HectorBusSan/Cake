@@ -4,7 +4,7 @@ import products from '../../../consts/products'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../../consts/colors'
-import { deleteOrder } from '../../../api';
+import { deleteOrder,updateOrder } from '../../../api';
 
 const OrderItem = ({User,pedidos}) => {
   const [productos, setProductos] = useState()
@@ -39,9 +39,17 @@ const OrderItem = ({User,pedidos}) => {
   //         <Text>completo: {Number(pedidos.completo)}</Text>
   //         <Text>---------------</Text> */}
   
+  const updateItem=async(id)=>{
+    await updateOrder(id)
+    ToastAndroid.show(
+      "Elemento Completo",
+      ToastAndroid.SHORT,
+    )
+  }
 
   const eraserItem=async(id)=>{
     // let ident=Number(id)
+    // let orders= true
     await deleteOrder(id)
     ToastAndroid.show(
       "Elemento Eliminado Recargar Pantalla",
@@ -53,15 +61,18 @@ const OrderItem = ({User,pedidos}) => {
 return (
   <View key={pedidos.id}>
     {
-      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2)?
+      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2&&pedidos.completo==0)||(User.pedido==1&&User.rol==1&&pedidos.completo==1)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
+      <View style={{position:"absolute",top:0,right:10}}>
       {
         User.pedido==1?null:
-        User.pedido==2?<MaterialIcons name="arrow-forward-ios" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#0000ff"}}/>:
-        <FontAwesome name="trash" size={24} color="black" style={{position:"absolute",top:0,right:10,color:"#f00"}} onPress={()=>eraserItem(pedidos.id)}/>
+        User.pedido==2?
+        <TouchableOpacity onPress={()=>updateItem(pedidos.id)}><MaterialIcons name="arrow-forward-ios" size={24} color="#0000ff" /></TouchableOpacity>:
+        <TouchableOpacity onPress={()=>eraserItem(pedidos.id)}><FontAwesome name="trash" size={24} color="black" style={{color:"#f00"}}/></TouchableOpacity>
       }
+      </View>
         <View style={{flex:1}}>
         <Text style={{fontWeight:"bold",fontSize:18}}>Pedido:</Text>
           {
