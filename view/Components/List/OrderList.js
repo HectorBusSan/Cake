@@ -5,7 +5,7 @@ import { orders } from '../../../api'
 import { useIsFocused } from '@react-navigation/native'
 import products from '../../../consts/products'
 
-const OrderList = ({User}) => {
+const OrderList = ({User,search}) => {
     const [pedidos, setPedidos] = useState([])
     const [refresting, setRefresting] = useState(false);
 
