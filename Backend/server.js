@@ -170,9 +170,13 @@ app.delete("/pedidos/:id",async(req,res)=>{
 })
 app.put("/pedidos/:id",async(req,res)=>{
     const id= parseInt(req.params.id)
-    await prisma.pedido.update({where:{id:id},
-    data:{
-        completo:true
-    }})
+    await prisma.pedido.update({
+        where:{
+            id:id
+        },
+        data:{
+            completo:true
+        }
+    })
     return res.json({messaje:"Full Update"})
 })
