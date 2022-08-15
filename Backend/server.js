@@ -168,3 +168,11 @@ app.delete("/pedidos/:id",async(req,res)=>{
     // console.log(id);
     return res.json({message:"Eliminado Exitosamente"})
 })
+app.put("/pedidos/:id",async(req,res)=>{
+    const id= parseInt(req.params.id)
+    await prisma.pedido.update({where:{id:id},
+    data:{
+        completo:true
+    }})
+    return res.json({messaje:"Full Update"})
+})
