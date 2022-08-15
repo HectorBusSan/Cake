@@ -42,7 +42,7 @@ const OrderItem = ({User,pedidos}) => {
   const updateItem=async(id)=>{
     await updateOrder(id)
     ToastAndroid.show(
-      "Elemento Completo",
+      "Este Articulo esta Listo",
       ToastAndroid.SHORT,
     )
   }
