@@ -21,7 +21,7 @@ const OrderList = ({User}) => {
     }, [isFocused])
 
     const renderItem=({item})=>{
-        return <OrderItem User={User} pedidos={item}/>
+        return <OrderItem User={User} pedidos={item} loadOrders={loadOrders}/>
     }
 
     const onRefresh= React.useCallback(async()=>{
