@@ -117,11 +117,12 @@ const HomeScreen=({navigation,route})=>{
             <View style={style.header}>
                 <View>
                     <Text style={{fontSize:25,fontWeight:"bold"}}>Bienvenido a el</Text>
-                    <Text style={{fontSize:34,fontWeight:"bold",color:COLORS.green}}>Palacio del Sabor</Text>
+                    <Text style={{fontSize:33,fontWeight:"bold",color:COLORS.green}}>Palacio del Sabor</Text>
                 </View>
-                <View style={{display:"flex", flexDirection:"row", width:"20%", justifyContent:"space-between"}}>
+                <View style={{display:"flex", flexDirection:"row", width:"30%", justifyContent:"space-between"}}>
+                    <TouchableOpacity><FontAwesome name="rocket" size={24} color="#cb3234" /></TouchableOpacity>
                     <TouchableOpacity onPress={showProfile}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart",Usuario)}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate("MyCart",Usuario)} style={{marginRight:5}}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
                 </View>
             </View>
                 <View style={{marginTop:30, flexDirection:"row", alignItems:"center", zIndex:10}}>
