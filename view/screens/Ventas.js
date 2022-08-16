@@ -1,4 +1,4 @@
-import { View, Text,SafeAreaView,StyleSheet,Image } from 'react-native'
+import { View, Text,SafeAreaView,StyleSheet,Image, ToastAndroid } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import { MaterialIcons,FontAwesome } from '@expo/vector-icons';
 import COLORS from '../../consts/colors';
@@ -23,10 +23,11 @@ const Ventas = ({navigation,route}) => {
     setResult(datas);
     }
     const sell=(id)=>{
-        console.log(id)
+        ToastAndroid.show(`Confirmando ${id}`,
+        ToastAndroid.SHORT)
     }
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor:COLORS.light}}>
         <View style={style.header}>
             <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
         </View>
