@@ -153,15 +153,16 @@ app.post("/pedidos",async(req,res)=>{
     console.log(pedido)
     return res.json({message});
 })
-// app.get("/pedidos/:orders",async(req,res)=>{
-//     const username=req.orders;
-//     const someProducts=await prisma.pedido.findMany({where:{username:username}});
-//     if(someProducts){
-//         res.json(someProducts);
-//     }else{
-//         console.log("No encontraron ")
-//     }
-// })
+app.get("/pedidos/:orders",async(req,res)=>{
+    const id=req.params.orders;
+    const someProducts=await prisma.pedido.findUnique({where:{codcake:id}});
+    if(someProducts){
+        res.json(someProducts);
+        console.log(someProducts)
+    }else{
+        res.json({messaje:"no encontrado"})
+    }
+})
 app.delete("/pedidos/:id",async(req,res)=>{
     const id= parseInt(req.params.id)
     await prisma.pedido.delete({where:{id:id}});
