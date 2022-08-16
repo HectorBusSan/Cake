@@ -83,8 +83,10 @@ return (
       (User.pedido==1&&User.rol==1&&pedidos.completo==1)||
       // pedidos aprobar
       (User.pedido==2&&pedidos.completo==0 && pedidos.codigop==0 &&User.rol==1)||
-      // ventas
-      (User.pedido==3&&pedidos.codigop==1)?
+      // ventas admi
+      (User.pedido==3&&pedidos.codigop==1 && User.rol==1)||
+      // ventas cliente
+      (User.pedido==3&&pedidos.codigop==1 && User.rol==2 &&User.username==pedidos.username)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
