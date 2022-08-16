@@ -1,27 +1,33 @@
 import { View, Text ,FlatList, RefreshControl} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import OrderItem from './OrderItem'
-import { orders } from '../../../api'
+import { orders,especificO } from '../../../api'
 import { useIsFocused } from '@react-navigation/native'
 import products from '../../../consts/products'
 
-const OrderList = ({User,search}) => {
+const OrderList = ({User,Search}) => {
     const [pedidos, setPedidos] = useState([])
     const [refresting, setRefresting] = useState(false);
-
     const isFocused=useIsFocused();
 
     const loadOrders=async()=>{
         const data= await orders();
         setPedidos(data);
     }
+    
     useEffect(() => {
         console.log(isFocused)
         loadOrders();
     }, [isFocused])
 
+    
+    // useEffect(()=>{
+    //     console.log("------")
+    //     console.log(Search)
+    //     loadOrders();
+    // },[Search])
     const renderItem=({item})=>{
-        return <OrderItem User={User} pedidos={item} loadOrders={loadOrders}/>
+        return <OrderItem User={User} pedidos={item} Search={Search} loadOrders={loadOrders}/>
     }
 
     const onRefresh= React.useCallback(async()=>{
