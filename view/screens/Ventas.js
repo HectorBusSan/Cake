@@ -42,7 +42,7 @@ const Ventas = ({navigation,route}) => {
         <View style={{padding:10,margin:10,borderRadius:10,backgroundColor:COLORS.green,marginTop:10}}>
             <View style={{backgroundColor:"#fff",padding:10,borderRadius:10,flexDirection:"row"}}>
                 <View style={{flex:1, alignItems:"center"}}>
-                    <View style={{flexDirection:"row"}}>
+                    <View style={{alignItems:"center"}}>
                         <Text style={{fontSize:18}}>Pedido de </Text>
                         <Text style={{color:COLORS.green,fontWeight:"bold",fontSize:18}}>{pedidos.username}</Text>
                     </View>
