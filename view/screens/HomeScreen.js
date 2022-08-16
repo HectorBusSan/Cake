@@ -89,9 +89,11 @@ const HomeScreen=({navigation,route})=>{
             duration:3000,
         }).start();
     }
-        
+    
+    let User0={...Usuario,pedido:0}
     let User= {...Usuario,pedido:1}
     let UserA={...Usuario,pedido:2}
+    let UserV={...Usuario,pedido:3}
     const Profile=()=>{
         return(
             <Animated.View style={{...style.card,backgroundColor:COLORS.green,position:"absolute",width:"100%",marginLeft:20,marginRight:20,
@@ -102,7 +104,7 @@ const HomeScreen=({navigation,route})=>{
                 {Usuario.rol===1?<TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}} onPress={() => navigation.navigate("Productos")}><Text style={{fontSize:18}}>Crear Productos</Text></TouchableOpacity>
                 :null}
                 <TouchableOpacity style={{...style.buttonP,marginBottom:5,backgroundColor:"#ffc107"}} onPress={()=>navigation.navigate("Pedidos",User)} ><Text style={{fontSize:18}}>Pedidos Listos</Text></TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.navigate("Pedidos",Usuario)} style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate("Pedidos",User0)} style={{...style.buttonP,marginBottom:5,backgroundColor:"#007bff"}}><Text style={{fontSize:18}}>Mi Pedido</Text></TouchableOpacity>
                 <TouchableOpacity style={style.buttonP} onPress={()=>navigation.navigate("Onboarding")}><Text style={{fontSize:18}}>Cerrar Sessión</Text></TouchableOpacity>
                 {/* <Animated.Text style={{fontSize:28,opacity:fadeIn}}>Hola</Animated.Text> */}
             </Animated.View>
@@ -120,7 +122,7 @@ const HomeScreen=({navigation,route})=>{
                     <Text style={{fontSize:33,fontWeight:"bold",color:COLORS.green}}>Palacio del Sabor</Text>
                 </View>
                 <View style={{display:"flex", flexDirection:"row", width:"30%", justifyContent:"space-between"}}>
-                    <TouchableOpacity><FontAwesome name="rocket" size={24} color="#cb3234" /></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate("Pedidos",UserV)}><FontAwesome name="rocket" size={24} color="#cb3234" /></TouchableOpacity>
                     <TouchableOpacity onPress={showProfile}><FontAwesome name="user-circle-o" size={24} color="black" /></TouchableOpacity>
                     <TouchableOpacity onPress={()=>navigation.navigate("MyCart",Usuario)} style={{marginRight:5}}><FontAwesome name="shopping-cart" size={24} /></TouchableOpacity>
                 </View>
