@@ -38,3 +38,8 @@ model pedido{
   username String @db.VarChar(250)
   completo Boolean @default(false)
 }
+model ventas{
+  id Int @id @default(autoincrement())
+  codcake String @db.VarChar(250)
+  fecha DateTime
+}
