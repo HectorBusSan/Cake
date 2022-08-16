@@ -6,11 +6,18 @@ import { FontAwesome,MaterialIcons } from '@expo/vector-icons';
 import COLORS from '../../../consts/colors'
 import { deleteOrder,updateOrder } from '../../../api';
 
-const OrderItem = ({User,pedidos,loadOrders}) => {
+const OrderItem = ({User,pedidos,Search,loadOrders}) => {
   const [productos, setProductos] = useState()
+  const [search, setSearch] = useState()
   useEffect(() => {
       getData();
   }, [])
+  useEffect(() => {
+    let searching=String(Search)
+    setSearch(searching)
+    // console.log(search);
+  }, [Search])
+  
   let datas=[]
   const getData=()=>{
     products.forEach(data=>{
@@ -61,7 +68,11 @@ const OrderItem = ({User,pedidos,loadOrders}) => {
 
 
 return (
-  <View key={pedidos.id}>
+  <View key={pedidos.id} style={
+    // String(search)=="no"?style.showbutton:
+    String(pedidos.codcake).includes(search)&&String(search).length>2?style.showbutton:
+    String(search).length<2?style.showbutton:
+    style.nobutton}>
     {
       (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2&&pedidos.completo==0)||(User.pedido==1&&User.rol==1&&pedidos.completo==1)?
       
@@ -106,7 +117,10 @@ const style=StyleSheet.create({
   button:{
     marginBottom:20,backgroundColor:COLORS.light,paddingHorizontal:10,paddingVertical:15,borderRadius:10
   },
-  nobuton:{
+  showbutton:{
+    color:"#f00"
+  },
+  nobutton:{
     display:"none"
   }
 })
