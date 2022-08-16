@@ -74,7 +74,7 @@ return (
     String(search).length<2?style.showbutton:
     style.nobutton}>
     {
-      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1)||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1)||(User.pedido==2&&pedidos.completo==0)||(User.pedido==1&&User.rol==1&&pedidos.completo==1)?
+      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1 && pedidos.codigop!="vendido")||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1 && pedidos.codigop!="vendido")||(User.pedido==2&&pedidos.completo==0 && pedidos.codigop!="vendido")||(User.pedido==1&&User.rol==1&&pedidos.completo==1 && pedidos.codigop!="vendido")?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
