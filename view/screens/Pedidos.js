@@ -35,7 +35,7 @@ const Pedidos = ({navigation,route}) => {
                 <TouchableOpacity onPress={()=>setSearch("")}><FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/></TouchableOpacity>
             </View>
             <View style={{padding:20,backgroundColor:COLORS.green,marginTop:10,borderRadius:20,height:"68%"}}>
-                <OrderList User={Usuario} Search={search}/>
+                <OrderList User={Usuario} Search={search} navigation={navigation}/>
             </View>
     </SafeAreaView>
   )
