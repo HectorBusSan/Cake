@@ -80,13 +80,13 @@ return (
       // pedidos listos
       (pedidos.username==User.username && pedidos.completo==1&&User.pedido==1 && pedidos.codigop==0)||
       // pedido listo admi
-      (User.pedido==1&&User.rol==1&&pedidos.completo==1)||
+      (User.pedido==1&&User.rol==1&&pedidos.completo==1 && pedidos.codigop==0)||
       // pedidos aprobar
       (User.pedido==2&&pedidos.completo==0 && pedidos.codigop==0 &&User.rol==1)||
       // ventas admi
-      (User.pedido==3&&pedidos.codigop==1 && User.rol==1)||
+      (User.pedido==3&&pedidos.completo==1 && User.rol==1&&pedidos.codigop==1)||
       // ventas cliente
-      (User.pedido==3&&pedidos.codigop==1 && User.rol==2 &&User.username==pedidos.username)?
+      (User.pedido==3&&pedidos.completo==1 && User.rol==2 &&User.username==pedidos.username&&pedidos.codigop==1)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
@@ -120,6 +120,7 @@ return (
       <Text>fehca de entrega: {pedidos.fechaf}</Text>
       <Text>User: {pedidos.username}</Text>
       {pedidos.completo==1?<Text style={{color:COLORS.green,fontWeight:"bold"}}>Completo</Text>:<Text style={{color:"#ffc107",fontWeight:"bold"}}>En Proceso...</Text>}
+      {pedidos.codigop==1?<Text style={{color:COLORS.green,fontWeight:"bold"}}>Pagado</Text>:null}
       </View>
   </TouchableOpacity>
       :null
