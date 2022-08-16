@@ -5,13 +5,12 @@ import OrderList from '../Components/List/OrderList'
 import COLORS from '../../consts/colors'
 import { TextInput } from 'react-native-gesture-handler'
 
-    const Pedidos = ({navigation,route}) => {
+const Pedidos = ({navigation,route}) => {
     const Usuario=route.params;
-    const [search, setSearch] = useState()
-    
-    const handlerChange=(e)=>{
+    const [search, setSearch] = useState("")
+    const searching=(e)=>{
         setSearch(e)
-        console.log(e)
+        // console.log(e)
     }
 
   return (
@@ -31,12 +30,12 @@ import { TextInput } from 'react-native-gesture-handler'
             </View>
             <View style={{flexDirection:"row",backgroundColor:"#ccc",
                 borderRadius:10,alignItems:"center",justifyContent:"space-between",marginBottom:1,marginHorizontal:20,paddingHorizontal:0}}>
-                <TextInput value={search} onChangeText={(text)=>handlerChange(text)} placeholder='Ingresar Codigo de Pedido' style={{ fontSize:18,
+                <TextInput value={search} onChangeText={(text)=>searching(text)} placeholder='Ingresar Codigo de Pedido' style={{ fontSize:18,
                 fontWeight:"bold",color:COLORS.dark,marginLeft:5,marginRight:10}}/>
-                <FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/>
+                <TouchableOpacity onPress={()=>filter}><FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/></TouchableOpacity>
             </View>
             <View style={{padding:20,backgroundColor:COLORS.green,marginTop:10,borderRadius:20,height:"68%"}}>
-                <OrderList User={Usuario} search={search}/>
+                <OrderList User={Usuario} Search={search}/>
             </View>
     </SafeAreaView>
   )
