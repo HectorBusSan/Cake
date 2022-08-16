@@ -32,7 +32,6 @@ const MyCart = ({navigation,route}) => {
             let totalCake= precioCake*cantidadCake; 
             console.log("contendo: ",counter[index]);
             arrayResult.push({
-                codigop:1,
                 idproducto:codigoCake,
                 cantidad:cantidadCake,
                 total:totalCake,

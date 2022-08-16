@@ -138,7 +138,7 @@ app.post("/pedidos",async(req,res)=>{
     const fecha= new Date();
     let id=String(uuidv4())
     const pedido={
-        codigop:String(req.body.codigop),
+        codigop:false,
         codcake:id,
         idproducto:req.body.idproducto,
         cantidad:req.body.cantidad,
