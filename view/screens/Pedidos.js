@@ -30,9 +30,9 @@ const Pedidos = ({navigation,route}) => {
             </View>
             <View style={{flexDirection:"row",backgroundColor:"#ccc",
                 borderRadius:10,alignItems:"center",justifyContent:"space-between",marginBottom:1,marginHorizontal:20,paddingHorizontal:0}}>
-                <TextInput value={search} onChangeText={(text)=>searching(text)} placeholder='Ingresar Codigo de Pedido' style={{ fontSize:18,
+                <TextInput value={search} onChangeText={(text)=>searching(text)} placeholder='Codigo de Pedido' style={{ fontSize:18,
                 fontWeight:"bold",color:COLORS.dark,marginLeft:5,marginRight:10}}/>
-                <TouchableOpacity onPress={()=>filter}><FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/></TouchableOpacity>
+                <TouchableOpacity onPress={()=>setSearch("")}><FontAwesome name="search" size={24} color="black" style={{backgroundColor:COLORS.green,padding:10,borderRadius:7}}/></TouchableOpacity>
             </View>
             <View style={{padding:20,backgroundColor:COLORS.green,marginTop:10,borderRadius:20,height:"68%"}}>
                 <OrderList User={Usuario} Search={search}/>
