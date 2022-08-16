@@ -106,6 +106,7 @@ return (
       <Text>fecha de solicitud: {pedidos.fechai}</Text>
       <Text>fehca de entrega: {pedidos.fechaf}</Text>
       <Text>User: {pedidos.username}</Text>
+      {pedidos.completo==1?<Text style={{color:COLORS.green,fontWeight:"bold"}}>Completo</Text>:<Text style={{color:"#ffc107",fontWeight:"bold"}}>En Proceso...</Text>}
       </View>
   </TouchableOpacity>
       :null
