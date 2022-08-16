@@ -181,3 +181,14 @@ app.put("/pedidos/:id",async(req,res)=>{
     })
     return res.json({messaje:"Full Update"})
 })
+app.post("/ventas",async(req,res)=>{
+    const fecha= new Date()
+    const venta={
+        codcake:req.body.codcake,
+        fecha:fecha
+    }
+    const message="Envio exitoso";
+    await prisma.ventas.create({data:venta});
+    console.log(venta);
+    return res.json({message});
+})
