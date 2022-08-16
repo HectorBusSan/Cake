@@ -1,7 +1,7 @@
 @api= http://localhost:3000/usuarios
 @api2= http://localhost:3000/productos
 @api3= http://localhost:3000/pedidos
-
+@api4=http://localhost:3000/ventas
 POST {{api}}
 Content-Type: application/json
 
@@ -66,3 +66,10 @@ Content-Type: application/json
 }
 ###
 GET {{api3}}/8f5ce545
+###
+POST {{api4}}
+Content-Type: application/json
+
+{
+    "codcake":"8f5ce545-915b-4eb9-8af2-aa88f462291a"
+}
