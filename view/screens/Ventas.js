@@ -23,6 +23,7 @@ const Ventas = ({navigation,route}) => {
     setResult(datas);
     }
     const sell=(id)=>{
+
         ToastAndroid.show(`Confirmando ${id}`,
         ToastAndroid.SHORT)
     }
@@ -32,8 +33,11 @@ const Ventas = ({navigation,route}) => {
             <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
         </View>
         <View style={{paddingHorizontal:20,marginTop:10}}>
-            <Text style={{fontSize:20,marginLeft:10}}>Ventas</Text>
-            <Text style={{fontSize:20,marginLeft:10}}>Bienvenido Administrador</Text>
+            <Text style={{fontSize:24,marginLeft:10}}>Ventas</Text>
+            <Text style={{fontSize:22,marginLeft:10}}>Bienvenido Administrador</Text>
+        </View>
+        <View style={{backgroundColor:"#ccc",borderRadius:10,padding:10,marginHorizontal:10,alignItems:"center",marginVertical:10}}>
+            <Text>Aqui podra realizar las ventas:</Text>
         </View>
         <View style={{padding:10,margin:10,borderRadius:10,backgroundColor:COLORS.green,marginTop:10}}>
             <View style={{backgroundColor:"#fff",padding:10,borderRadius:10,flexDirection:"row"}}>
@@ -52,7 +56,7 @@ const Ventas = ({navigation,route}) => {
                     <Text>Total: ${pedidos.total}</Text>
                 </View>
                 <View style={{position:"absolute",bottom:10,right:20}}>
-                        <TouchableOpacity onPress={()=>sell(pedidos.id)} style={{padding:2,borderRadius:26,backgroundColor:"#000"}}><FontAwesome name="check" size={24} color="#fff" style={{backgroundColor:COLORS.green,borderRadius:14,padding:2}} /></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>sell(pedidos.idproducto)} style={{padding:2,borderRadius:26,backgroundColor:"#000"}}><FontAwesome name="check" size={24} color="#fff" style={{backgroundColor:COLORS.green,borderRadius:14,padding:2}} /></TouchableOpacity>
                     </View>
             </View>
         </View>
