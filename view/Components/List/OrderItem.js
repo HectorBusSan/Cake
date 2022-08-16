@@ -74,7 +74,17 @@ return (
     String(search).length<2?style.showbutton:
     style.nobutton}>
     {
-      (pedidos.username==User.username && pedidos.completo==0&&User.pedido!=1 && pedidos.codigop!="vendido")||(pedidos.username==User.username && pedidos.completo==1&&User.pedido==1 && pedidos.codigop!="vendido")||(User.pedido==2&&pedidos.completo==0 && pedidos.codigop!="vendido")||(User.pedido==1&&User.rol==1&&pedidos.completo==1 && pedidos.codigop!="vendido")?
+     
+      // mi pedido
+      (pedidos.username==User.username && pedidos.completo==0&& User.pedido==0 && pedidos.codigop==0)||
+      // pedidos listos
+      (pedidos.username==User.username && pedidos.completo==1&&User.pedido==1 && pedidos.codigop==0)||
+      // pedido listo admi
+      (User.pedido==1&&User.rol==1&&pedidos.completo==1)||
+      // pedidos aprobar
+      (User.pedido==2&&pedidos.completo==0 && pedidos.codigop==0 &&User.rol==1)||
+      // ventas
+      (User.pedido==3&&pedidos.codigop==1)?
       
   <TouchableOpacity style={style.button}>
       <View style={{flexDirection:"row",marginBottom:10}}>
@@ -85,6 +95,7 @@ return (
         User.pedido==1?null:
         User.pedido==2?
         <TouchableOpacity onPress={()=>updateItem(pedidos.id)}><MaterialIcons name="arrow-forward-ios" size={24} color="#0000ff" /></TouchableOpacity>:
+        User.pedido==3?null:
         <TouchableOpacity onPress={()=>eraserItem(pedidos.id)}><FontAwesome name="trash" size={24} color="black" style={{color:"#f00"}}/></TouchableOpacity>
       }
       </View>
