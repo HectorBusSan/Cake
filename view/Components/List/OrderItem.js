@@ -81,7 +81,7 @@ return (
       <View style={{position:"absolute",top:0,right:10}}>
       {
         User.pedido==1 && User.rol==1?
-        <TouchableOpacity onPress={()=>navigation.navigate("Ventas")}><FontAwesome name="rocket" size={24} color="#cb3234" /></TouchableOpacity>:
+        <TouchableOpacity onPress={()=>navigation.navigate("Ventas",pedidos)}><FontAwesome name="rocket" size={24} color="#cb3234" /></TouchableOpacity>:
         User.pedido==1?null:
         User.pedido==2?
         <TouchableOpacity onPress={()=>updateItem(pedidos.id)}><MaterialIcons name="arrow-forward-ios" size={24} color="#0000ff" /></TouchableOpacity>:
