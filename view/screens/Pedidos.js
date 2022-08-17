@@ -26,7 +26,7 @@ const Pedidos = ({navigation,route}) => {
                     Usuario.pedido==2?
                     <Text>Podras consultar todos los pedidos en esta Pantalla:</Text>:
                     Usuario.pedido==3&&Usuario.rol==1?
-                    <Text>Podras onsultar todas las ventas realizadas</Text>:
+                    <Text>Podras consultar todas las ventas realizadas</Text>:
                     Usuario.pedido==3&&Usuario.rol==2?
                     <Text>Podras consultar el historial de todas tus compras</Text>:
                     <Text>Podras consultar tus pedidos en esta Pantalla:</Text>}
