@@ -191,7 +191,7 @@ const send=async()=>{
     setSubtotal()
     setFinal()
     getDataFromDB();
-    navigation.navigate("Pedidos",Usuario);
+    navigation.navigate("Pedidos",{...Usuario,pedido:0});
 }
 
 
