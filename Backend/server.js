@@ -181,6 +181,7 @@ app.put("/pedidos/:id",async(req,res)=>{
     })
     return res.json({messaje:"Full Update"})
 })
+// ventas
 app.post("/ventas",async(req,res)=>{
     const fecha= new Date()
     const venta={
