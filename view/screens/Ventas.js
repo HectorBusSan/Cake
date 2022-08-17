@@ -4,10 +4,12 @@ import { MaterialIcons,FontAwesome } from '@expo/vector-icons';
 import COLORS from '../../consts/colors';
 import products from '../../consts/products';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { sellOrder } from '../../api';
 
 const Ventas = ({navigation,route}) => {
     const pedidos=route.params;
     const [result, setResult] = useState([])
+    
     useEffect(() => {
       getData()
     }, [])
@@ -18,13 +20,17 @@ const Ventas = ({navigation,route}) => {
         products.forEach(data=>{
             if(data.id==pedidos.idproducto){
                 datas.push(data);
+                
             }
         })
     setResult(datas);
     }
-    const sell=(id)=>{
-
-        ToastAndroid.show(`Confirmando ${id}`,
+    const sell=async(id)=>{
+        console.log(id)
+        await sellOrder({codcake:id})
+        // let ident=parseInt(id)
+        // await sellOrder(id)
+        ToastAndroid.show(`Confirmando Venta ${id}`,
         ToastAndroid.SHORT)
     }
   return (
@@ -56,7 +62,7 @@ const Ventas = ({navigation,route}) => {
                     <Text>Total: ${pedidos.total}</Text>
                 </View>
                 <View style={{position:"absolute",bottom:10,right:20}}>
-                        <TouchableOpacity onPress={()=>sell(pedidos.idproducto)} style={{padding:2,borderRadius:26,backgroundColor:"#000"}}><FontAwesome name="check" size={24} color="#fff" style={{backgroundColor:COLORS.green,borderRadius:14,padding:2}} /></TouchableOpacity>
+                        <TouchableOpacity onPress={()=>sell(pedidos.codcake)} style={{padding:2,borderRadius:26,backgroundColor:"#000"}}><FontAwesome name="check" size={24} color="#fff" style={{backgroundColor:COLORS.green,borderRadius:14,padding:2}} /></TouchableOpacity>
                     </View>
             </View>
         </View>
