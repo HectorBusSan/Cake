@@ -76,7 +76,7 @@ return (
     {
      
       // mi pedido
-      (pedidos.username==User.username && pedidos.completo==0&& User.pedido==0 && pedidos.codigop==0)||
+      (pedidos.username==User.username && pedidos.completo==0 && User.pedido==0 && pedidos.codigop==0)||
       // pedidos listos
       (pedidos.username==User.username && pedidos.completo==1&&User.pedido==1 && pedidos.codigop==0)||
       // pedido listo admi
