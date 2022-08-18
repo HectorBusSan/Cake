@@ -76,7 +76,7 @@ const Login=({navigation})=>{
                 <MaterialIcons name="arrow-back-ios" size={24} color="black" onPress={()=>{navigation.goBack()}}/>
             </View>
             <Text style={{fontSize:28, marginBottom:20, fontWeight:"bold",color:COLORS.dark}}>Login</Text>
-            <Image source={Logo} style={{...styles.logo,height:height*0.3}} resizeMode="contain"/>
+            <Image source={Logo} style={{...styles.logo,height:height*0.3,marginBottom:30}} resizeMode="contain"/>
             <View style={styles.container}>
                 <TextInput
                 value={log.username} placeholder={"Username"} style={styles.input}

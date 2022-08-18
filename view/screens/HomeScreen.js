@@ -47,12 +47,12 @@ const HomeScreen=({navigation,route})=>{
         onPress={() => navigation.navigate('Details', product)}>
             <View style={product.name!=search&&search.length>2?style.cardnone:product.category===categoryIndex? style.card:categoryIndex===0?style.card:style.cardnone}>
                 <View style={{alignItems:'flex-end'}}>
-                    <View style={{width:30,height:30, borderRadius:15,
+                    {/* <View style={{width:30,height:30, borderRadius:15,
                     alignItems:"center",justifyContent:"center",
                     backgroundColor:product.like?"rgba(245,42,42,0.2)":"rgba(0,0,0,0.2)"
                     }}>
                         <MaterialIcons name="favorite" size={18} color={product.like?COLORS.red:COLORS.dark}/>
-                    </View>
+                    </View> */}
                 </View>
                     <View style={{height:100,alignItems:"center"}}>
                         <Image source={product.img} style={{flex:1, resizeMode:'contain'}}/>

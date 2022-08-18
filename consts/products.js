@@ -17,7 +17,7 @@ const products=[
     img: require('../assets/img/example2.jpg'),
     category:2,
     about:
-        'Dragon Plant one of the most popular and beautiful species that will produce clumpms. The storage of water often gives succulent plants a more swollen or fleshy appearance than other plants, a characteristic known as succulence.',
+        'Uno de nuestros mas populares productos en los cuales podras encontrar un conjunto de 6 cupcakes personalizados de cocolate y cubiertos con un glaseado chocolatado',
     },
     {
     id: 3,
